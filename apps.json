@@ -16,8 +16,17 @@
   "Nuke": {
     "path": "/home/jmacey/GoScripts25-25",
     "execName": "goNuke",
-    "desc": "Launch Nuke ",
-    "icon": "icons/Nuke.png",
+    "desc": "Launch Nuke X",
+    "icon": "/icons/Nuke.png",
     "tabName": "Core DCC Tools"
-  }
+  },
+"NukeStudio": {
+  "path": "/home/jmacey/GoScripts25-25",
+  "execName": "goNukeStudio",
+  "desc": "Launch Nuke Studio",
+  "icon": "/icons/Nuke.png",
+  "tabName": "Core DCC Tools"
+}
+
+
 }
