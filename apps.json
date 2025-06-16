@@ -17,7 +17,7 @@
     "path": "/home/jmacey/GoScripts25-25",
     "execName": "goNuke",
     "desc": "Launch Nuke ",
-    "icon": "icons/Nuke.png",
+    "icon": "/icons/Nuke.png",
     "tabName": "Core DCC Tools"
   }
 }
