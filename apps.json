@@ -1,30 +1,23 @@
 {
-  "Calculator": {
-    "path": "/usr/bin",
-    "execName": "calc",
-    "desc": "A simple calculator",
-    "icon": "/icons/calc.png",
-    "tabName": "Utilities"
+  "Maya": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goMaya",
+    "desc": "Launch Maya 2025",
+    "icon": "file:////opt/autodesk/maya/icons/mayaico.png",
+    "tabName": "Core DCC Tools"
   },
-  "Terminal Emulator": {
-    "path": "/usr/bin",
-    "execName": "terminal",
-    "desc": "A terminal emulator",
-    "icon": "/icons/terminal.png",
-    "tabName": "Utilities"
+  "Houdini": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goHoudini",
+    "desc": "Launch Houdini 20.5",
+    "icon": "file:////opt/hfs20.5.332/houdini_logo.png",
+    "tabName": "Core DCC Tools"
   },
-  "Text Editor": {
-    "path": "/usr/bin",
-    "execName": "editor",
-    "desc": "A text editor",
-    "icon": "/icons/editor.png",
-    "tabName": "Productivity"
-  },
-  "Web Browser": {
-    "path": "/usr/bin",
-    "execName": "browser",
-    "desc": "A web browser",
-    "icon": "/icons/browser.png",
-    "tabName": "Internet"
+  "Nuke": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goNuke",
+    "desc": "Launch Nuke ",
+    "icon": "icons/Nuke.png",
+    "tabName": "Core DCC Tools"
   }
 }
