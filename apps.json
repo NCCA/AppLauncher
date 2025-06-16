@@ -1,0 +1,30 @@
+{
+  "Calculator": [
+    "/usr/bin",
+    "calc",
+    "A simple calculator",
+    "/icons/calc.png",
+    "Utilities"
+  ],
+  "Terminal": [
+    "/usr/bin",
+    "terminal",
+    "A terminal emulator",
+    "/icons/terminal.png",
+    "Utilities"
+  ],
+  "TextEditor": [
+    "/usr/bin",
+    "editor",
+    "A text editor",
+    "/icons/editor.png",
+    "Productivity"
+  ],
+  "Browser": [
+    "/usr/bin",
+    "browser",
+    "A web browser",
+    "/icons/browser.png",
+    "Internet"
+  ]
+}
