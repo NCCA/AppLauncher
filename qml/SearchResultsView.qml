@@ -30,15 +30,14 @@ ScrollView {
 
                 Image {
                     source: model.icon
-                    height: delegateRect.height
+                    Layout.preferredWidth: 32
+                    Layout.preferredHeight: 32
+                    Layout.fillWidth: false
+                    Layout.fillHeight: false
                     fillMode: Image.PreserveAspectFit
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                    onStatusChanged: {
-                        if (status === Image.Error) {
-                            source = "qrc:/qml/placeholder.png";
-                        }
-                    }
                 }
+
                 ColumnLayout {
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                     Text {
@@ -56,7 +55,7 @@ ScrollView {
                 }
                 Button {
                     text: "Add to Favourites"
-                    onClicked: appLauncher.addToFavourites(model.name)
+                    onClicked: appLauncher.add_to_favourites(model.name)
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 }
             }

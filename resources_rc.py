@@ -6,7 +6,7 @@
 from PySide6 import QtCore
 
 qt_resource_data = b"\
-\x00\x00\x08\xb0\
+\x00\x00\x08k\
 i\
 mport QtQuick\x0aim\
 port QtQuick.Con\
@@ -66,87 +66,83 @@ r\x0a\x0a             \
                s\
 ource: model.ico\
 n\x0a              \
-      height: de\
-legateRect.heigh\
-t\x0a              \
-      fillMode: \
-Image.PreserveAs\
-pectFit\x0a        \
-            Layo\
-ut.alignment: Qt\
-.AlignLeft | Qt.\
-AlignVCenter\x0a   \
+      Layout.pre\
+ferredWidth: 32\x0a\
                 \
- onStatusChanged\
-: {\x0a            \
-            if (\
-status === Image\
-.Error) {\x0a      \
+    Layout.prefe\
+rredHeight: 32\x0a \
                 \
-      source = \x22\
-qrc:/qml/placeho\
-lder.png\x22;\x0a     \
+   Layout.fillWi\
+dth: false\x0a     \
+               L\
+ayout.fillHeight\
+: false\x0a        \
+            fill\
+Mode: Image.Pres\
+erveAspectFit\x0a  \
                 \
-   }\x0a           \
-         }\x0a     \
-           }\x0a   \
-             Col\
-umnLayout {\x0a    \
+  Layout.alignme\
+nt: Qt.AlignLeft\
+ | Qt.AlignVCent\
+er\x0a             \
+   }\x0a\x0a          \
+      ColumnLayo\
+ut {\x0a           \
+         Layout.\
+alignment: Qt.Al\
+ignLeft | Qt.Ali\
+gnVCenter\x0a      \
+              Te\
+xt {\x0a           \
+             tex\
+t: model.name\x0a  \
+                \
+      font.pixel\
+Size: 16\x0a       \
+                \
+ font.bold: true\
+\x0a               \
+         horizon\
+talAlignment: Te\
+xt.AlignLeft\x0a   \
+                \
+     Layout.alig\
+nment: Qt.AlignL\
+eft | Qt.AlignVC\
+enter\x0a          \
+          }\x0a    \
+            }\x0a  \
+              Bu\
+tton {\x0a         \
+           text:\
+ \x22Launch\x22\x0a      \
+              on\
+Clicked: appLaun\
+cher.launch_app(\
+model.path, mode\
+l.execName)\x0a    \
                 \
 Layout.alignment\
 : Qt.AlignLeft |\
  Qt.AlignVCenter\
 \x0a               \
-     Text {\x0a    \
-                \
-    text: model.\
-name\x0a           \
-             fon\
-t.pixelSize: 16\x0a\
-                \
-        font.bol\
-d: true\x0a        \
-                \
-horizontalAlignm\
-ent: Text.AlignL\
-eft\x0a            \
-            Layo\
-ut.alignment: Qt\
-.AlignLeft | Qt.\
-AlignVCenter\x0a   \
-                \
  }\x0a             \
-   }\x0a           \
-     Button {\x0a  \
+   Button {\x0a    \
                 \
-  text: \x22Launch\x22\
-\x0a               \
-     onClicked: \
-appLauncher.laun\
-ch_app(model.pat\
-h, model.execNam\
+text: \x22Add to Fa\
+vourites\x22\x0a      \
+              on\
+Clicked: appLaun\
+cher.add_to_favo\
+urites(model.nam\
 e)\x0a             \
        Layout.al\
 ignment: Qt.Alig\
 nLeft | Qt.Align\
 VCenter\x0a        \
         }\x0a      \
-          Button\
- {\x0a             \
-       text: \x22Ad\
-d to Favourites\x22\
-\x0a               \
-     onClicked: \
-appLauncher.addT\
-oFavourites(mode\
-l.name)\x0a        \
-            Layo\
-ut.alignment: Qt\
-.AlignLeft | Qt.\
-AlignVCenter\x0a   \
-             }\x0a \
-           }\x0a   \
-     }\x0a    }\x0a}\x0a\
+      }\x0a        \
+}\x0a    }\x0a}\x0a\
 \x00\x00\x01p\
 i\
 mport QtQuick 2.\
@@ -299,7 +295,7 @@ ld.text = \x22\x22;\x0a  \
           clear(\
 );\x0a        }\x0a   \
  }\x0a}\x0a\
-\x00\x00\x06$\
+\x00\x00\x06!\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
@@ -311,95 +307,95 @@ licationWindow {\
 ue\x0a    width: 80\
 0\x0a    height: 60\
 0\x0a    title: \x22Ap\
-p Launcher\x22\x0a\x0a   \
- ListModel {\x0a   \
-     id: searchR\
-esultsModel\x0a    \
-}\x0a\x0a    ColumnLay\
-out {\x0a        an\
-chors.fill: pare\
-nt\x0a\x0a        Sear\
-chBar {\x0a        \
-    id: searchBa\
-r\x0a            on\
-Search: function\
- (query) {\x0a     \
-           searc\
-hResultsModel.cl\
-ear();\x0a         \
-       if (query\
-.trim().length >\
- 0) {\x0a          \
-          print(\
-query);\x0a        \
-            var \
-results = appLau\
-ncher.search_app\
-s(query);\x0a      \
-              fo\
-r (var i = 0; i \
-< results.length\
-; ++i) {\x0a       \
-                \
- searchResultsMo\
-del.append(resul\
-ts[i]);\x0a        \
-            }\x0a  \
-              }\x0a\
-            }\x0a  \
-          onClea\
-r: {\x0a           \
-     searchResul\
-tsModel.clear();\
-\x0a            }\x0a \
-       }\x0a\x0a      \
-  SearchResultsV\
-iew {\x0a          \
+psHere!\x22\x0a\x0a    Li\
+stModel {\x0a      \
   id: searchResu\
-ltsView\x0a        \
-    model: searc\
-hResultsModel\x0a  \
-      }\x0a\x0a       \
- TabBar {\x0a      \
-      id: tabBar\
+ltsModel\x0a    }\x0a\x0a\
+    ColumnLayout\
+ {\x0a        ancho\
+rs.fill: parent\x0a\
+\x0a        SearchB\
+ar {\x0a           \
+ id: searchBar\x0a \
+           onSea\
+rch: function (q\
+uery) {\x0a        \
+        searchRe\
+sultsModel.clear\
+();\x0a            \
+    if (query.tr\
+im().length > 0)\
+ {\x0a             \
+       print(que\
+ry);\x0a           \
+         var res\
+ults = appLaunch\
+er.search_apps(q\
+uery);\x0a         \
+           for (\
+var i = 0; i < r\
+esults.length; +\
++i) {\x0a          \
+              se\
+archResultsModel\
+.append(results[\
+i]);\x0a           \
+         }\x0a     \
+           }\x0a   \
+         }\x0a     \
+       onClear: \
+{\x0a              \
+  searchResultsM\
+odel.clear();\x0a  \
+          }\x0a    \
+    }\x0a\x0a        S\
+earchResultsView\
+ {\x0a            i\
+d: searchResults\
+View\x0a           \
+ model: searchRe\
+sultsModel\x0a     \
+   }\x0a\x0a        Ta\
+bBar {\x0a         \
+   id: tabBar\x0a  \
+          Layout\
+.fillWidth: true\
+\x0a            Rep\
+eater {\x0a        \
+        model: t\
+absModel\x0a       \
+         TabButt\
+on {\x0a           \
+         text: m\
+odelData.tabName\
+\x0a               \
+ }\x0a            }\
+\x0a        }\x0a\x0a    \
+    StackLayout \
+{\x0a            id\
+: stackLayout\x0a  \
+          Layout\
+.fillWidth: true\
 \x0a            Lay\
-out.fillWidth: t\
-rue\x0a            \
+out.fillHeight: \
+true\x0a           \
+ currentIndex: t\
+abBar.currentInd\
+ex\x0a\x0a            \
 Repeater {\x0a     \
            model\
 : tabsModel\x0a    \
-            TabB\
-utton {\x0a        \
-            text\
-: modelData.tabN\
-ame\x0a            \
-    }\x0a          \
-  }\x0a        }\x0a\x0a \
-       StackLayo\
-ut {\x0a           \
- id: stackLayout\
-\x0a            Lay\
-out.fillWidth: t\
-rue\x0a            \
-Layout.fillHeigh\
-t: true\x0a        \
-    currentIndex\
-: tabBar.current\
-Index\x0a\x0a         \
-   Repeater {\x0a  \
-              mo\
-del: tabsModel\x0a \
-               A\
-ppGrid {\x0a       \
-             tab\
-Name: modelData.\
-tabName\x0a        \
-            apps\
-: modelData.apps\
-\x0a               \
- }\x0a            }\
-\x0a        }\x0a    }\
-\x0a}\x0a\
+            AppG\
+rid {\x0a          \
+          tabNam\
+e: modelData.tab\
+Name\x0a           \
+         apps: m\
+odelData.apps\x0a  \
+              }\x0a\
+            }\x0a  \
+      }\x0a    }\x0a}\x0a\
+\
 \x00\x01\x00\x8b\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -4552,18 +4548,18 @@ qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\xc2\x00\x00\x00\x00\x00\x01\x00\x00\x17\xf7\
-\x00\x00\x01\x97y\xe6>\xdc\
-\x00\x00\x00h\x00\x00\x00\x00\x00\x01\x00\x00\x0a(\
-\x00\x00\x01\x97zC\x06\xbc\
-\x00\x00\x00\xac\x00\x00\x00\x00\x00\x01\x00\x00\x11\xcf\
-\x00\x00\x01\x97z8n\xdc\
-\x00\x00\x00L\x00\x00\x00\x00\x00\x01\x00\x00\x08\xb4\
-\x00\x00\x01\x97z0B\x0e\
+\x00\x00\x00\xc2\x00\x00\x00\x00\x00\x01\x00\x00\x17\xaf\
+\x00\x00\x01\x97y\xf1\x06\x8f\
+\x00\x00\x00h\x00\x00\x00\x00\x00\x01\x00\x00\x09\xe3\
+\x00\x00\x01\x97zE\xa0^\
+\x00\x00\x00\xac\x00\x00\x00\x00\x00\x01\x00\x00\x11\x8a\
+\x00\x00\x01\x97zH<\xc1\
+\x00\x00\x00L\x00\x00\x00\x00\x00\x01\x00\x00\x08o\
+\x00\x00\x01\x97zE\xa0d\
 \x00\x00\x00\x1c\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
-\x00\x00\x01\x97zB\x86\xce\
-\x00\x00\x00\x8c\x00\x00\x00\x00\x00\x01\x00\x00\x0f\xf5\
-\x00\x00\x01\x97z0B\x0e\
+\x00\x00\x01\x97zM\xa6\xb5\
+\x00\x00\x00\x8c\x00\x00\x00\x00\x00\x01\x00\x00\x0f\xb0\
+\x00\x00\x01\x97zE\xa0j\
 "
 
 def qInitResources():

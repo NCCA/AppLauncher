@@ -6,7 +6,7 @@ ApplicationWindow {
     visible: true
     width: 800
     height: 600
-    title: "App Launcher"
+    title: "AppsHere!"
 
     ListModel {
         id: searchResultsModel
