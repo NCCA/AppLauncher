@@ -16,8 +16,50 @@
   "Nuke": {
     "path": "/home/jmacey/GoScripts25-25",
     "execName": "goNuke",
-    "desc": "Launch Nuke ",
+    "desc": "Launch Nuke X",
     "icon": "/icons/Nuke.png",
     "tabName": "Core DCC Tools"
+  },
+  "NukeStudio": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goNukeStudio",
+    "desc": "Launch Nuke Studio",
+    "icon": "/icons/Nuke.png",
+    "tabName": "Core DCC Tools"
+  },
+  "MudBox": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goMudbox",
+    "desc": "Mudbox, Autodesk Sculpting tool",
+    "icon": "file:////opt/autodesk/mudbox/desktop/Mudbox.png",
+    "tabName": "Core DCC Tools"
+  },
+  "MotionBuilder": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goMotionbuilder",
+    "desc": "Motionbuilder MoCap cleanup",
+    "icon": "file:////opt/autodesk/MotionBuilder2025/bin/MotionBuilder.png",
+    "tabName": "Core DCC Tools"
+  },
+  "DavinciResolve": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "goDavinci",
+    "desc": "Davinci Resolve, editing, color correction, visual effects, motion graphics and audio post production ",
+    "icon": "file:////opt/resolve/graphics/DV_Resolve.png",
+    "tabName": "Core DCC Tools"
+  },
+  "CLion": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "clion",
+    "desc": "Clion C / C++ IDE",
+    "icon": "file:////public/devel/25-26/clion-2025.1.2/bin/clion.png",
+    "tabName": "Developer Tools"
+  },
+  "PyCharm": {
+    "path": "/home/jmacey/GoScripts25-25",
+    "execName": "pycharm",
+    "desc": "PyCharm Python IDE",
+    "icon": "file:////public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png",
+    "tabName": "Developer Tools"
   }
 }
