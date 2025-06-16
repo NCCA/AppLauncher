@@ -1,30 +1,30 @@
 {
-  "Calculator": [
-    "/usr/bin",
-    "calc",
-    "A simple calculator",
-    "/icons/calc.png",
-    "Utilities"
-  ],
-  "Terminal": [
-    "/usr/bin",
-    "terminal",
-    "A terminal emulator",
-    "/icons/terminal.png",
-    "Utilities"
-  ],
-  "TextEditor": [
-    "/usr/bin",
-    "editor",
-    "A text editor",
-    "/icons/editor.png",
-    "Productivity"
-  ],
-  "Browser": [
-    "/usr/bin",
-    "browser",
-    "A web browser",
-    "/icons/browser.png",
-    "Internet"
-  ]
+  "Calculator": {
+    "path": "/usr/bin",
+    "execName": "calc",
+    "desc": "A simple calculator",
+    "icon": "/icons/calc.png",
+    "tabName": "Utilities"
+  },
+  "Terminal Emulator": {
+    "path": "/usr/bin",
+    "execName": "terminal",
+    "desc": "A terminal emulator",
+    "icon": "/icons/terminal.png",
+    "tabName": "Utilities"
+  },
+  "Text Editor": {
+    "path": "/usr/bin",
+    "execName": "editor",
+    "desc": "A text editor",
+    "icon": "/icons/editor.png",
+    "tabName": "Productivity"
+  },
+  "Web Browser": {
+    "path": "/usr/bin",
+    "execName": "browser",
+    "desc": "A web browser",
+    "icon": "/icons/browser.png",
+    "tabName": "Internet"
+  }
 }

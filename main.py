@@ -83,10 +83,13 @@ def load_apps_json(json_path):
         data = json.load(f)
     tabs = {}
     for app_name, entry in data.items():
-        path, exec_name, desc, icon, tab_name = entry
+        # entry is now a dict with named fields
+        app = dict(entry)
+        app["name"] = app_name  # Add the name field for convenience
+        tab_name = app["tabName"]
         if tab_name not in tabs:
             tabs[tab_name] = []
-        tabs[tab_name].append({"name": app_name, "path": path, "execName": exec_name, "desc": desc, "icon": icon})
+        tabs[tab_name].append(app)
     return [{"tabName": tab, "apps": apps} for tab, apps in tabs.items()]
 
 
