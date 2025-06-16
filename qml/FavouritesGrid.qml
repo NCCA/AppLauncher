@@ -1,12 +1,24 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+/**
+ * FavouritesGrid.qml
+ *
+ * Displays a grid of favourite applications, allowing users to reorder them via drag-and-drop.
+ * Uses AppDelegate for each app icon and provides a drag handle for reordering.
+ * The model is expected to be set externally (e.g., from main.qml).
+ */
+
 GridView {
     id: gridView
+
     cellWidth: 100
     cellHeight: 100
-    model: model // set from main.qml
 
+    // The model should be set from outside this component (e.g., main.qml)
+    model: model
+
+    // Index of the currently dragged item, -1 if none
     property int dragIndex: -1
 
     delegate: Item {
@@ -14,6 +26,7 @@ GridView {
         width: gridView.cellWidth
         height: gridView.cellHeight
 
+        // App icon and label
         AppDelegate {
             id: appDelegate
             tabName: "Favourites"
@@ -21,7 +34,7 @@ GridView {
             anchors.fill: parent
         }
 
-        // Drag handle in the corner for reordering
+        // Drag handle in the bottom-right corner for reordering
         Rectangle {
             id: dragHandle
             width: 20
@@ -44,12 +57,15 @@ GridView {
                 drag.target: delegateItem
                 acceptedButtons: Qt.LeftButton
 
+                // Start dragging
                 onPressed: {
                     gridView.dragIndex = index;
                 }
+                // Stop dragging
                 onReleased: {
                     gridView.dragIndex = -1;
                 }
+                // Handle drag movement and reorder items
                 onPositionChanged: function (mouse) {
                     var pos = gridView.mapFromItem(delegateItem, mouse.x, mouse.y);
                     var toIndex = gridView.indexAt(pos.x, pos.y);

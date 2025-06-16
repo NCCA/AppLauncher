@@ -6,93 +6,156 @@
 from PySide6 import QtCore
 
 qt_resource_data = b"\
-\x00\x00\x05J\
+\x00\x00\x098\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
 k.Controls 2.15\x0a\
-import QtQuick.L\
-ayouts 1.15\x0a\x0aGri\
-dView {\x0a    id: \
-gridView\x0a    pro\
-perty var apps: \
-[]\x0a    Layout.fi\
-llWidth: true\x0a  \
-  Layout.fillHei\
-ght: true\x0a    ce\
-llWidth: 100\x0a   \
- cellHeight: 100\
-\x0a    interactive\
-: true\x0a\x0a    // T\
-rack the dragged\
- index\x0a    prope\
-rty int dragInde\
-x: -1\x0a\x0a    deleg\
-ate: Item {\x0a    \
-    id: delegate\
-Item\x0a        wid\
-th: gridView.cel\
-lWidth\x0a        h\
-eight: gridView.\
-cellHeight\x0a\x0a    \
-    AppDelegate \
-{\x0a            ta\
-bName: \x22Favourit\
-es\x22\x0a            \
-app: modelData\x0a \
+\x0a/**\x0a * Favourit\
+esGrid.qml\x0a *\x0a *\
+ Displays a grid\
+ of favourite ap\
+plications, allo\
+wing users to re\
+order them via d\
+rag-and-drop.\x0a *\
+ Uses AppDelegat\
+e for each app i\
+con and provides\
+ a drag handle f\
+or reordering.\x0a \
+* The model is e\
+xpected to be se\
+t externally (e.\
+g., from main.qm\
+l).\x0a */\x0a\x0aGridVie\
+w {\x0a    id: grid\
+View\x0a\x0a    cellWi\
+dth: 100\x0a    cel\
+lHeight: 100\x0a\x0a  \
+  // The model s\
+hould be set fro\
+m outside this c\
+omponent (e.g., \
+main.qml)\x0a    mo\
+del: model\x0a\x0a    \
+// Index of the \
+currently dragge\
+d item, -1 if no\
+ne\x0a    property \
+int dragIndex: -\
+1\x0a\x0a    delegate:\
+ Item {\x0a        \
+id: delegateItem\
+\x0a        width: \
+gridView.cellWid\
+th\x0a        heigh\
+t: gridView.cell\
+Height\x0a\x0a        \
+// App icon and \
+label\x0a        Ap\
+pDelegate {\x0a    \
+        id: appD\
+elegate\x0a        \
+    tabName: \x22Fa\
+vourites\x22\x0a      \
+      app: model\
+Data\x0a           \
+ anchors.fill: p\
+arent\x0a        }\x0a\
+\x0a        // Drag\
+ handle in the b\
+ottom-right corn\
+er for reorderin\
+g\x0a        Rectan\
+gle {\x0a          \
+  id: dragHandle\
+\x0a            wid\
+th: 20\x0a         \
+   height: 20\x0a  \
+          anchor\
+s.right: parent.\
+right\x0a          \
+  anchors.bottom\
+: parent.bottom\x0a\
+            colo\
+r: \x22#cccccc\x22\x0a   \
+         radius:\
+ 10\x0a            \
+border.color: \x22#\
+888\x22\x0a           \
+ border.width: 1\
+\x0a\x0a            Te\
+xt {\x0a           \
+     anchors.cen\
+terIn: parent\x0a  \
+              te\
+xt: \x22\x5cu2630\x22 // \
+Unicode for drag\
+ handle\x0a        \
+        font.pix\
+elSize: 14\x0a     \
        }\x0a\x0a      \
-  MouseArea {\x0a  \
-          id: dr\
-agArea\x0a         \
-   anchors.fill:\
- parent\x0a        \
-    drag.target:\
- parent\x0a        \
-    onPressed: {\
+      MouseArea \
+{\x0a              \
+  anchors.fill: \
+parent\x0a         \
+       drag.targ\
+et: delegateItem\
 \x0a               \
- gridView.dragIn\
-dex = index;\x0a   \
-         }\x0a     \
-       onRelease\
-d: {\x0a           \
+ acceptedButtons\
+: Qt.LeftButton\x0a\
+\x0a               \
+ // Start draggi\
+ng\x0a             \
+   onPressed: {\x0a\
+                \
+    gridView.dra\
+gIndex = index;\x0a\
+                \
+}\x0a              \
+  // Stop draggi\
+ng\x0a             \
+   onReleased: {\
+\x0a               \
      gridView.dr\
 agIndex = -1;\x0a  \
-          }\x0a    \
-        onPositi\
-onChanged: funct\
-ion (mouse) {\x0a  \
-              //\
- Calculate which\
- index we're ove\
-r\x0a              \
-  var pos = grid\
-View.mapFromItem\
-(delegateItem, m\
-ouse.x, mouse.y)\
-;\x0a              \
-  var toIndex = \
-gridView.indexAt\
-(pos.x, pos.y);\x0a\
+              }\x0a\
                 \
-if (toIndex !== \
--1 && toIndex !=\
-= index && gridV\
-iew.dragIndex ==\
-= index) {\x0a     \
-               /\
-/ Call Python sl\
-ot to move favou\
-rite\x0a           \
-         appLaun\
-cher.move_favour\
-ite(index, toInd\
-ex);\x0a           \
-         gridVie\
-w.dragIndex = to\
-Index;\x0a         \
-       }\x0a       \
-     }\x0a        }\
-\x0a    }\x0a}\x0a\
+// Handle drag m\
+ovement and reor\
+der items\x0a      \
+          onPosi\
+tionChanged: fun\
+ction (mouse) {\x0a\
+                \
+    var pos = gr\
+idView.mapFromIt\
+em(delegateItem,\
+ mouse.x, mouse.\
+y);\x0a            \
+        var toIn\
+dex = gridView.i\
+ndexAt(pos.x, po\
+s.y);\x0a          \
+          if (to\
+Index !== -1 && \
+toIndex !== inde\
+x && gridView.dr\
+agIndex === inde\
+x) {\x0a           \
+             app\
+Launcher.move_fa\
+vourite(index, t\
+oIndex);\x0a       \
+                \
+ gridView.dragIn\
+dex = toIndex;\x0a \
+                \
+   }\x0a           \
+     }\x0a         \
+   }\x0a        }\x0a \
+   }\x0a}\x0a\
 \x00\x00\x08k\
 i\
 mport QtQuick\x0aim\
@@ -230,127 +293,177 @@ VCenter\x0a        \
         }\x0a      \
       }\x0a        \
 }\x0a    }\x0a}\x0a\
-\x00\x00\x01\x7f\
+\x00\x00\x02\xb2\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
 k.Controls 2.15\x0a\
 import QtQuick.L\
-ayouts 1.15\x0a\x0aGri\
-dView {\x0a    id: \
-gridView\x0a    pro\
-perty string tab\
-Name: \x22\x22\x0a    Lay\
+ayouts 1.15\x0a\x0a/**\
+\x0a * AppGrid.qml\x0a\
+ *\x0a * Displays a\
+ grid of applica\
+tion icons using\
+ AppDelegate as \
+the delegate.\x0a *\
+ The model is ex\
+pected to be set\
+ externally.\x0a * \
+The tabName prop\
+erty is passed t\
+o each delegate \
+for context (e.g\
+., \x22Favourites\x22)\
+.\x0a */\x0a\x0aGridView \
+{\x0a    id: gridVi\
+ew\x0a\x0a    // The n\
+ame of the curre\
+nt tab (e.g., \x22F\
+avourites\x22, \x22All\
+ Apps\x22)\x0a    prop\
+erty string tabN\
+ame: \x22\x22\x0a\x0a    Lay\
 out.fillWidth: t\
 rue\x0a    Layout.f\
 illHeight: true\x0a\
     cellWidth: 1\
 00\x0a    cellHeigh\
-t: 100\x0a    // mo\
-del is now set f\
-rom outside, do \
-not set it here\x0a\
-\x0a    delegate: A\
-ppDelegate {\x0a   \
-     tabName: gr\
-idView.tabName\x0a \
-       app: mode\
-lData\x0a    }\x0a}\x0a\
-\x00\x00\x05\xc9\
+t: 100\x0a\x0a    // T\
+he model should \
+be set from outs\
+ide this compone\
+nt\x0a\x0a    delegate\
+: AppDelegate {\x0a\
+        tabName:\
+ gridView.tabNam\
+e\x0a        app: m\
+odelData\x0a    }\x0a}\
+\x0a\
+\x00\x00\x07\xaa\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
 k.Controls 2.15\x0a\
-\x0aRectangle {\x0a   \
- property string\
- tabName: \x22\x22\x0a   \
- property var ap\
-p: {}\x0a\x0a    width\
-: 90\x0a    height:\
- 90\x0a    color: \x22\
-#f0f0f0\x22\x0a    bor\
-der.color: \x22#888\
-\x22\x0a    radius: 8\x0a\
-\x0a    Image {\x0a   \
-     source: app\
-.icon\x0a        an\
-chors.centerIn: \
-parent\x0a        w\
-idth: 48\x0a       \
- height: 48\x0a    \
-}\x0a    Text {\x0a   \
-     text: app.n\
-ame\x0a        anch\
-ors.horizontalCe\
-nter: parent.hor\
-izontalCenter\x0a  \
-      anchors.bo\
-ttom: parent.bot\
-tom\x0a        anch\
-ors.bottomMargin\
-: 8\x0a        font\
-.pixelSize: 14\x0a \
-       elide: Te\
-xt.ElideRight\x0a  \
-  }\x0a\x0a    MouseAr\
-ea {\x0a        id:\
- mouseArea\x0a     \
-   anchors.fill:\
- parent\x0a        \
-acceptedButtons:\
- Qt.LeftButton |\
- Qt.RightButton\x0a\
-        onClicke\
-d: function (mou\
-se) {\x0a          \
-  if (mouse.butt\
-on === Qt.LeftBu\
-tton) {\x0a        \
-        appLaunc\
-her.launch_app(a\
-pp.path, app.exe\
-cName);\x0a        \
-    }\x0a        }\x0a\
-        onPresse\
-d: function (mou\
-se) {\x0a          \
-  if (mouse.butt\
-on === Qt.RightB\
-utton) {\x0a       \
-         context\
-Menu.popup();\x0a  \
-          }\x0a    \
-    }\x0a    }\x0a\x0a   \
- Menu {\x0a        \
-id: contextMenu\x0a\
-        MenuItem\
- {\x0a            t\
-ext: \x22Add to Fav\
-ourites\x22\x0a       \
-     visible: ta\
-bName !== \x22Favou\
-rites\x22\x0a         \
-   onTriggered: \
-{\x0a              \
-  appLauncher.ad\
-d_to_favourites(\
-app.name);\x0a     \
+\x0a/**\x0a * AppDeleg\
+ate.qml\x0a *\x0a * Re\
+presents a singl\
+e application ic\
+on with its name\
+, supporting lau\
+nching and conte\
+xt menu actions.\
+\x0a * Used within \
+an app launcher \
+grid or list.\x0a *\
+/\x0a\x0aRectangle {\x0a \
+   // The name o\
+f the current ta\
+b (e.g., \x22Favour\
+ites\x22, \x22All Apps\
+\x22)\x0a    property \
+string tabName: \
+\x22\x22\x0a    // The ap\
+p object, expect\
+ed to have: name\
+, icon, path, ex\
+ecName\x0a    prope\
+rty var app: {}\x0a\
+\x0a    width: 90\x0a \
+   height: 90\x0a  \
+  color: \x22#f0f0f\
+0\x22\x0a    border.co\
+lor: \x22#888\x22\x0a    \
+radius: 8\x0a\x0a    /\
+/ App icon\x0a    I\
+mage {\x0a        s\
+ource: app.icon\x0a\
+        anchors.\
+centerIn: parent\
+\x0a        width: \
+48\x0a        heigh\
+t: 48\x0a    }\x0a\x0a   \
+ // App name lab\
+el\x0a    Text {\x0a  \
+      text: app.\
+name\x0a        anc\
+hors.horizontalC\
+enter: parent.ho\
+rizontalCenter\x0a \
+       anchors.b\
+ottom: parent.bo\
+ttom\x0a        anc\
+hors.bottomMargi\
+n: 8\x0a        fon\
+t.pixelSize: 14\x0a\
+        elide: T\
+ext.ElideRight\x0a \
+   }\x0a\x0a    // Mou\
+se interaction a\
+rea for launchin\
+g and context me\
+nu\x0a    MouseArea\
+ {\x0a        id: m\
+ouseArea\x0a       \
+ anchors.fill: p\
+arent\x0a        ac\
+ceptedButtons: Q\
+t.LeftButton | Q\
+t.RightButton\x0a\x0a \
+       // Launch\
+ app on left cli\
+ck\x0a        onCli\
+cked: function (\
+mouse) {\x0a       \
+     if (mouse.b\
+utton === Qt.Lef\
+tButton) {\x0a     \
+           appLa\
+uncher.launch_ap\
+p(app.path, app.\
+execName);\x0a     \
        }\x0a       \
- }\x0a        MenuI\
+ }\x0a        // Sh\
+ow context menu \
+on right click\x0a \
+       onPressed\
+: function (mous\
+e) {\x0a           \
+ if (mouse.butto\
+n === Qt.RightBu\
+tton) {\x0a        \
+        contextM\
+enu.popup();\x0a   \
+         }\x0a     \
+   }\x0a    }\x0a\x0a    \
+// Context menu \
+for adding/remov\
+ing favourites\x0a \
+   Menu {\x0a      \
+  id: contextMen\
+u\x0a\x0a        MenuI\
 tem {\x0a          \
-  text: \x22Remove \
-from Favourites\x22\
-\x0a            vis\
-ible: tabName ==\
-= \x22Favourites\x22\x0a \
-           onTri\
-ggered: {\x0a      \
-          appLau\
+  text: \x22Add to \
+Favourites\x22\x0a    \
+        visible:\
+ tabName !== \x22Fa\
+vourites\x22\x0a      \
+      onTriggere\
+d: appLauncher.a\
+dd_to_favourites\
+(app.name)\x0a     \
+   }\x0a        Men\
+uItem {\x0a        \
+    text: \x22Remov\
+e from Favourite\
+s\x22\x0a            v\
+isible: tabName \
+=== \x22Favourites\x22\
+\x0a            onT\
+riggered: appLau\
 ncher.remove_fro\
 m_favourites(app\
-.name);\x0a        \
-    }\x0a        }\x0a\
-    }\x0a}\x0a\
+.name)\x0a        }\
+\x0a    }\x0a}\x0a\
 \x00\x00\x01\xd6\
 i\
 mport QtQuick 2.\
@@ -383,46 +496,175 @@ ld.text = \x22\x22;\x0a  \
           clear(\
 );\x0a        }\x0a   \
  }\x0a}\x0a\
-\x00\x00\x02W\
-\x00\
-\x00\x08,x\xda\xadUQo\xd3@\x0c~\xcf\xaf0\
-}j5)\xea\x90@(\xa5\xa0Q4\x86T\x906\
-\x10{@\x08\xdd\x12w\xb1\x96\xde\x85;\xa7]5\xe5\
-\xbfs\x97\xa4m\xd2$+\x13\xbb\x97*\xf6\xe7\xcf\xbe\
-\xcf>\x97\x96\xa9\xd2\x0c\x97|\x99Qx\x07/\xfd\xd3\
-W\x1e5l\xfeLI\xd6*1\x9d\xce\xb9\xd8\xa8\x8c\
-\x0d\x9c:\x9fw\x96\xa6\x09\x85\x82I\xc9k\x92\x91Z\
-\xc3\x83\x07\xf6\xac\xc8\xd0M\x82\x01\xb0\xce\xb0\xb0\xac)\
-\xe28\x807\xe3q\xf1\x19#\xdd\xc6\x1c\xc0\xeb\xea\x9b\
-\x89\x1d|`\x09\xcd\x05j|1\xf0\x0a\xfb\x9c\x0c\x7f\
-Q\x11&\x15\xb1;\x14\x05`P\xe80\xbeB\x93%\
-l\x0a@\xe1\xce\xcb\xa8\x99J\xb2\xa5,K\xad\x05\x0a\
-\x19\xc6J\x1b\x7fAI\x12@*4J\xf6v\xdeo\
-\x05\xe5\x07\xa1k\x11\xcdt\xd6\xd7\xf0(Y\xc6\x04\xb0\
-\xc8d\xe8D\x80\xe1\x9f\x0c\xf5ft@\xe1N\xbbb\
-?L\xacm8\x9a\xb4\xb0\xb4\xa8\x88|\xd6\xb4\x1c\x8e\
-\xfc\x04\xe5-\xc7\xf0\x0e\xc6]\xd4\xee\xa4\x9a$W\xd9\
-'\x9d\x88\x95\xbd\x99.\xd3\xc3\x14D\x9a\xce\x85\xad:\
-F\xed\x97\xa5\xfd\xb6&\xf3(\xc3Bi\x18:\x1a\xb2\
-\x04\xe3\x89\xfdy\xbbe\xac*\x9c\xc0\xc9\x09\xf5\x95\xd8\
-\xa3\x82M\x8b2\x1aVD?\xe9WO\xf6\xdc{\xdc\
-\x92\x1f\xf4f\xe6\xd4\x0d\xfe\xa3\x13{\xc2\xfcpJ\xaa\
-\xe0\x1f\x84\xeb\xdei\xa9a\x1a\x88\xa5\xcb\xd8;\xc1\x07\
-\xe9\xbe\x8b\x9b\xee\x89\xe4\xc2\xd10\x97\xf3^L\xf7u\
-\xf9\xdav\xafo{\xae0E\xc1\xa8;T\xa9\xca\xb2\
-\xbc\x07\xd5\xd4K\xc9\x98\xed\x90w\xb7\x97\xf1\xde>\xe8\
-\x82\xe6\xa3`\xe1[\xa6\xafb\x89\xff\xdc\xb5\xba\xc8,\
-\xc2\xbb\xd6\xf3\xdd\xc9\xbb\xf7>\xf5\xfe5\xc8E\xb5\x81\
-Z\x980\xd3n1|\x96\x11\xdeou\xf6\xebF\xef\
-\xd9$\x9d+\x11uF\xd6\xba\x5cb:\x11\xc2\xee\x9c\
-\x15v\x5ca\xbf\x14T\x8a\x9a7\xc5\xdb\xb7\x5c\xae/\
-\xb5\x16u\xc6\x18\x95\xe9\x10g\xca\xae}io\x1cl\
-\xe3\xb6\xfd\x84\xe9t\x0a\x83s\xb1\xb28b4\x03x\
-\x0f\x8b\xdd\xd7'M\xd1.\x16\x02\xb7f\x1a\xa6\xa3\xd3\
-\xd0\xf8\xdc3\xb5%r\xf2\xf4\xe4ma\xcf\x1b\xb8\x1e\
-\xbd\xf7\xdd*\xae\xeb\xb6\xe1\x936\xce\xb1b\x8fJq\
-V\x02\xfa\x9eW)\x7f\xab\x1f\xcf~\x97\xbc\xfa'\xcd\
-\xbd\xbf\xb6E\x14k\
+\x00\x00\x0ah\
+i\
+mport QtQuick 2.\
+15\x0aimport QtQuic\
+k.Controls 2.15\x0a\
+import QtQuick.L\
+ayouts 1.15\x0a\x0a/**\
+\x0a * main.qml\x0a *\x0a\
+ * Main entry po\
+int for the Apps\
+Here! applicatio\
+n launcher.\x0a * P\
+rovides search f\
+unctionality, ta\
+bbed navigation,\
+ and displays ap\
+p grids.\x0a */\x0a\x0aAp\
+plicationWindow \
+{\x0a    visible: t\
+rue\x0a    width: 8\
+00\x0a    height: 6\
+00\x0a    title: \x22A\
+ppsHere!\x22\x0a\x0a    /\
+/ Model to hold \
+search results\x0a \
+   ListModel {\x0a \
+       id: searc\
+hResultsModel\x0a  \
+  }\x0a\x0a    ColumnL\
+ayout {\x0a        \
+anchors.fill: pa\
+rent\x0a\x0a        //\
+ Search bar at t\
+he top\x0a        S\
+earchBar {\x0a     \
+       id: searc\
+hBar\x0a           \
+ onSearch: funct\
+ion (query) {\x0a  \
+              se\
+archResultsModel\
+.clear();\x0a      \
+          if (qu\
+ery.trim().lengt\
+h > 0) {\x0a       \
+             pri\
+nt(query);\x0a     \
+               v\
+ar results = app\
+Launcher.search_\
+apps(query);\x0a   \
+                \
+ for (var i = 0;\
+ i < results.len\
+gth; ++i) {\x0a    \
+                \
+    searchResult\
+sModel.append(re\
+sults[i]);\x0a     \
+               }\
+\x0a               \
+ }\x0a            }\
+\x0a            onC\
+lear: {\x0a        \
+        searchRe\
+sultsModel.clear\
+();\x0a            \
+}\x0a        }\x0a\x0a   \
+     // Displays\
+ search results \
+below the search\
+ bar\x0a        Sea\
+rchResultsView {\
+\x0a            id:\
+ searchResultsVi\
+ew\x0a            m\
+odel: searchResu\
+ltsModel\x0a       \
+ }\x0a\x0a        // T\
+ab bar for navig\
+ation (e.g., Fav\
+ourites, All App\
+s)\x0a        TabBa\
+r {\x0a            \
+id: tabBar\x0a     \
+       Layout.fi\
+llWidth: true\x0a  \
+          Repeat\
+er {\x0a           \
+     model: tabs\
+Model\x0a          \
+      TabButton \
+{\x0a              \
+      text: mode\
+lData.tabName\x0a  \
+              }\x0a\
+            }\x0a  \
+      }\x0a\x0a       \
+ // StackLayout \
+to show the grid\
+ for the selecte\
+d tab\x0a        St\
+ackLayout {\x0a    \
+        id: stac\
+kLayout\x0a        \
+    Layout.fillW\
+idth: true\x0a     \
+       Layout.fi\
+llHeight: true\x0a \
+           curre\
+ntIndex: tabBar.\
+currentIndex\x0a\x0a  \
+          // Dyn\
+amically load th\
+e correct grid f\
+or each tab\x0a    \
+        Repeater\
+ {\x0a             \
+   model: tabsMo\
+del\x0a            \
+    Loader {\x0a   \
+                \
+ id: tabLoader\x0a \
+                \
+   active: true\x0a\
+                \
+    property var\
+ tabData: modelD\
+ata\x0a            \
+        sourceCo\
+mponent: tabData\
+.tabName === \x22Fa\
+vourites\x22 ? favo\
+uritesGridCompon\
+ent : appGridCom\
+ponent\x0a         \
+       }\x0a       \
+     }\x0a\x0a        \
+    // Component\
+ for the Favouri\
+tes grid\x0a       \
+     Component {\
+\x0a               \
+ id: favouritesG\
+ridComponent\x0a   \
+             Fav\
+ouritesGrid {\x0a  \
+                \
+  model: tabData\
+.apps\x0a          \
+      }\x0a        \
+    }\x0a\x0a         \
+   // Component \
+for the general \
+app grid\x0a       \
+     Component {\
+\x0a               \
+ id: appGridComp\
+onent\x0a          \
+      AppGrid {\x0a\
+                \
+    tabName: tab\
+Data.tabName\x0a   \
+                \
+ model: tabData.\
+apps\x0a           \
+     }\x0a         \
+   }\x0a        }\x0a \
+   }\x0a}\x0a\
 \x00\x01\x00\x8b\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -4580,19 +4822,19 @@ qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\xec\x00\x00\x00\x00\x00\x01\x00\x00\x19B\
+\x00\x00\x00\xec\x00\x00\x00\x00\x00\x01\x00\x00(U\
 \x00\x00\x01\x97y\xe6>\xdc\
-\x00\x00\x00\x92\x00\x00\x00\x00\x00\x01\x00\x00\x0f@\
-\x00\x00\x01\x97zC\x06\xbc\
-\x00\x00\x00\xd6\x00\x01\x00\x00\x00\x01\x00\x00\x16\xe7\
-\x00\x00\x01\x97zg\xd6\x11\
-\x00\x00\x00v\x00\x00\x00\x00\x00\x01\x00\x00\x0d\xbd\
-\x00\x00\x01\x97zeN\xbd\
-\x00\x00\x00F\x00\x00\x00\x00\x00\x01\x00\x00\x05N\
+\x00\x00\x00\x92\x00\x00\x00\x00\x00\x01\x00\x00\x14a\
+\x00\x00\x01\x97z\x9apJ\
+\x00\x00\x00\xd6\x00\x00\x00\x00\x00\x01\x00\x00\x1d\xe9\
+\x00\x00\x01\x97z\x9d\xe1\xbe\
+\x00\x00\x00v\x00\x00\x00\x00\x00\x01\x00\x00\x11\xab\
+\x00\x00\x01\x97z\x9c\xa6[\
+\x00\x00\x00F\x00\x00\x00\x00\x00\x01\x00\x00\x09<\
 \x00\x00\x01\x97zPPq\
 \x00\x00\x00\x1c\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
-\x00\x00\x01\x97zh\xc9\xfe\
-\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x15\x0d\
+\x00\x00\x01\x97z\x9d\x1e\xef\
+\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x1c\x0f\
 \x00\x00\x01\x97z0B\x0e\
 "
 
