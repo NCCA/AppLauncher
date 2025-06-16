@@ -21,7 +21,7 @@ ApplicationWindow {
                 searchResultsModel.clear();
                 if (query.trim().length > 0) {
                     print(query);
-                    var results = appLauncher.searchApps(query);
+                    var results = appLauncher.search_apps(query);
                     for (var i = 0; i < results.length; ++i) {
                         searchResultsModel.append(results[i]);
                     }

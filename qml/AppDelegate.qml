@@ -30,12 +30,12 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onClicked: {
+        onClicked: function (mouse) {
             if (mouse.button === Qt.LeftButton) {
-                appLauncher.launchApp(app.path, app.execName);
+                appLauncher.launch_app(app.path, app.execName);
             }
         }
-        onPressed: {
+        onPressed: function (mouse) {
             if (mouse.button === Qt.RightButton) {
                 contextMenu.popup();
             }
@@ -48,14 +48,14 @@ Rectangle {
             text: "Add to Favourites"
             visible: tabName !== "Favourites"
             onTriggered: {
-                appLauncher.addToFavourites(app.name);
+                appLauncher.add_to_favourites(app.name);
             }
         }
         MenuItem {
             text: "Remove from Favourites"
             visible: tabName === "Favourites"
             onTriggered: {
-                appLauncher.removeFromFavourites(app.name);
+                appLauncher.remove_from_favourites(app.name);
             }
         }
     }

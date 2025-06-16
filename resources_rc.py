@@ -6,7 +6,7 @@
 from PySide6 import QtCore
 
 qt_resource_data = b"\
-\x00\x00\x07g\
+\x00\x00\x08\xb0\
 i\
 mport QtQuick\x0aim\
 port QtQuick.Con\
@@ -37,96 +37,116 @@ ight\x0a        mod\
 el: model\x0a      \
   interactive: t\
 rue\x0a        clip\
-: true\x0a\x0a        \
-delegate: Rectan\
-gle {\x0a          \
-  width: ListVie\
-w.view ? ListVie\
-w.view.width : 0\
-\x0a            hei\
-ght: 60\x0a        \
-    color: \x22#e0e\
-0e0\x22\x0a           \
- border.color: \x22\
-#888\x22\x0a          \
-  radius: 8\x0a    \
-        RowLayou\
-t {\x0a            \
-    anchors.fill\
-: parent\x0a       \
-         spacing\
-: 12\x0a           \
-     Image {\x0a   \
+: true\x0a        d\
+elegate: Rectang\
+le {\x0a           \
+ id: delegateRec\
+t\x0a            wi\
+dth: ListView.vi\
+ew ? ListView.vi\
+ew.width : 0\x0a   \
+         height:\
+ 60\x0a            \
+color: \x22#e0e0e0\x22\
+\x0a            bor\
+der.color: \x22#888\
+\x22\x0a            ra\
+dius: 8\x0a        \
+    RowLayout {\x0a\
                 \
- source: model.i\
-con\x0a            \
-        width: 4\
-0\x0a              \
-      height: 40\
+anchors.fill: pa\
+rent\x0a           \
+     spacing: 12\
 \x0a               \
-     Layout.alig\
-nment: Qt.AlignV\
-Center\x0a         \
-           onSta\
-tusChanged: {\x0a  \
-                \
-      if (status\
- === Image.Error\
-) {\x0a            \
-                \
-source = \x22qrc:/q\
-ml/placeholder.p\
-ng\x22;\x0a           \
-             }\x0a \
-                \
-   }\x0a           \
-     }\x0a         \
-       ColumnLay\
-out {\x0a          \
-          Layout\
-.alignment: Qt.A\
-lignVCenter\x0a    \
-                \
-Text {\x0a         \
-               t\
-ext: model.name\x0a\
-                \
-        font.pix\
-elSize: 16\x0a     \
-                \
-   font.bold: tr\
-ue\x0a             \
-       }\x0a       \
-         }\x0a     \
-           Butto\
-n {\x0a            \
-        text: \x22L\
-aunch\x22\x0a         \
-           onCli\
-cked: appLaunche\
-r.launchApp(mode\
-l.path, model.ex\
-ecName)\x0a        \
+ Layout.alignmen\
+t: Qt.AlignLeft \
+| Qt.AlignVCente\
+r\x0a\x0a             \
+   Image {\x0a     \
+               s\
+ource: model.ico\
+n\x0a              \
+      height: de\
+legateRect.heigh\
+t\x0a              \
+      fillMode: \
+Image.PreserveAs\
+pectFit\x0a        \
             Layo\
 ut.alignment: Qt\
-.AlignVCenter\x0a  \
-              }\x0a\
+.AlignLeft | Qt.\
+AlignVCenter\x0a   \
                 \
-Button {\x0a       \
-             tex\
-t: \x22Add to Favou\
-rites\x22\x0a         \
-           onCli\
-cked: appLaunche\
-r.addToFavourite\
-s(model.name)\x0a  \
+ onStatusChanged\
+: {\x0a            \
+            if (\
+status === Image\
+.Error) {\x0a      \
                 \
-  Layout.alignme\
-nt: Qt.AlignVCen\
-ter\x0a            \
-    }\x0a          \
-  }\x0a        }\x0a  \
-  }\x0a}\x0a\
+      source = \x22\
+qrc:/qml/placeho\
+lder.png\x22;\x0a     \
+                \
+   }\x0a           \
+         }\x0a     \
+           }\x0a   \
+             Col\
+umnLayout {\x0a    \
+                \
+Layout.alignment\
+: Qt.AlignLeft |\
+ Qt.AlignVCenter\
+\x0a               \
+     Text {\x0a    \
+                \
+    text: model.\
+name\x0a           \
+             fon\
+t.pixelSize: 16\x0a\
+                \
+        font.bol\
+d: true\x0a        \
+                \
+horizontalAlignm\
+ent: Text.AlignL\
+eft\x0a            \
+            Layo\
+ut.alignment: Qt\
+.AlignLeft | Qt.\
+AlignVCenter\x0a   \
+                \
+ }\x0a             \
+   }\x0a           \
+     Button {\x0a  \
+                \
+  text: \x22Launch\x22\
+\x0a               \
+     onClicked: \
+appLauncher.laun\
+ch_app(model.pat\
+h, model.execNam\
+e)\x0a             \
+       Layout.al\
+ignment: Qt.Alig\
+nLeft | Qt.Align\
+VCenter\x0a        \
+        }\x0a      \
+          Button\
+ {\x0a             \
+       text: \x22Ad\
+d to Favourites\x22\
+\x0a               \
+     onClicked: \
+appLauncher.addT\
+oFavourites(mode\
+l.name)\x0a        \
+            Layo\
+ut.alignment: Qt\
+.AlignLeft | Qt.\
+AlignVCenter\x0a   \
+             }\x0a \
+           }\x0a   \
+     }\x0a    }\x0a}\x0a\
 \x00\x00\x01p\
 i\
 mport QtQuick 2.\
@@ -152,7 +172,7 @@ AppDelegate {\x0a  \
 ridView.tabName\x0a\
         app: mod\
 elData\x0a    }\x0a}\x0a\
-\x00\x00\x05\xa2\
+\x00\x00\x05\xc9\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
@@ -197,54 +217,56 @@ acceptedButtons:\
  Qt.LeftButton |\
  Qt.RightButton\x0a\
         onClicke\
-d: {\x0a           \
- if (mouse.butto\
-n === Qt.LeftBut\
-ton) {\x0a         \
-       appLaunch\
-er.launchApp(app\
-.path, app.execN\
-ame);\x0a          \
-  }\x0a        }\x0a  \
-      onPressed:\
- {\x0a            i\
-f (mouse.button \
-=== Qt.RightButt\
-on) {\x0a          \
-      contextMen\
-u.popup();\x0a     \
+d: function (mou\
+se) {\x0a          \
+  if (mouse.butt\
+on === Qt.LeftBu\
+tton) {\x0a        \
+        appLaunc\
+her.launch_app(a\
+pp.path, app.exe\
+cName);\x0a        \
+    }\x0a        }\x0a\
+        onPresse\
+d: function (mou\
+se) {\x0a          \
+  if (mouse.butt\
+on === Qt.RightB\
+utton) {\x0a       \
+         context\
+Menu.popup();\x0a  \
+          }\x0a    \
+    }\x0a    }\x0a\x0a   \
+ Menu {\x0a        \
+id: contextMenu\x0a\
+        MenuItem\
+ {\x0a            t\
+ext: \x22Add to Fav\
+ourites\x22\x0a       \
+     visible: ta\
+bName !== \x22Favou\
+rites\x22\x0a         \
+   onTriggered: \
+{\x0a              \
+  appLauncher.ad\
+d_to_favourites(\
+app.name);\x0a     \
        }\x0a       \
- }\x0a    }\x0a\x0a    Me\
-nu {\x0a        id:\
- contextMenu\x0a   \
-     MenuItem {\x0a\
-            text\
-: \x22Add to Favour\
-ites\x22\x0a          \
-  visible: tabNa\
-me !== \x22Favourit\
-es\x22\x0a            \
-onTriggered: {\x0a \
-               a\
-ppLauncher.addTo\
-Favourites(app.n\
-ame);\x0a          \
-  }\x0a        }\x0a  \
-      MenuItem {\
-\x0a            tex\
-t: \x22Remove from \
-Favourites\x22\x0a    \
-        visible:\
- tabName === \x22Fa\
-vourites\x22\x0a      \
-      onTriggere\
-d: {\x0a           \
-     appLauncher\
-.removeFromFavou\
-rites(app.name);\
-\x0a            }\x0a \
-       }\x0a    }\x0a}\
-\x0a\
+ }\x0a        MenuI\
+tem {\x0a          \
+  text: \x22Remove \
+from Favourites\x22\
+\x0a            vis\
+ible: tabName ==\
+= \x22Favourites\x22\x0a \
+           onTri\
+ggered: {\x0a      \
+          appLau\
+ncher.remove_fro\
+m_favourites(app\
+.name);\x0a        \
+    }\x0a        }\x0a\
+    }\x0a}\x0a\
 \x00\x00\x01\xd6\
 i\
 mport QtQuick 2.\
@@ -277,7 +299,7 @@ ld.text = \x22\x22;\x0a  \
           clear(\
 );\x0a        }\x0a   \
  }\x0a}\x0a\
-\x00\x00\x06#\
+\x00\x00\x06$\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
@@ -312,72 +334,72 @@ ear();\x0a         \
 query);\x0a        \
             var \
 results = appLau\
-ncher.searchApps\
-(query);\x0a       \
-             for\
- (var i = 0; i <\
- results.length;\
- ++i) {\x0a        \
+ncher.search_app\
+s(query);\x0a      \
+              fo\
+r (var i = 0; i \
+< results.length\
+; ++i) {\x0a       \
                 \
-searchResultsMod\
-el.append(result\
-s[i]);\x0a         \
-           }\x0a   \
-             }\x0a \
-           }\x0a   \
-         onClear\
-: {\x0a            \
-    searchResult\
-sModel.clear();\x0a\
+ searchResultsMo\
+del.append(resul\
+ts[i]);\x0a        \
             }\x0a  \
+              }\x0a\
+            }\x0a  \
+          onClea\
+r: {\x0a           \
+     searchResul\
+tsModel.clear();\
+\x0a            }\x0a \
+       }\x0a\x0a      \
+  SearchResultsV\
+iew {\x0a          \
+  id: searchResu\
+ltsView\x0a        \
+    model: searc\
+hResultsModel\x0a  \
       }\x0a\x0a       \
- SearchResultsVi\
-ew {\x0a           \
- id: searchResul\
-tsView\x0a         \
-   model: search\
-ResultsModel\x0a   \
-     }\x0a\x0a        \
-TabBar {\x0a       \
-     id: tabBar\x0a\
-            Layo\
-ut.fillWidth: tr\
-ue\x0a            R\
-epeater {\x0a      \
-          model:\
- tabsModel\x0a     \
-           TabBu\
-tton {\x0a         \
-           text:\
- modelData.tabNa\
-me\x0a             \
-   }\x0a           \
- }\x0a        }\x0a\x0a  \
-      StackLayou\
-t {\x0a            \
-id: stackLayout\x0a\
-            Layo\
-ut.fillWidth: tr\
-ue\x0a            L\
-ayout.fillHeight\
-: true\x0a         \
-   currentIndex:\
- tabBar.currentI\
-ndex\x0a\x0a          \
-  Repeater {\x0a   \
-             mod\
-el: tabsModel\x0a  \
-              Ap\
-pGrid {\x0a        \
-            tabN\
-ame: modelData.t\
-abName\x0a         \
-           apps:\
- modelData.apps\x0a\
-                \
-}\x0a            }\x0a\
-        }\x0a    }\x0a\
-}\x0a\
+ TabBar {\x0a      \
+      id: tabBar\
+\x0a            Lay\
+out.fillWidth: t\
+rue\x0a            \
+Repeater {\x0a     \
+           model\
+: tabsModel\x0a    \
+            TabB\
+utton {\x0a        \
+            text\
+: modelData.tabN\
+ame\x0a            \
+    }\x0a          \
+  }\x0a        }\x0a\x0a \
+       StackLayo\
+ut {\x0a           \
+ id: stackLayout\
+\x0a            Lay\
+out.fillWidth: t\
+rue\x0a            \
+Layout.fillHeigh\
+t: true\x0a        \
+    currentIndex\
+: tabBar.current\
+Index\x0a\x0a         \
+   Repeater {\x0a  \
+              mo\
+del: tabsModel\x0a \
+               A\
+ppGrid {\x0a       \
+             tab\
+Name: modelData.\
+tabName\x0a        \
+            apps\
+: modelData.apps\
+\x0a               \
+ }\x0a            }\
+\x0a        }\x0a    }\
+\x0a}\x0a\
 \x00\x01\x00\x8b\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -4530,18 +4552,18 @@ qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\xc2\x00\x00\x00\x00\x00\x01\x00\x00\x16\x86\
+\x00\x00\x00\xc2\x00\x00\x00\x00\x00\x01\x00\x00\x17\xf7\
 \x00\x00\x01\x97y\xe6>\xdc\
-\x00\x00\x00h\x00\x00\x00\x00\x00\x01\x00\x00\x08\xdf\
-\x00\x00\x01\x97z\x18e\xb4\
-\x00\x00\x00\xac\x00\x00\x00\x00\x00\x01\x00\x00\x10_\
-\x00\x00\x01\x97z*\xc1\x8c\
-\x00\x00\x00L\x00\x00\x00\x00\x00\x01\x00\x00\x07k\
-\x00\x00\x01\x97z\x18\x18.\
+\x00\x00\x00h\x00\x00\x00\x00\x00\x01\x00\x00\x0a(\
+\x00\x00\x01\x97zC\x06\xbc\
+\x00\x00\x00\xac\x00\x00\x00\x00\x00\x01\x00\x00\x11\xcf\
+\x00\x00\x01\x97z8n\xdc\
+\x00\x00\x00L\x00\x00\x00\x00\x00\x01\x00\x00\x08\xb4\
+\x00\x00\x01\x97z0B\x0e\
 \x00\x00\x00\x1c\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
-\x00\x00\x01\x97z/\x86\x1a\
-\x00\x00\x00\x8c\x00\x00\x00\x00\x00\x01\x00\x00\x0e\x85\
-\x00\x00\x01\x97z\x17c\x98\
+\x00\x00\x01\x97zB\x86\xce\
+\x00\x00\x00\x8c\x00\x00\x00\x00\x00\x01\x00\x00\x0f\xf5\
+\x00\x00\x01\x97z0B\x0e\
 "
 
 def qInitResources():

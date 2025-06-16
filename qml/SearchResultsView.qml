@@ -16,8 +16,8 @@ ScrollView {
         model: model
         interactive: true
         clip: true
-
         delegate: Rectangle {
+            id: delegateRect
             width: ListView.view ? ListView.view.width : 0
             height: 60
             color: "#e0e0e0"
@@ -26,11 +26,13 @@ ScrollView {
             RowLayout {
                 anchors.fill: parent
                 spacing: 12
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+
                 Image {
                     source: model.icon
-                    width: 40
-                    height: 40
-                    Layout.alignment: Qt.AlignVCenter
+                    height: delegateRect.height
+                    fillMode: Image.PreserveAspectFit
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                     onStatusChanged: {
                         if (status === Image.Error) {
                             source = "qrc:/qml/placeholder.png";
@@ -38,22 +40,24 @@ ScrollView {
                     }
                 }
                 ColumnLayout {
-                    Layout.alignment: Qt.AlignVCenter
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                     Text {
                         text: model.name
                         font.pixelSize: 16
                         font.bold: true
+                        horizontalAlignment: Text.AlignLeft
+                        Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                     }
                 }
                 Button {
                     text: "Launch"
-                    onClicked: appLauncher.launchApp(model.path, model.execName)
-                    Layout.alignment: Qt.AlignVCenter
+                    onClicked: appLauncher.launch_app(model.path, model.execName)
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 }
                 Button {
                     text: "Add to Favourites"
                     onClicked: appLauncher.addToFavourites(model.name)
-                    Layout.alignment: Qt.AlignVCenter
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 }
             }
         }

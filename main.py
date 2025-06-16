@@ -20,14 +20,14 @@ class AppLauncher(QObject):
         self._favourites = self._load_favourites()
 
     @Slot(str, str)
-    def launchApp(self, path, execName):
+    def launch_app(self, path, execName):
         try:
             subprocess.Popen([f"{path}/{execName}"])
         except Exception as e:
             print(f"Failed to launch: {e}")
 
     @Slot(str, result="QVariantList")
-    def searchApps(self, query):
+    def search_apps(self, query):
         """Return a flat list of apps matching the query in their name."""
         query = query.strip().lower()
         if not query:
@@ -40,7 +40,7 @@ class AppLauncher(QObject):
         return matches
 
     @Slot(str)
-    def addToFavourites(self, appName):
+    def add_to_favourites(self, appName):
         # Avoid duplicates
         for fav in self._favourites:
             if fav["name"] == appName:
@@ -55,7 +55,7 @@ class AppLauncher(QObject):
                     return
 
     @Slot(str)
-    def removeFromFavourites(self, appName):
+    def remove_from_favourites(self, appName):
         for fav in self._favourites:
             if fav["name"] == appName:
                 self._favourites.remove(fav)
@@ -63,7 +63,7 @@ class AppLauncher(QObject):
                 self.favouritesChanged.emit()
                 return
 
-    def getTabsModel(self):
+    def get_tabs_model(self):
         # Insert Favourites tab at the front
         tabs = [{"tabName": "Favourites", "apps": self._favourites}] + self._apps_by_tab
         return tabs
@@ -98,14 +98,14 @@ if __name__ == "__main__":
     appLauncher = AppLauncher(apps_by_tab)
     engine = QQmlApplicationEngine()
     engine.rootContext().setContextProperty("appLauncher", appLauncher)
-    engine.rootContext().setContextProperty("tabsModel", appLauncher.getTabsModel())
+    engine.rootContext().setContextProperty("tabsModel", appLauncher.get_tabs_model())
     engine.load(QUrl("qrc:/qml/main.qml"))
 
     # Update QML model when favourites change
-    def updateTabsModel():
-        engine.rootContext().setContextProperty("tabsModel", appLauncher.getTabsModel())
+    def update_tabs_model():
+        engine.rootContext().setContextProperty("tabsModel", appLauncher.get_tabs_model())
 
-    appLauncher.favouritesChanged.connect(updateTabsModel)
+    appLauncher.favouritesChanged.connect(update_tabs_model)
 
     if not engine.rootObjects():
         sys.exit(-1)
