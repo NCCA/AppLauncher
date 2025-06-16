@@ -11,11 +11,6 @@ Rectangle {
     border.color: "#888"
     radius: 8
 
-    // ToolTip attached property
-    ToolTip.visible: mouseArea.containsMouse
-    ToolTip.text: app.desc
-    ToolTip.delay: 300
-
     Image {
         source: app.icon
         anchors.centerIn: parent
@@ -35,8 +30,6 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
-        hoverEnabled: true
-
         onClicked: {
             if (mouse.button === Qt.LeftButton) {
                 appLauncher.launchApp(app.path, app.execName);

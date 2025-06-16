@@ -36,8 +36,7 @@ class AppLauncher(QObject):
         for tab in self._apps_by_tab:
             for app in tab["apps"]:
                 if query in app["name"].lower():
-                    # Ensure 'name' is present in the result
-                    matches.append(dict(app))  # Make a copy to be safe
+                    matches.append(app)
         return matches
 
     @Slot(str)

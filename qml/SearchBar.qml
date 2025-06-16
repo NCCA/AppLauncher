@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 
 RowLayout {
     signal search(string query)
-    signal clear()
+    signal clear
 
     TextField {
         id: searchField
@@ -16,8 +16,8 @@ RowLayout {
         text: "Clear"
         visible: searchField.text.length > 0
         onClicked: {
-            searchField.text = ""
-            clear()
+            searchField.text = "";
+            clear();
         }
     }
 }

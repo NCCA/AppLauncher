@@ -8,7 +8,9 @@ ApplicationWindow {
     height: 600
     title: "App Launcher"
 
-    property var searchResults: []
+    ListModel {
+        id: searchResultsModel
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -16,20 +18,23 @@ ApplicationWindow {
         SearchBar {
             id: searchBar
             onSearch: function (query) {
+                searchResultsModel.clear();
                 if (query.trim().length > 0) {
-                    searchResults = appLauncher.searchApps(query);
-                } else {
-                    searchResults = [];
+                    print(query);
+                    var results = appLauncher.searchApps(query);
+                    for (var i = 0; i < results.length; ++i) {
+                        searchResultsModel.append(results[i]);
+                    }
                 }
             }
             onClear: {
-                searchResults = [];
+                searchResultsModel.clear();
             }
         }
 
         SearchResultsView {
             id: searchResultsView
-            searchResults: searchResults
+            model: searchResultsModel
         }
 
         TabBar {
