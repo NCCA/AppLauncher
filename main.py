@@ -2,6 +2,7 @@
 import json
 import subprocess
 import sys
+from typing import Any, Dict, List
 
 from PySide6.QtCore import QObject, QSettings, QUrl, Signal, Slot
 from PySide6.QtQml import QQmlApplicationEngine
@@ -11,36 +12,79 @@ import resources_rc  # noqa: F401 qt resource
 
 
 class AppLauncher(QObject):
-    favouritesChanged = Signal()
+    """
+    AppLauncher provides methods to launch applications, manage favourites,
+    and search for apps. It exposes slots for QML integration.
+    """
 
-    def __init__(self, apps_by_tab):
+    favourites_changed = Signal()
+
+    def __init__(self, apps_by_tab: List[Dict[str, Any]]) -> None:
+        """
+        Initialize the AppLauncher.
+
+        Args:
+            apps_by_tab: List of dictionaries, each representing a tab with its apps.
+        """
         super().__init__()
-        self._apps_by_tab = apps_by_tab
-        self._settings = QSettings("YourCompany", "AppLauncher")
-        self._favourites = self._load_favourites()
+        self._apps_by_tab: List[Dict[str, Any]] = apps_by_tab
+        self._settings: QSettings = QSettings("YourCompany", "AppLauncher")
+        self._favourites: List[Dict[str, Any]] = self._load_favourites()
 
     @Slot(str, str)
-    def launch_app(self, path, execName):
+    def launch_app(self, path: str, execName: str) -> None:
+        """
+        Launch an application using its path and executable name.
+
+        Args:
+            path: The directory path of the application.
+            execName: The executable name of the application.
+        """
         try:
             subprocess.Popen([f"{path}/{execName}"])
         except Exception as e:
             print(f"Failed to launch: {e}")
 
     @Slot(str, result="QVariantList")
-    def search_apps(self, query):
-        """Return a flat list of apps matching the query in their name."""
+    def search_apps(self, query: str) -> List[Dict[str, Any]]:
+        """
+        Search for applications whose names contain the query string.
+
+        Args:
+            query: The search query.
+
+        Returns:
+            A list of app dictionaries matching the query.
+        """
         query = query.strip().lower()
         if not query:
             return []
-        matches = []
+        matches: List[Dict[str, Any]] = []
         for tab in self._apps_by_tab:
             for app in tab["apps"]:
                 if query in app["name"].lower():
                     matches.append(app)
         return matches
 
+    @Slot(int, int)
+    def move_favourite(self, from_index: int, to_index: int) -> None:
+        """
+        Move a favourite app from one position to another.
+        """
+        if 0 <= from_index < len(self._favourites) and 0 <= to_index < len(self._favourites):
+            fav = self._favourites.pop(from_index)
+            self._favourites.insert(to_index, fav)
+            self._save_favourites()
+            self.favourites_changed.emit()
+
     @Slot(str)
-    def add_to_favourites(self, appName):
+    def add_to_favourites(self, appName: str) -> None:
+        """
+        Add an application to the favourites list by name.
+
+        Args:
+            appName: The name of the application to add.
+        """
         # Avoid duplicates
         for fav in self._favourites:
             if fav["name"] == appName:
@@ -51,36 +95,65 @@ class AppLauncher(QObject):
                 if app["name"] == appName:
                     self._favourites.append(app)
                     self._save_favourites()
-                    self.favouritesChanged.emit()
+                    self.favourites_changed.emit()
                     return
 
     @Slot(str)
-    def remove_from_favourites(self, appName):
+    def remove_from_favourites(self, appName: str) -> None:
+        """
+        Remove an application from the favourites list by name.
+
+        Args:
+            appName: The name of the application to remove.
+        """
         for fav in self._favourites:
             if fav["name"] == appName:
                 self._favourites.remove(fav)
                 self._save_favourites()
-                self.favouritesChanged.emit()
+                self.favourites_changed.emit()
                 return
 
-    def get_tabs_model(self):
-        # Insert Favourites tab at the front
+    def get_tabs_model(self) -> List[Dict[str, Any]]:
+        """
+        Get the model for tabs, including the Favourites tab.
+
+        Returns:
+            A list of tab dictionaries, with Favourites as the first tab.
+        """
         tabs = [{"tabName": "Favourites", "apps": self._favourites}] + self._apps_by_tab
         return tabs
 
-    def _load_favourites(self):
+    def _load_favourites(self) -> List[Dict[str, Any]]:
+        """
+        Load the favourites list from QSettings.
+
+        Returns:
+            A list of favourite app dictionaries.
+        """
         favs = self._settings.value("user/favourites", [])
         # QSettings may return a QVariantList of QVariantMaps, ensure Python dicts
         return [dict(fav) for fav in favs] if favs else []
 
-    def _save_favourites(self):
+    def _save_favourites(self) -> None:
+        """
+        Save the current favourites list to QSettings.
+        """
         self._settings.setValue("user/favourites", self._favourites)
 
 
-def load_apps_json(json_path):
+def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
+    """
+    Load applications from a JSON file and organize them by tab.
+
+    Args:
+        json_path: Path to the JSON file.
+
+    Returns:
+        A list of tab dictionaries, each containing a list of apps.
+    """
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    tabs = {}
+    tabs: Dict[str, List[Dict[str, Any]]] = {}
     for app_name, entry in data.items():
         # entry is now a dict with named fields
         app = dict(entry)
@@ -95,17 +168,20 @@ def load_apps_json(json_path):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     apps_by_tab = load_apps_json("apps.json")
-    appLauncher = AppLauncher(apps_by_tab)
+    app_launcher = AppLauncher(apps_by_tab)
     engine = QQmlApplicationEngine()
-    engine.rootContext().setContextProperty("appLauncher", appLauncher)
-    engine.rootContext().setContextProperty("tabsModel", appLauncher.get_tabs_model())
+    engine.rootContext().setContextProperty("appLauncher", app_launcher)
+    engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
     engine.load(QUrl("qrc:/qml/main.qml"))
 
     # Update QML model when favourites change
-    def update_tabs_model():
-        engine.rootContext().setContextProperty("tabsModel", appLauncher.get_tabs_model())
+    def update_tabs_model() -> None:
+        """
+        Update the QML context property for the tabs model when favourites change.
+        """
+        engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
 
-    appLauncher.favouritesChanged.connect(update_tabs_model)
+    app_launcher.favourites_changed.connect(update_tabs_model)
 
     if not engine.rootObjects():
         sys.exit(-1)

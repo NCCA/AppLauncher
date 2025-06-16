@@ -56,9 +56,25 @@ ApplicationWindow {
 
             Repeater {
                 model: tabsModel
+                Loader {
+                    id: tabLoader
+                    active: true
+                    property var tabData: modelData
+                    sourceComponent: tabData.tabName === "Favourites" ? favouritesGridComponent : appGridComponent
+                }
+            }
+
+            Component {
+                id: favouritesGridComponent
+                FavouritesGrid {
+                    model: tabData.apps
+                }
+            }
+            Component {
+                id: appGridComponent
                 AppGrid {
-                    tabName: modelData.tabName
-                    apps: modelData.apps
+                    tabName: tabData.tabName
+                    model: tabData.apps
                 }
             }
         }

@@ -5,6 +5,7 @@
         <file>qml/SearchResultsView.qml</file>
         <file>qml/AppGrid.qml</file>
         <file>qml/AppDelegate.qml</file>
+        <file>qml/FavouritesGrid.qml</file>
         <file>icons/Nuke.png</file>
     </qresource>
 </RCC>

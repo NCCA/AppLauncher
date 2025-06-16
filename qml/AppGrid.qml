@@ -5,12 +5,11 @@ import QtQuick.Layouts 1.15
 GridView {
     id: gridView
     property string tabName: ""
-    property var apps: []
     Layout.fillWidth: true
     Layout.fillHeight: true
     cellWidth: 100
     cellHeight: 100
-    model: apps
+    // model is now set from outside, do not set it here
 
     delegate: AppDelegate {
         tabName: gridView.tabName
