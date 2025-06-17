@@ -43,7 +43,7 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
-
+        hoverEnabled: true
         // Launch app on left click
         onClicked: function (mouse) {
             if (mouse.button === Qt.LeftButton) {
@@ -57,6 +57,9 @@ Rectangle {
             }
         }
     }
+    ToolTip.visible: mouseArea.containsMouse && !!app.desc
+    ToolTip.text: app.desc || ""
+    ToolTip.delay: 300
 
     // Context menu for adding/removing favourites
     Menu {
