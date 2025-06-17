@@ -2,6 +2,6 @@
 Type=Application
 Name=AppsEre
 Exec=/public/devel/25-26/bin/AppsEre
-Icon=/public/devel/25-26/AppsEre/icon.png
+Icon=/public/devel/25-26/AppsEre/appsereicon.png
 X-GNOME-Autostart-enabled=true
 Comment=Start AppsEre Launcher on Login
