@@ -1,26 +1,19 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
-/**
- * AppDelegate.qml
- *
- * Represents a single application icon with its name, supporting launching and context menu actions.
- * Used within an app launcher grid or list.
- */
+import QtQuick.Controls.Material 2.15
 
 Rectangle {
-    // The name of the current tab (e.g., "Favourites", "All Apps")
     property string tabName: ""
-    // The app object, expected to have: name, icon, path, execName
     property var app: {}
-
+    property var rootWindow
+    property int theme: Material.theme
     width: 90
     height: 90
-    color: "#f0f0f0"
-    border.color: "#888"
+    color: theme === Material.Dark ? "#333" : "#fff"
+    border.color: theme === Material.Dark ? "#bbb" : "#888"
+
     radius: 8
 
-    // App icon
     Image {
         source: app.icon
         anchors.centerIn: parent
@@ -28,7 +21,6 @@ Rectangle {
         height: 48
     }
 
-    // App name label
     Text {
         text: app.name
         anchors.horizontalCenter: parent.horizontalCenter
@@ -36,35 +28,33 @@ Rectangle {
         anchors.bottomMargin: 8
         font.pixelSize: 14
         elide: Text.ElideRight
+        color: theme === Material.Dark ? "#fff" : "#222"
     }
 
-    // Mouse interaction area for launching and context menu
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
-        // Launch app on left click
+
         onClicked: function (mouse) {
             if (mouse.button === Qt.LeftButton) {
                 appLauncher.launch_app(app.path, app.execName);
             }
         }
-        // Show context menu on right click
         onPressed: function (mouse) {
             if (mouse.button === Qt.RightButton) {
                 contextMenu.popup();
             }
         }
-    }
-    ToolTip.visible: mouseArea.containsMouse && !!app.desc
-    ToolTip.text: app.desc || ""
-    ToolTip.delay: 300
 
-    // Context menu for adding/removing favourites
+        ToolTip.visible: containsMouse && !!app.desc
+        ToolTip.text: app.desc || ""
+        ToolTip.delay: 300
+    }
+
     Menu {
         id: contextMenu
-
         MenuItem {
             text: "Add to Favourites"
             visible: tabName !== "Favourites"

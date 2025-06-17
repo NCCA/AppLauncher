@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 import QtQuick.Layouts 1.15
 
 /**
@@ -12,8 +13,8 @@ import QtQuick.Layouts 1.15
 MenuBar {
     id: mainMenuBar
     property var rootWindow
-    // Expose the about dialog so it can be referenced if needed
     property alias aboutDialog: aboutDialog
+
     Menu {
         title: "Debug"
         MenuItem {
@@ -30,6 +31,21 @@ MenuBar {
         MenuItem {
             text: "About"
             onTriggered: aboutDialog.open()
+        }
+    }
+    Menu {
+        title: "Theme"
+        MenuItem {
+            text: "System"
+            onTriggered: rootWindow.Material.theme = Material.System
+        }
+        MenuItem {
+            text: "Light"
+            onTriggered: rootWindow.Material.theme = Material.Light
+        }
+        MenuItem {
+            text: "Dark"
+            onTriggered: rootWindow.Material.theme = Material.Dark
         }
     }
 

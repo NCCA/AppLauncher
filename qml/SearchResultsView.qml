@@ -1,6 +1,7 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
+import QtQuick.Layouts 1.15
 
 /**
  * SearchResultsView.qml
@@ -34,8 +35,11 @@ ScrollView {
             id: delegateRect
             width: ListView.view ? ListView.view.width : 0
             height: 60
-            color: "#e0e0e0"
-            border.color: "#888"
+
+            // Theme-aware colors
+            property int theme: Material.theme
+            color: theme === Material.Dark ? "#232323" : "#e0e0e0"
+            border.color: theme === Material.Dark ? "#666" : "#888"
             radius: 8
 
             RowLayout {
@@ -61,6 +65,7 @@ ScrollView {
                         font.bold: true
                         horizontalAlignment: Text.AlignLeft
                         Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                        color: theme === Material.Dark ? "#fff" : "#222"
                     }
                 }
 

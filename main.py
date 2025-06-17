@@ -4,7 +4,8 @@ import subprocess
 import sys
 from typing import Any, Dict, List
 
-from PySide6.QtCore import QObject, QSettings, QUrl, Signal, Slot
+from PySide6.QtCore import Property, QObject, QSettings, QUrl, Signal, Slot
+from PySide6.QtGui import QIcon
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtWidgets import QApplication
 
@@ -32,6 +33,14 @@ class AppLauncher(QObject):
         self._apps_by_tab: List[Dict[str, Any]] = apps_by_tab
         self._settings: QSettings = QSettings("YourCompany", "AppLauncher")
         self._favourites: List[Dict[str, Any]] = self._load_favourites()
+        self._disk_quotas = [
+            {"location": "/home", "used": 42 * 1024**3, "quota": 50 * 1024**3, "limit": 60 * 1024**3},
+            {"location": "/transfer", "used": 10 * 1024**3, "quota": 20 * 1024**3, "limit": 25 * 1024**3},
+        ]
+
+    @Property("QVariantList", constant=True)
+    def diskQuotas(self):
+        return self._disk_quotas
 
     @Slot(str, str)
     def launch_app(self, path: str, execName: str) -> None:
@@ -198,6 +207,8 @@ if __name__ == "__main__":
     engine = QQmlApplicationEngine()
     engine.rootContext().setContextProperty("appLauncher", app_launcher)
     engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
+    engine.rootContext().setContextProperty("diskQuotas", app_launcher._disk_quotas)
+
     engine.load(QUrl("qrc:/qml/main.qml"))
 
     # Update QML model when favourites change
@@ -227,6 +238,8 @@ if __name__ == "__main__":
             status_label.setProperty("text", text)
 
     app_launcher.status_changed.connect(set_status)
+    # this needs to be loaded locally for menu bars etc.
+    app.setWindowIcon(QIcon("./appsereicon.png"))
 
     if not engine.rootObjects():
         sys.exit(-1)

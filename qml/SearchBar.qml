@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Controls.Material 2.15
 
 /**
  * SearchBar.qml
@@ -10,20 +11,25 @@ import QtQuick.Layouts 1.15
  */
 
 RowLayout {
-    // Signal emitted when the search text changes
     signal search(string query)
-    // Signal emitted when the search is cleared
     signal clear
 
-    // Text field for entering search queries
+    property int theme: Material.theme
+
     TextField {
         id: searchField
         Layout.fillWidth: true
         placeholderText: "Search apps..."
         onTextChanged: search(text)
+        color: Material.theme === Material.Dark ? "#fff" : "#222"
+        placeholderTextColor: Material.theme === Material.Dark ? "#bbb" : "#888"
+        background: Rectangle {
+            color: Material.theme === Material.Dark ? "#232323" : "#fff"
+            radius: 4
+            border.color: Material.theme === Material.Dark ? "#555" : "#ccc"
+        }
     }
 
-    // Button to clear the search field
     Button {
         text: "Clear"
         visible: searchField.text.length > 0
