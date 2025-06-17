@@ -64,7 +64,7 @@ class AppLauncher(QObject):
 
         except Exception as e:
             self.debug_output.emit(f"Failed to launch: {e}")
-        self.status_changed.emit("Failed to launch.")
+        self.status_changed.emit("App Launched")
 
     @Slot(str)
     def emit_debug(self, text: str):

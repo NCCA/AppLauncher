@@ -1,65 +1,79 @@
 {
   "Maya": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goMaya",
     "desc": "Launch Maya 2025",
     "icon": "file:////opt/autodesk/maya/icons/mayaico.png",
     "tabName": "Core DCC Tools"
   },
   "Houdini": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goHoudini",
     "desc": "Launch Houdini 20.5",
     "icon": "file:////opt/hfs20.5.332/houdini_logo.png",
     "tabName": "Core DCC Tools"
   },
   "Nuke": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goNuke",
     "desc": "Launch Nuke X",
     "icon": "/icons/Nuke.png",
     "tabName": "Core DCC Tools"
   },
   "NukeStudio": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goNukeStudio",
     "desc": "Launch Nuke Studio",
     "icon": "/icons/Nuke.png",
     "tabName": "Core DCC Tools"
   },
   "MudBox": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goMudbox",
     "desc": "Mudbox, Autodesk Sculpting tool",
     "icon": "file:////opt/autodesk/mudbox/desktop/Mudbox.png",
     "tabName": "Core DCC Tools"
   },
   "MotionBuilder": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goMotionbuilder",
     "desc": "Motionbuilder MoCap cleanup",
     "icon": "file:////opt/autodesk/MotionBuilder2025/bin/MotionBuilder.png",
     "tabName": "Core DCC Tools"
   },
   "DavinciResolve": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "goDavinci",
     "desc": "Davinci Resolve, editing, color correction, visual effects, motion graphics and audio post production ",
     "icon": "file:////opt/resolve/graphics/DV_Resolve.png",
     "tabName": "Core DCC Tools"
   },
   "CLion": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "clion",
     "desc": "Clion C / C++ IDE",
     "icon": "file:////public/devel/25-26/clion-2025.1.2/bin/clion.png",
     "tabName": "Developer Tools"
   },
   "PyCharm": {
-    "path": "/home/jmacey/GoScripts25-25",
+    "path": "/public/bin/25-26",
     "execName": "pycharm",
     "desc": "PyCharm Python IDE",
     "icon": "file:////public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png",
+    "tabName": "Developer Tools"
+  },
+  "Warp": {
+    "path": "/usr/bin/",
+    "execName": "warp-terminal",
+    "desc": "Warp Terminal ",
+    "icon": "file:////usr/share/icons/hicolor/128x128/apps/dev.warp.Warp.png",
+    "tabName": "Developer Tools"
+  },
+  "QtCreator": {
+    "path": "/public/devel/25-26/Qt/Tools/QtCreator/bin",
+    "execName": "QtCreator",
+    "desc": "Qt IDE for C++ and Python",
+    "icon": "file:////usr/share/icons/hicolor/128x128/apps/dev.warp.Warp.png",
     "tabName": "Developer Tools"
   }
 }

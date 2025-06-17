@@ -15,7 +15,7 @@ ApplicationWindow {
     visible: true
     width: 800
     height: 600
-    title: "AppsHere!"
+    title: "AppsHere! 'cause typing is hard."
 
     property bool debugVisible: false
 
