@@ -23,6 +23,7 @@ class AppLauncher(QObject):
     favourites_changed = Signal()
     debug_output = Signal(str)
     status_changed = Signal(str)
+    theme_changed = Signal(str)
 
     def __init__(self, apps_by_tab: List[Dict[str, Any]]) -> None:
         """
@@ -36,10 +37,19 @@ class AppLauncher(QObject):
         self._settings: QSettings = QSettings("YourCompany", "AppLauncher")
         self._favourites: List[Dict[str, Any]] = self._load_favourites()
         self._disk_quotas = []
-        #     {"location": "/home", "used": 42 * 1024**3, "quota": 50 * 1024**3, "limit": 60 * 1024**3},
-        #     {"location": "/transfer", "used": 10 * 1024**3, "quota": 20 * 1024**3, "limit": 25 * 1024**3},
-        # ]
         self._create_disk_quotas()
+        self._theme = self._settings.value("user/theme", "System")  # Default to System
+
+    @Property(str, notify=theme_changed)
+    def theme(self):
+        return self._theme
+
+    @Slot(str)
+    def set_theme(self, theme: str):
+        if theme != self._theme:
+            self._theme = theme
+            self._settings.setValue("user/theme", theme)
+            self.theme_changed.emit(theme)
 
 
     def _create_disk_quotas(self) :
@@ -52,7 +62,6 @@ class AppLauncher(QObject):
             output = subprocess.check_output(["quota", "-u" ,"-s", user], text=True)
             data = output.strip().splitlines()
             numbers=data[3].split()
-            print(numbers)
             return {
                 "location": Path.home().as_posix(),
                 "used": int(numbers[0][:-1]),
@@ -241,7 +250,7 @@ if __name__ == "__main__":
     engine.rootContext().setContextProperty("appLauncher", app_launcher)
     engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
     engine.rootContext().setContextProperty("diskQuotas", app_launcher._disk_quotas)
-
+    engine.rootContext().setContextProperty("theme", app_launcher._theme)
     engine.load(QUrl("qrc:/qml/main.qml"))
 
     # Update QML model when favourites change
