@@ -111,7 +111,7 @@
     "icon": "file:////public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png",
     "tabName": "Developer Tools"
   },
-  
+
   "Warp": {
     "path": "/usr/bin/",
     "execName": "warp-terminal",
@@ -167,7 +167,26 @@
     "desc": "video player",
     "icon": "file:////usr/share/icons/hicolor/32x32/apps/vlc.png",
     "tabName": "FOSS DCC"
+  },
+  "Obs": {
+    "path": "/usr/bin",
+    "execName": "obs",
+    "desc": "video /screen recording ",
+    "icon": "file:////usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png",
+    "tabName": "FOSS DCC"
+  },
+  "Inkscapoe": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "inkscape",
+    "desc": "Vector Drawing",
+    "icon": "/icons/inkscape.png",
+    "tabName": "FOSS DCC"
+  },
+  "Krita": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "krita",
+    "desc": "2D Drawing",
+    "icon": "/icons/krita.png",
+    "tabName": "FOSS DCC"
   }
-
-  
 }
