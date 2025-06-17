@@ -37,15 +37,15 @@ MenuBar {
         title: "Theme"
         MenuItem {
             text: "System"
-            onTriggered: rootWindow.Material.theme = Material.System
+            onTriggered: appLauncher.set_theme("System")
         }
         MenuItem {
             text: "Light"
-            onTriggered: rootWindow.Material.theme = Material.Light
+            onTriggered: appLauncher.set_theme("Light")
         }
         MenuItem {
             text: "Dark"
-            onTriggered: rootWindow.Material.theme = Material.Dark
+            onTriggered: appLauncher.set_theme("Dark")
         }
     }
 

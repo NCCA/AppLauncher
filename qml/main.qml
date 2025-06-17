@@ -13,14 +13,21 @@ import QtQuick.Layouts 1.15
 
 ApplicationWindow {
     id: rootWindow
-    Material.theme: Material.System
     visible: true
     width: 800
     height: 600
     title: "Apps'Ere! 'cause typing is hard."
-
+    property int theme: Material.theme
     property bool debugVisible: false
-
+    property string currentTheme: appLauncher.theme
+    Material.theme: currentTheme === "Dark" ? Material.Dark : currentTheme === "Light" ? Material.Light : Material.System
+    // Listen for theme changes from Python
+    Connections {
+        target: appLauncher
+        function onTheme_changed(theme) {
+            rootWindow.currentTheme = theme;
+        }
+    }
     menuBar: MainMenu {
         rootWindow: rootWindow
     }
@@ -142,7 +149,7 @@ ApplicationWindow {
         Rectangle {
             id: statusBar
             objectName: "statusBar"
-            color: rootWindow.palette ? rootWindow.palette.window : "#222"
+            color: theme === Material.Dark ? "#222" : "#e0e0e0"
             height: 28
             Layout.fillWidth: true
             z: 1000
@@ -151,7 +158,7 @@ ApplicationWindow {
                 id: statusLabel
                 objectName: "statusLabel"
                 text: "Status :"
-                color: rootWindow.palette ? rootWindow.palette.text : "#fff"
+                color: theme === Material.Dark ? "#fff" : "#222"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 12
