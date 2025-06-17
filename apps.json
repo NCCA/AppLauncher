@@ -48,6 +48,55 @@
     "icon": "file:////opt/resolve/graphics/DV_Resolve.png",
     "tabName": "Core DCC Tools"
   },
+  "Katana": {
+    "path": "/public/bin/25-26",
+    "execName": "goKatana",
+    "desc": "Katan look dev",
+    "icon": "file:////opt/Katana8.0v3/bin/python/UI4/Resources/Icons/Katana.svg",
+    "tabName": "Core DCC Tools"
+  },
+  "Mari": {
+    "path": "/public/bin/25-26",
+    "execName": "goMari",
+    "desc": "Mari Paint Tool",
+    "icon": "file:////opt/Mari7.1v2/Media/Icons/Mari.png",
+    "tabName": "Core DCC Tools"
+  },
+  "Blender": {
+    "path": "/public/devel/25-26/fossdcc/blender-4.4.3-linux-x64",
+    "execName": "blender",
+    "desc": "Blender",
+    "icon": "file:////public/devel/25-26/fossdcc/blender-4.4.3-linux-x64/blender.svg",
+    "tabName": "Core DCC Tools"
+  },
+  "Rawtherapee": {
+    "path": "/public/bin/25-26",
+    "execName": "goRawtherapee",
+    "desc": "Raw Image  Editor",
+    "icon": "/icons/rawtherapee.svg",
+    "tabName": "Core DCC Tools"
+  },
+  "MetaShape": {
+    "path": "/public/bin/25-26",
+    "execName": "goMetashape",
+    "desc": "Metashape 3D  re-construction",
+    "icon": "file:////opt/metashape-pro/metashape.png",
+    "tabName": "Core DCC Tools"
+  },
+  "HoudiniShell": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "run_houshell.sh",
+    "desc": "Houdini Shell for command line tools and usd",
+    "icon": "file://usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
+    "tabName": "Core DCC Tools"
+  },
+  "MayaShell": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "run_mayashell.sh",
+    "desc": "Maya Shell for command line tools and usd",
+    "icon": "file://usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
+    "tabName": "Core DCC Tools"
+  },
   "CLion": {
     "path": "/public/bin/25-26",
     "execName": "clion",
@@ -62,6 +111,7 @@
     "icon": "file:////public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png",
     "tabName": "Developer Tools"
   },
+  
   "Warp": {
     "path": "/usr/bin/",
     "execName": "warp-terminal",
@@ -71,9 +121,46 @@
   },
   "QtCreator": {
     "path": "/public/devel/25-26/Qt/Tools/QtCreator/bin",
-    "execName": "QtCreator",
+    "execName": "qtcreator",
     "desc": "Qt IDE for C++ and Python",
-    "icon": "file:////usr/share/icons/hicolor/128x128/apps/dev.warp.Warp.png",
+    "icon": "/icons/qt-creator.png",
     "tabName": "Developer Tools"
+  },
+  "QtDesignStudio": {
+    "path": "/public/devel/25-26/Qt/Tools/QtDesignStudio-4.1.1-lts/bin",
+    "execName": "qtdesignstudio",
+    "desc": "QtDesignStudio for QML",
+    "icon": "file:////public/devel/25-26/Qt/Tools/QtDesignStudio-4.1.1-lts/share/icons/hicolor/128x128/apps/QtProject-qtcreator.png",
+    "tabName": "Developer Tools"
+  },
+  "Podman": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "podman-desktop",
+    "desc": "Podman Desktop tool",
+    "icon": "/icons/podman.svg",
+    "tabName": "Developer Tools"
+  },
+  "Allusion": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "allusion",
+    "desc": "Mood boards and references",
+    "icon": "/icons/allusion.png",
+    "tabName": "FOSS DCC"
+  },
+  "DJV": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "djv",
+    "desc": "Image / Movie Viewer",
+    "icon": "file:////public/devel/25-26/fossdcc/DJV-2.0.8-Linux/etc/Icons/djv-reel-64.png",
+    "tabName": "FOSS DCC"
+  },
+  "Gaffer": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "gaffer",
+    "desc": "DCC Pipeline / LookDev",
+    "icon": "file:////public/devel/25-26/fossdcc/gaffer-1.5.14.0-linux-gcc11/graphics/GafferLogoMini.png",
+    "tabName": "FOSS DCC"
   }
+
+  
 }

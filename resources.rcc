@@ -9,5 +9,10 @@
         <file>qml/MainMenu.qml</file>
         <file>qml/DebugOutput.qml</file>
         <file>icons/Nuke.png</file>
+        <file>icons/rawtherapee.svg</file>
+        <file>icons/qt-creator.png</file>
+        <file>icons/podman.svg</file>
+        <file>icons/allusion.png</file>
+
     </qresource>
 </RCC>
