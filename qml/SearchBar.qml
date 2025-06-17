@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Controls.Material 2.15
 
 /**
  * SearchBar.qml
@@ -20,14 +21,13 @@ RowLayout {
         Layout.fillWidth: true
         placeholderText: "Search apps..."
         onTextChanged: search(text)
-        // Theme-aware colors
+        color: Material.theme === Material.Dark ? "#fff" : "#222"
+        placeholderTextColor: Material.theme === Material.Dark ? "#bbb" : "#888"
         background: Rectangle {
-            color: theme === Material.Dark ? "#232323" : "#fff"
+            color: Material.theme === Material.Dark ? "#232323" : "#fff"
             radius: 4
+            border.color: Material.theme === Material.Dark ? "#555" : "#ccc"
         }
-        color: theme === Material.Dark ? "#fff" : "#222"
-        // Optionally, set placeholder text color
-        placeholderTextColor: theme === Material.Dark ? "#bbb" : "#888"
     }
 
     Button {

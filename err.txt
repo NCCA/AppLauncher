@@ -1,0 +1,15 @@
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://opt/autodesk/maya/icons/mayaico.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://public/devel/25-26/clion-2025.1.2/bin/clion.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://usr/share/icons/hicolor/48x48/apps/firefox.png
+qrc:/qml/DebugOutput.qml:40:29: QML QQuickRectangle: The current style does not support customization of this control (property: "background" item: QQuickRectangle(0x600002ad6f40, parent=0x0, geometry=0,0 0x0)). Please customize a non-native style (such as Basic, Fusion, Material, etc). For more information, see: https://doc.qt.io/qt-6/qtquickcontrols2-customize.html#customization-reference
+qrc:/qml/MainMenu.qml:52:5: QML Dialog: Binding loop detected for property "implicitWidth":
+qrc:/qt-project.org/imports/QtQuick/Controls/Material/Dialog.qml:13:5
+qrc:/qml/MainMenu.qml:52:5: QML Dialog: Binding loop detected for property "implicitWidth":
+qrc:/qt-project.org/imports/QtQuick/Controls/Material/Dialog.qml:13:5
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://opt/hfs20.5.332/houdini_logo.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://opt/autodesk/mudbox/desktop/Mudbox.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://opt/resolve/graphics/DV_Resolve.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://public/devel/25-26/clion-2025.1.2/bin/clion.png
+qrc:/qml/AppDelegate.qml:17:5: QML QQuickImage: Cannot open: file://public/devel/25-26/fossdcc/gaffer-1.5.14.0-linux-gcc11/graphics/GafferLogoMini.png
+<PySide6.QtGui.QIcon(availableSizes[normal,Off]=QList(QSize(64, 64)),cacheKey=0x100000000) at 0x1290809c0>

@@ -36,7 +36,7 @@ Item {
                 readOnly: true
                 wrapMode: TextArea.Wrap
                 color: "#fff"
-                font.family: "monospace"
+                font.family: "Courier New"
                 background: Rectangle {
                     color: "#333"
                 }

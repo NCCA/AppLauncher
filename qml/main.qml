@@ -13,12 +13,11 @@ import QtQuick.Layouts 1.15
 
 ApplicationWindow {
     id: rootWindow
+    Material.theme: Material.System
     visible: true
     width: 800
     height: 600
-    title: "AppsHere! 'cause typing is hard."
-
-    Material.theme: Material.System
+    title: "Apps'Ere! 'cause typing is hard."
 
     property bool debugVisible: false
 
@@ -107,7 +106,7 @@ ApplicationWindow {
                         id: favouritesGridComponent
                         FavouritesGrid {
                             model: tabData.apps
-                            rootWindow: rootWindow
+                            //rootWindow: rootWindow
                         }
                     }
 
@@ -117,9 +116,24 @@ ApplicationWindow {
                         AppGrid {
                             tabName: tabData.tabName
                             model: tabData.apps
-                            rootWindow: rootWindow
+                            //rootWindow: rootWindow
                         }
                     }
+                }
+            }
+        }
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 4   // <-- This sets the gap between each DiskQuotaBar
+
+            Repeater {
+                model: diskQuotas
+                DiskQuotaBar {
+                    location: modelData.location
+                    used: modelData.used
+                    quota: modelData.quota
+                    limit: modelData.limit
+                    Layout.fillWidth: true
                 }
             }
         }
