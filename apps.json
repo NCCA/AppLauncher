@@ -160,6 +160,13 @@
     "desc": "DCC Pipeline / LookDev",
     "icon": "file:////public/devel/25-26/fossdcc/gaffer-1.5.14.0-linux-gcc11/graphics/GafferLogoMini.png",
     "tabName": "FOSS DCC"
+  },
+  "VLC": {
+    "path": "/usr/bin",
+    "execName": "vlc",
+    "desc": "video player",
+    "icon": "file:////usr/share/icons/hicolor/32x32/apps/vlc.png",
+    "tabName": "FOSS DCC"
   }
 
   
