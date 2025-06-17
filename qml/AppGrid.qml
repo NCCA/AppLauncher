@@ -13,18 +13,17 @@ import QtQuick.Layouts 1.15
 GridView {
     id: gridView
 
-    // The name of the current tab (e.g., "Favourites", "All Apps")
     property string tabName: ""
+    property var rootWindow
 
     Layout.fillWidth: true
     Layout.fillHeight: true
     cellWidth: 100
     cellHeight: 100
 
-    // The model should be set from outside this component
-
     delegate: AppDelegate {
         tabName: gridView.tabName
         app: modelData
+        rootWindow: gridView.rootWindow
     }
 }

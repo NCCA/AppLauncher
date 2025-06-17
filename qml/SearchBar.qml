@@ -10,20 +10,26 @@ import QtQuick.Layouts 1.15
  */
 
 RowLayout {
-    // Signal emitted when the search text changes
     signal search(string query)
-    // Signal emitted when the search is cleared
     signal clear
 
-    // Text field for entering search queries
+    property int theme: Material.theme
+
     TextField {
         id: searchField
         Layout.fillWidth: true
         placeholderText: "Search apps..."
         onTextChanged: search(text)
+        // Theme-aware colors
+        background: Rectangle {
+            color: theme === Material.Dark ? "#232323" : "#fff"
+            radius: 4
+        }
+        color: theme === Material.Dark ? "#fff" : "#222"
+        // Optionally, set placeholder text color
+        placeholderTextColor: theme === Material.Dark ? "#bbb" : "#888"
     }
 
-    // Button to clear the search field
     Button {
         text: "Clear"
         visible: searchField.text.length > 0

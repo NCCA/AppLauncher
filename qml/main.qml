@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 import QtQuick.Layouts 1.15
 
 /**
@@ -15,7 +16,9 @@ ApplicationWindow {
     visible: true
     width: 800
     height: 600
-    title: "Apps'Ere! 'cause typing is hard."
+    title: "AppsHere! 'cause typing is hard."
+
+    Material.theme: Material.System
 
     property bool debugVisible: false
 
@@ -104,6 +107,7 @@ ApplicationWindow {
                         id: favouritesGridComponent
                         FavouritesGrid {
                             model: tabData.apps
+                            rootWindow: rootWindow
                         }
                     }
 
@@ -113,6 +117,7 @@ ApplicationWindow {
                         AppGrid {
                             tabName: tabData.tabName
                             model: tabData.apps
+                            rootWindow: rootWindow
                         }
                     }
                 }
@@ -123,7 +128,7 @@ ApplicationWindow {
         Rectangle {
             id: statusBar
             objectName: "statusBar"
-            color: "#222"
+            color: rootWindow.palette ? rootWindow.palette.window : "#222"
             height: 28
             Layout.fillWidth: true
             z: 1000
@@ -132,7 +137,7 @@ ApplicationWindow {
                 id: statusLabel
                 objectName: "statusLabel"
                 text: "Status :"
-                color: "#fff"
+                color: rootWindow.palette ? rootWindow.palette.text : "#fff"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 12

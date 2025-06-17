@@ -11,14 +11,12 @@ import QtQuick.Controls 2.15
 
 GridView {
     id: gridView
-
+    property var rootWindow
     cellWidth: 100
     cellHeight: 100
 
-    // The model should be set from outside this component (e.g., main.qml)
     model: model
 
-    // Index of the currently dragged item, -1 if none
     property int dragIndex: -1
 
     delegate: Item {
@@ -26,15 +24,14 @@ GridView {
         width: gridView.cellWidth
         height: gridView.cellHeight
 
-        // App icon and label
         AppDelegate {
             id: appDelegate
             tabName: "Favourites"
             app: modelData
+            rootWindow: gridView.rootWindow
             anchors.fill: parent
         }
 
-        // Drag handle in the bottom-right corner for reordering
         Rectangle {
             id: dragHandle
             width: 20
@@ -48,7 +45,7 @@ GridView {
 
             Text {
                 anchors.centerIn: parent
-                text: "\u2630" // Unicode for drag handle
+                text: "\u2630"
                 font.pixelSize: 14
             }
 
@@ -57,15 +54,12 @@ GridView {
                 drag.target: delegateItem
                 acceptedButtons: Qt.LeftButton
 
-                // Start dragging
                 onPressed: {
                     gridView.dragIndex = index;
                 }
-                // Stop dragging
                 onReleased: {
                     gridView.dragIndex = -1;
                 }
-                // Handle drag movement and reorder items
                 onPositionChanged: function (mouse) {
                     var pos = gridView.mapFromItem(delegateItem, mouse.x, mouse.y);
                     var toIndex = gridView.indexAt(pos.x, pos.y);
