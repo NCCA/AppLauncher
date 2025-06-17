@@ -15,6 +15,13 @@
         <file>icons/allusion.png</file>
         <file>icons/inkscape.png</file>
         <file>icons/krita.png</file>
+        <file>icons/lmstudio.png</file>
+        <file>icons/meshlab.png</file>
+        <file>icons/meshroom.png</file>
+        <file>icons/opentoonz-icon.png</file>
+        <file>icons/pencil2d.png</file>
+        <file>icons/pureref.png</file>
+        <file>icons/UltiMaker.png</file>
 
     </qresource>
 </RCC>

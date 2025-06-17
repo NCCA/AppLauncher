@@ -69,6 +69,13 @@
     "icon": "file:////public/devel/25-26/fossdcc/blender-4.4.3-linux-x64/blender.svg",
     "tabName": "Core DCC Tools"
   },
+  "UnrealEditor": {
+    "path": "/public/devel/25-26/bin/",
+    "execName": "UnrealEditor",
+    "desc": "Unreal Engine and Game Development",
+    "icon": "file:////docker_images/Unreal/Engine/Plugins/VirtualProduction/Switchboard/Source/Switchboard/switchboard/ui/images/unreal_logo.png",
+    "tabName": "Core DCC Tools"
+  },
   "Rawtherapee": {
     "path": "/public/bin/25-26",
     "execName": "goRawtherapee",
@@ -126,7 +133,7 @@
     "icon": "/icons/qt-creator.png",
     "tabName": "Developer Tools"
   },
-  "QtDesignStudio": {
+  "DesignStudio": {
     "path": "/public/devel/25-26/Qt/Tools/QtDesignStudio-4.1.1-lts/bin",
     "execName": "qtdesignstudio",
     "desc": "QtDesignStudio for QML",
@@ -140,6 +147,14 @@
     "icon": "/icons/podman.svg",
     "tabName": "Developer Tools"
   },
+  "LMStudio": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "LMStudio",
+    "desc": "LLM Tools",
+    "icon": "/icons/lmstudio.png",
+    "tabName": "Developer Tools"
+  },
+
   "Allusion": {
     "path": "/public/devel/25-26/bin",
     "execName": "allusion",
@@ -188,5 +203,84 @@
     "desc": "2D Drawing",
     "icon": "/icons/krita.png",
     "tabName": "FOSS DCC"
+  },
+  "MeshLab": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "meshlab",
+    "desc": "mesh processing tools",
+    "icon": "/icons/meshlab.png",
+    "tabName": "FOSS DCC"
+  },
+  "MeshRoom": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "meshroom",
+    "desc": "mesh processing tools",
+    "icon": "/icons/meshroom.png",
+    "tabName": "FOSS DCC"
+  },
+  "MrViewer2": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "mrv2",
+    "desc": "playback tools",
+    "icon": "file:////public/devel/25-26/fossdcc/mrv2-v1.3.8-Linux-64/share/icons/hicolor/64x64/apps/mrv2.png",
+    "tabName": "FOSS DCC"
+  },
+  "Natron": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "natron",
+    "desc": "compositing tools",
+    "icon": "file:////public/devel/25-26/fossdcc/Natron-2.5.0/Resources/pixmaps/natronIcon256_linux.png",
+    "tabName": "FOSS DCC"
+  },
+  "OpenToonz": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "opentoonz",
+    "desc": "2D animation tools",
+    "icon": "/icons/opentoonz-icon.png",
+    "tabName": "FOSS DCC"
+  },
+  "Pencil2D": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "pencil2d",
+    "desc": "2D drawing tools",
+    "icon": "/icons/pencil2d.png",
+    "tabName": "FOSS DCC"
+  },
+  "PurRef": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "pureref",
+    "desc": "Mood boards and image collections",
+    "icon": "/icons/pureref.png",
+    "tabName": "FOSS DCC"
+  },
+  "UltimakerCura": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "UltiMaker-Cura",
+    "desc": "3D printing",
+    "icon": "/icons/UltiMaker.png",
+    "tabName": "FOSS DCC"
+  },
+  
+  "Firefox": {
+    "path": "/usr/bin",
+    "execName": "firefox",
+    "desc": "Web Browser",
+    "icon": "file:////usr/share/icons/hicolor/48x48/apps/firefox.png",
+    "tabName": "Web"
+  },
+  "Brave": {
+    "path": "/usr/bin",
+    "execName": "brave-browser",
+    "desc": "Web Browser",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/brave-browser.png",
+    "tabName": "Web"
+  },
+
+  "Chrome": {
+    "path": "/usr/bin",
+    "execName": "google-chrome",
+    "desc": "Web Browser",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/google-chrome.png",
+    "tabName": "Web"
   }
 }
