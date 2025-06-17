@@ -7,92 +7,142 @@ import QtQuick.Layouts 1.15
  *
  * Main entry point for the AppsHere! application launcher.
  * Provides search functionality, tabbed navigation, and displays app grids.
+ * Includes a debug output overlay and a status bar at the bottom.
  */
 
 ApplicationWindow {
+    id: rootWindow
     visible: true
     width: 800
     height: 600
     title: "AppsHere!"
 
-    // Model to hold search results
-    ListModel {
-        id: searchResultsModel
+    property bool debugVisible: false
+
+    menuBar: MainMenu {
+        rootWindow: rootWindow
     }
 
     ColumnLayout {
         anchors.fill: parent
+        spacing: 0
 
-        // Search bar at the top
-        SearchBar {
-            id: searchBar
-            onSearch: function (query) {
-                searchResultsModel.clear();
-                if (query.trim().length > 0) {
-                    print(query);
-                    var results = appLauncher.search_apps(query);
-                    for (var i = 0; i < results.length; ++i) {
-                        searchResultsModel.append(results[i]);
+        // Main content area
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            // Debug output overlay (floating)
+            DebugOutput {
+                id: debugOutput
+                objectName: "debugOutput"
+                visible: rootWindow.debugVisible
+                anchors.centerIn: parent
+                z: 100
+            }
+
+            // Main app UI
+            ColumnLayout {
+                anchors.fill: parent
+
+                // Search bar at the top
+                SearchBar {
+                    id: searchBar
+                    onSearch: function (query) {
+                        searchResultsModel.clear();
+                        if (query.trim().length > 0) {
+                            print(query);
+                            var results = appLauncher.search_apps(query);
+                            for (var i = 0; i < results.length; ++i) {
+                                searchResultsModel.append(results[i]);
+                            }
+                        }
+                    }
+                    onClear: {
+                        searchResultsModel.clear();
+                    }
+                }
+
+                // Displays search results below the search bar
+                SearchResultsView {
+                    id: searchResultsView
+                    model: searchResultsModel
+                }
+
+                // Tab bar for navigation (e.g., Favourites, All Apps)
+                TabBar {
+                    id: tabBar
+                    Layout.fillWidth: true
+                    Repeater {
+                        model: tabsModel
+                        TabButton {
+                            text: modelData.tabName
+                        }
+                    }
+                }
+
+                // StackLayout to show the grid for the selected tab
+                StackLayout {
+                    id: stackLayout
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    currentIndex: tabBar.currentIndex
+
+                    // Dynamically load the correct grid for each tab
+                    Repeater {
+                        model: tabsModel
+                        Loader {
+                            id: tabLoader
+                            active: true
+                            property var tabData: modelData
+                            sourceComponent: tabData.tabName === "Favourites" ? favouritesGridComponent : appGridComponent
+                        }
+                    }
+
+                    // Component for the Favourites grid
+                    Component {
+                        id: favouritesGridComponent
+                        FavouritesGrid {
+                            model: tabData.apps
+                        }
+                    }
+
+                    // Component for the general app grid
+                    Component {
+                        id: appGridComponent
+                        AppGrid {
+                            tabName: tabData.tabName
+                            model: tabData.apps
+                        }
                     }
                 }
             }
-            onClear: {
-                searchResultsModel.clear();
-            }
         }
 
-        // Displays search results below the search bar
-        SearchResultsView {
-            id: searchResultsView
-            model: searchResultsModel
-        }
-
-        // Tab bar for navigation (e.g., Favourites, All Apps)
-        TabBar {
-            id: tabBar
+        // Status bar at the bottom
+        Rectangle {
+            id: statusBar
+            objectName: "statusBar"
+            color: "#222"
+            height: 28
             Layout.fillWidth: true
-            Repeater {
-                model: tabsModel
-                TabButton {
-                    text: modelData.tabName
-                }
+            z: 1000
+
+            Label {
+                id: statusLabel
+                objectName: "statusLabel"
+                text: "Status :"
+                color: "#fff"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 12
+                font.pixelSize: 14
             }
         }
+    }
 
-        // StackLayout to show the grid for the selected tab
-        StackLayout {
-            id: stackLayout
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            currentIndex: tabBar.currentIndex
-
-            // Dynamically load the correct grid for each tab
-            Repeater {
-                model: tabsModel
-                Loader {
-                    id: tabLoader
-                    active: true
-                    property var tabData: modelData
-                    sourceComponent: tabData.tabName === "Favourites" ? favouritesGridComponent : appGridComponent
-                }
-            }
-
-            // Component for the Favourites grid
-            Component {
-                id: favouritesGridComponent
-                FavouritesGrid {
-                    model: tabData.apps
-                }
-            }
-
-            // Component for the general app grid
-            Component {
-                id: appGridComponent
-                AppGrid {
-                    tabName: tabData.tabName
-                    model: tabData.apps
-                }
-            }
-        }
+    // Model to hold search results (must be outside layouts)
+    ListModel {
+        id: searchResultsModel
     }
 }

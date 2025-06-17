@@ -6,6 +6,91 @@
 from PySide6 import QtCore
 
 qt_resource_data = b"\
+\x00\x00\x05&\
+i\
+mport QtQuick 2.\
+15\x0aimport QtQuic\
+k.Controls 2.15\x0a\
+import QtQuick.L\
+ayouts 1.15\x0a\x0a/**\
+\x0a * DebugOutput.\
+qml\x0a *\x0a * Displa\
+ys debug output \
+in a scrollable \
+text area with a\
+ clear button.\x0a \
+* Use the append\
+Text(text) metho\
+d to add output.\
+\x0a */\x0a\x0aItem {\x0a   \
+ id: debugOutput\
+\x0a    property al\
+ias text: debugA\
+rea.text\x0a    obj\
+ectName: \x22debugO\
+utput\x22\x0a    signa\
+l cleared\x0a\x0a    w\
+idth: 600\x0a    he\
+ight: 300\x0a\x0a    R\
+ectangle {\x0a     \
+   anchors.fill:\
+ parent\x0a        \
+color: \x22#222\x22\x0a  \
+      radius: 8\x0a\
+        border.c\
+olor: \x22#888\x22\x0a   \
+     border.widt\
+h: 1\x0a\x0a        Co\
+lumnLayout {\x0a   \
+         anchors\
+.fill: parent\x0a  \
+          spacin\
+g: 8\x0a\x0a          \
+  TextArea {\x0a   \
+             id:\
+ debugArea\x0a     \
+           Layou\
+t.fillWidth: tru\
+e\x0a              \
+  Layout.fillHei\
+ght: true\x0a      \
+          readOn\
+ly: true\x0a       \
+         wrapMod\
+e: TextArea.Wrap\
+\x0a               \
+ color: \x22#fff\x22\x0a \
+               f\
+ont.family: \x22mon\
+ospace\x22\x0a        \
+        backgrou\
+nd: Rectangle {\x0a\
+                \
+    color: \x22#333\
+\x22\x0a              \
+  }\x0a            \
+}\x0a\x0a            B\
+utton {\x0a        \
+        text: \x22C\
+lear\x22\x0a          \
+      Layout.ali\
+gnment: Qt.Align\
+Right\x0a          \
+      onClicked:\
+ {\x0a             \
+       debugArea\
+.text = \x22\x22;\x0a    \
+                \
+debugOutput.clea\
+red();\x0a         \
+       }\x0a       \
+     }\x0a        }\
+\x0a    }\x0a\x0a    func\
+tion appendText(\
+msg) {\x0a        d\
+ebugArea.text +=\
+ msg + \x22\x5cn\x22;\x0a   \
+ }\x0a}\x0a\
 \x00\x00\x098\
 i\
 mport QtQuick 2.\
@@ -156,143 +241,168 @@ dex = toIndex;\x0a \
      }\x0a         \
    }\x0a        }\x0a \
    }\x0a}\x0a\
-\x00\x00\x08k\
+\x00\x00\x09\xf2\
 i\
 mport QtQuick\x0aim\
 port QtQuick.Con\
 trols\x0aimport QtQ\
-uick.Layouts\x0a\x0aSc\
-rollView {\x0a    i\
-d: scrollArea\x0a  \
-  property alias\
- model: searchRe\
-sultsView.model\x0a\
-    Layout.fillW\
-idth: true\x0a    L\
+uick.Layouts\x0a\x0a/*\
+*\x0a * SearchResul\
+tsView.qml\x0a *\x0a *\
+ Displays search\
+ results in a sc\
+rollable list.\x0a \
+* Each result sh\
+ows the app icon\
+, name, and butt\
+ons to launch or\
+ add to favourit\
+es.\x0a * The model\
+ is expected to \
+be set externall\
+y.\x0a */\x0a\x0aScrollVi\
+ew {\x0a    id: scr\
+ollArea\x0a\x0a    // \
+Expose the ListV\
+iew's model as a\
+ property alias\x0a\
+    property ali\
+as model: search\
+ResultsView.mode\
+l\x0a\x0a    Layout.fi\
+llWidth: true\x0a  \
+  // Show up to \
+5 items (each 64\
+px tall), adjust\
+ as needed\x0a    L\
 ayout.preferredH\
 eight: Math.min(\
 model.count * 64\
-, 320) // 5 item\
-s max visible, a\
-djust as needed\x0a\
-    visible: mod\
-el.count > 0\x0a\x0a  \
-  ListView {\x0a   \
-     id: searchR\
-esultsView\x0a     \
-   width: parent\
-.width\x0a        h\
-eight: contentHe\
-ight\x0a        mod\
-el: model\x0a      \
-  interactive: t\
-rue\x0a        clip\
-: true\x0a        d\
-elegate: Rectang\
-le {\x0a           \
- id: delegateRec\
-t\x0a            wi\
-dth: ListView.vi\
-ew ? ListView.vi\
-ew.width : 0\x0a   \
-         height:\
- 60\x0a            \
-color: \x22#e0e0e0\x22\
-\x0a            bor\
-der.color: \x22#888\
-\x22\x0a            ra\
-dius: 8\x0a        \
-    RowLayout {\x0a\
+, 320)\x0a    // On\
+ly visible if th\
+ere are search r\
+esults\x0a    visib\
+le: model.count \
+> 0\x0a\x0a    ListVie\
+w {\x0a        id: \
+searchResultsVie\
+w\x0a        width:\
+ parent.width\x0a  \
+      height: co\
+ntentHeight\x0a    \
+    model: model\
+\x0a        interac\
+tive: true\x0a     \
+   clip: true\x0a\x0a \
+       delegate:\
+ Rectangle {\x0a   \
+         id: del\
+egateRect\x0a      \
+      width: Lis\
+tView.view ? Lis\
+tView.view.width\
+ : 0\x0a           \
+ height: 60\x0a    \
+        color: \x22\
+#e0e0e0\x22\x0a       \
+     border.colo\
+r: \x22#888\x22\x0a      \
+      radius: 8\x0a\
+\x0a            Row\
+Layout {\x0a       \
+         anchors\
+.fill: parent\x0a  \
+              sp\
+acing: 12\x0a      \
+          Layout\
+.alignment: Qt.A\
+lignLeft | Qt.Al\
+ignVCenter\x0a\x0a    \
+            // A\
+pp icon\x0a        \
+        Image {\x0a\
                 \
-anchors.fill: pa\
-rent\x0a           \
-     spacing: 12\
-\x0a               \
+    source: mode\
+l.icon\x0a         \
+           Layou\
+t.preferredWidth\
+: 32\x0a           \
+         Layout.\
+preferredHeight:\
+ 32\x0a            \
+        fillMode\
+: Image.Preserve\
+AspectFit\x0a      \
+              La\
+yout.alignment: \
+Qt.AlignLeft | Q\
+t.AlignVCenter\x0a \
+               }\
+\x0a\x0a              \
+  // App name\x0a  \
+              Co\
+lumnLayout {\x0a   \
+                \
  Layout.alignmen\
 t: Qt.AlignLeft \
 | Qt.AlignVCente\
-r\x0a\x0a             \
-   Image {\x0a     \
-               s\
-ource: model.ico\
-n\x0a              \
-      Layout.pre\
-ferredWidth: 32\x0a\
+r\x0a              \
+      Text {\x0a   \
                 \
-    Layout.prefe\
-rredHeight: 32\x0a \
-                \
-   Layout.fillWi\
-dth: false\x0a     \
-               L\
-ayout.fillHeight\
-: false\x0a        \
-            fill\
-Mode: Image.Pres\
-erveAspectFit\x0a  \
-                \
-  Layout.alignme\
-nt: Qt.AlignLeft\
- | Qt.AlignVCent\
-er\x0a             \
-   }\x0a\x0a          \
-      ColumnLayo\
-ut {\x0a           \
-         Layout.\
-alignment: Qt.Al\
-ignLeft | Qt.Ali\
-gnVCenter\x0a      \
-              Te\
-xt {\x0a           \
-             tex\
-t: model.name\x0a  \
-                \
-      font.pixel\
-Size: 16\x0a       \
-                \
- font.bold: true\
+     text: model\
+.name\x0a          \
+              fo\
+nt.pixelSize: 16\
 \x0a               \
-         horizon\
-talAlignment: Te\
-xt.AlignLeft\x0a   \
+         font.bo\
+ld: true\x0a       \
                 \
-     Layout.alig\
-nment: Qt.AlignL\
-eft | Qt.AlignVC\
-enter\x0a          \
-          }\x0a    \
-            }\x0a  \
-              Bu\
-tton {\x0a         \
-           text:\
- \x22Launch\x22\x0a      \
-              on\
-Clicked: appLaun\
-cher.launch_app(\
-model.path, mode\
-l.execName)\x0a    \
+ horizontalAlign\
+ment: Text.Align\
+Left\x0a           \
+             Lay\
+out.alignment: Q\
+t.AlignLeft | Qt\
+.AlignVCenter\x0a  \
                 \
-Layout.alignment\
-: Qt.AlignLeft |\
- Qt.AlignVCenter\
+  }\x0a            \
+    }\x0a\x0a         \
+       // Launch\
+ button\x0a        \
+        Button {\
 \x0a               \
- }\x0a             \
-   Button {\x0a    \
-                \
-text: \x22Add to Fa\
-vourites\x22\x0a      \
-              on\
-Clicked: appLaun\
-cher.add_to_favo\
-urites(model.nam\
-e)\x0a             \
-       Layout.al\
-ignment: Qt.Alig\
-nLeft | Qt.Align\
-VCenter\x0a        \
-        }\x0a      \
-      }\x0a        \
-}\x0a    }\x0a}\x0a\
+     text: \x22Laun\
+ch\x22\x0a            \
+        onClicke\
+d: appLauncher.l\
+aunch_app(model.\
+path, model.exec\
+Name)\x0a          \
+          Layout\
+.alignment: Qt.A\
+lignLeft | Qt.Al\
+ignVCenter\x0a     \
+           }\x0a\x0a  \
+              //\
+ Add to Favourit\
+es button\x0a      \
+          Button\
+ {\x0a             \
+       text: \x22Ad\
+d to Favourites\x22\
+\x0a               \
+     onClicked: \
+appLauncher.add_\
+to_favourites(mo\
+del.name)\x0a      \
+              La\
+yout.alignment: \
+Qt.AlignLeft | Q\
+t.AlignVCenter\x0a \
+               }\
+\x0a            }\x0a \
+       }\x0a    }\x0a}\
+\x0a\
 \x00\x00\x02\xb2\
 i\
 mport QtQuick 2.\
@@ -464,207 +574,249 @@ ncher.remove_fro\
 m_favourites(app\
 .name)\x0a        }\
 \x0a    }\x0a}\x0a\
-\x00\x00\x01\xd6\
-i\
-mport QtQuick 2.\
-15\x0aimport QtQuic\
-k.Controls 2.15\x0a\
-import QtQuick.L\
-ayouts 1.15\x0a\x0aRow\
-Layout {\x0a    sig\
-nal search(strin\
-g query)\x0a    sig\
-nal clear\x0a\x0a    T\
-extField {\x0a     \
-   id: searchFie\
-ld\x0a        Layou\
-t.fillWidth: tru\
-e\x0a        placeh\
-olderText: \x22Sear\
-ch apps...\x22\x0a    \
-    onTextChange\
-d: search(text)\x0a\
-    }\x0a    Button\
- {\x0a        text:\
- \x22Clear\x22\x0a       \
- visible: search\
-Field.text.lengt\
-h > 0\x0a        on\
-Clicked: {\x0a     \
-       searchFie\
-ld.text = \x22\x22;\x0a  \
-          clear(\
-);\x0a        }\x0a   \
- }\x0a}\x0a\
-\x00\x00\x0ah\
+\x00\x00\x03>\
 i\
 mport QtQuick 2.\
 15\x0aimport QtQuic\
 k.Controls 2.15\x0a\
 import QtQuick.L\
 ayouts 1.15\x0a\x0a/**\
-\x0a * main.qml\x0a *\x0a\
- * Main entry po\
-int for the Apps\
-Here! applicatio\
-n launcher.\x0a * P\
-rovides search f\
-unctionality, ta\
-bbed navigation,\
- and displays ap\
-p grids.\x0a */\x0a\x0aAp\
-plicationWindow \
-{\x0a    visible: t\
-rue\x0a    width: 8\
-00\x0a    height: 6\
-00\x0a    title: \x22A\
-ppsHere!\x22\x0a\x0a    /\
-/ Model to hold \
-search results\x0a \
-   ListModel {\x0a \
-       id: searc\
-hResultsModel\x0a  \
-  }\x0a\x0a    ColumnL\
-ayout {\x0a        \
-anchors.fill: pa\
-rent\x0a\x0a        //\
- Search bar at t\
-he top\x0a        S\
-earchBar {\x0a     \
-       id: searc\
-hBar\x0a           \
- onSearch: funct\
-ion (query) {\x0a  \
-              se\
-archResultsModel\
-.clear();\x0a      \
-          if (qu\
-ery.trim().lengt\
-h > 0) {\x0a       \
-             pri\
-nt(query);\x0a     \
-               v\
-ar results = app\
-Launcher.search_\
-apps(query);\x0a   \
+\x0a * SearchBar.qm\
+l\x0a *\x0a * A simple\
+ search bar comp\
+onent with a tex\
+t field and a cl\
+ear button.\x0a * E\
+mits 'search' si\
+gnal on text cha\
+nge and 'clear' \
+signal when clea\
+red.\x0a */\x0a\x0aRowLay\
+out {\x0a    // Sig\
+nal emitted when\
+ the search text\
+ changes\x0a    sig\
+nal search(strin\
+g query)\x0a    // \
+Signal emitted w\
+hen the search i\
+s cleared\x0a    si\
+gnal clear\x0a\x0a    \
+// Text field fo\
+r entering searc\
+h queries\x0a    Te\
+xtField {\x0a      \
+  id: searchFiel\
+d\x0a        Layout\
+.fillWidth: true\
+\x0a        placeho\
+lderText: \x22Searc\
+h apps...\x22\x0a     \
+   onTextChanged\
+: search(text)\x0a \
+   }\x0a\x0a    // But\
+ton to clear the\
+ search field\x0a  \
+  Button {\x0a     \
+   text: \x22Clear\x22\
+\x0a        visible\
+: searchField.te\
+xt.length > 0\x0a  \
+      onClicked:\
+ {\x0a            s\
+earchField.text \
+= \x22\x22;\x0a          \
+  clear();\x0a     \
+   }\x0a    }\x0a}\x0a\
+\x00\x00\x06\xc7\
+i\
+mport QtQuick 2.\
+15\x0aimport QtQuic\
+k.Controls 2.15\x0a\
+import QtQuick.L\
+ayouts 1.15\x0a\x0a/**\
+\x0a * MainMenu.qml\
+\x0a *\x0a * Provides \
+the main menu ba\
+r with a Help \xe2\x86\
+\x92 About item and\
+ an About dialog\
+.\x0a * Usage: Set \
+as the menuBar p\
+roperty of Appli\
+cationWindow.\x0a *\
+/\x0a\x0aMenuBar {\x0a   \
+ id: mainMenuBar\
+\x0a    property va\
+r rootWindow\x0a   \
+ // Expose the a\
+bout dialog so i\
+t can be referen\
+ced if needed\x0a  \
+  property alias\
+ aboutDialog: ab\
+outDialog\x0a    Me\
+nu {\x0a        tit\
+le: \x22Debug\x22\x0a    \
+    MenuItem {\x0a \
+           text:\
+ \x22Show Output\x22\x0a \
+           onTri\
+ggered: {\x0a      \
+          if (ro\
+otWindow) {\x0a    \
                 \
- for (var i = 0;\
- i < results.len\
-gth; ++i) {\x0a    \
-                \
-    searchResult\
-sModel.append(re\
-sults[i]);\x0a     \
-               }\
-\x0a               \
- }\x0a            }\
-\x0a            onC\
-lear: {\x0a        \
-        searchRe\
-sultsModel.clear\
-();\x0a            \
-}\x0a        }\x0a\x0a   \
-     // Displays\
- search results \
-below the search\
- bar\x0a        Sea\
-rchResultsView {\
-\x0a            id:\
- searchResultsVi\
-ew\x0a            m\
-odel: searchResu\
-ltsModel\x0a       \
- }\x0a\x0a        // T\
-ab bar for navig\
-ation (e.g., Fav\
-ourites, All App\
-s)\x0a        TabBa\
-r {\x0a            \
-id: tabBar\x0a     \
-       Layout.fi\
-llWidth: true\x0a  \
-          Repeat\
-er {\x0a           \
-     model: tabs\
-Model\x0a          \
-      TabButton \
-{\x0a              \
-      text: mode\
-lData.tabName\x0a  \
-              }\x0a\
-            }\x0a  \
-      }\x0a\x0a       \
- // StackLayout \
-to show the grid\
- for the selecte\
-d tab\x0a        St\
-ackLayout {\x0a    \
-        id: stac\
-kLayout\x0a        \
-    Layout.fillW\
-idth: true\x0a     \
-       Layout.fi\
-llHeight: true\x0a \
-           curre\
-ntIndex: tabBar.\
-currentIndex\x0a\x0a  \
-          // Dyn\
-amically load th\
-e correct grid f\
-or each tab\x0a    \
-        Repeater\
+rootWindow.debug\
+Visible = !rootW\
+indow.debugVisib\
+le;\x0a            \
+    }\x0a          \
+  }\x0a        }\x0a  \
+  }\x0a    Menu {\x0a \
+       title: \x22H\
+elp\x22\x0a        Men\
+uItem {\x0a        \
+    text: \x22About\
+\x22\x0a            on\
+Triggered: about\
+Dialog.open()\x0a  \
+      }\x0a    }\x0a\x0a \
+   Dialog {\x0a    \
+    id: aboutDia\
+log\x0a        titl\
+e: \x22About AppsHe\
+re!\x22\x0a        mod\
+al: true\x0a       \
+ standardButtons\
+: Dialog.Ok\x0a    \
+    contentItem:\
+ ColumnLayout {\x0a\
+            widt\
+h: 300\x0a         \
+   spacing: 12\x0a \
+           Label\
  {\x0a             \
-   model: tabsMo\
-del\x0a            \
-    Loader {\x0a   \
-                \
- id: tabLoader\x0a \
-                \
-   active: true\x0a\
-                \
-    property var\
- tabData: modelD\
-ata\x0a            \
-        sourceCo\
-mponent: tabData\
-.tabName === \x22Fa\
-vourites\x22 ? favo\
-uritesGridCompon\
-ent : appGridCom\
-ponent\x0a         \
-       }\x0a       \
-     }\x0a\x0a        \
-    // Component\
- for the Favouri\
-tes grid\x0a       \
-     Component {\
-\x0a               \
- id: favouritesG\
-ridComponent\x0a   \
-             Fav\
-ouritesGrid {\x0a  \
-                \
-  model: tabData\
-.apps\x0a          \
-      }\x0a        \
-    }\x0a\x0a         \
-   // Component \
-for the general \
-app grid\x0a       \
-     Component {\
-\x0a               \
- id: appGridComp\
-onent\x0a          \
-      AppGrid {\x0a\
-                \
-    tabName: tab\
-Data.tabName\x0a   \
-                \
- model: tabData.\
-apps\x0a           \
-     }\x0a         \
-   }\x0a        }\x0a \
-   }\x0a}\x0a\
+   text: \x22AppsHe\
+re! Application \
+Launcher\x22\x0a      \
+          font.b\
+old: true\x0a      \
+          font.p\
+ixelSize: 18\x0a   \
+             hor\
+izontalAlignment\
+: Text.AlignHCen\
+ter\x0a            \
+    Layout.align\
+ment: Qt.AlignHC\
+enter\x0a          \
+  }\x0a            \
+Label {\x0a        \
+        text: \x22V\
+ersion 1.0.0\x22\x0a  \
+              ho\
+rizontalAlignmen\
+t: Text.AlignHCe\
+nter\x0a           \
+     Layout.alig\
+nment: Qt.AlignH\
+Center\x0a         \
+   }\x0a           \
+ Label {\x0a       \
+         text: \x22\
+A simple and mod\
+ern launcher for\
+ your desktop ap\
+ps.\x22\x0a           \
+     wrapMode: T\
+ext.WordWrap\x0a   \
+             hor\
+izontalAlignment\
+: Text.AlignHCen\
+ter\x0a            \
+    Layout.align\
+ment: Qt.AlignHC\
+enter\x0a          \
+  }\x0a        }\x0a  \
+  }\x0a}\x0a\
+\x00\x00\x04\xb6\
+\x00\
+\x00\x11\x9ax\xda\xb5Xmo\xdb6\x10\xfe\xae_q\
+\xf3\xbe8i\xa08F7\x14\xca\xb2!K\xd05@\
+\xb2\xad\xcd\xd6~\x18\x86\x81\x96h\x9b+E\xaa$\xe5\
+\xc4\x1d\xfc\xdfw$\xf5\x1a\xbd8AZ}IH>\
+w<\xde=\xe4\xdd\x99\xa5\x99T\x06\xde\x9a\xb79\x8b\
+?\xc2<<\xf9.`\xad\xb9\xf0B\x0a\xa3$\xd7\xbd\
+\x8b\xd7d+s\xa3\xe1\xc4\xae\x05\xc7\x87\x87\x01\x1cB\
+J\x98\x08?\xa5\x1c\xff\xb7\xc3\x1b\x1c\x02E%[\xc8\
+$\x13\x06\x96R\x81YS8\xcf2\xfd\x86*\xfa\x0d\
+\x90,\xe3,&\x86I\x01\x9c\xe4\x22^S\x15Z\xd9\
+\xdf\x95\xdc\xb0\x84j\xd0\x94\xa8x\x0dK\x5c\xb3(\xc2\
+\x99\xd9\x1e\x81!\x8b\x05M@\x90\x0d[9\xe9# \
+\x22\x81\x84\xe9\x8c\x93\xad\xb6za\xa5X\xa2\x9d\xb2+\
+\x11\xf3\xdc*#\x90\xd0E\xbe\x024=\xcb\x0d\xc8\x0d\
+U\x08w\xa2\x04\xb4!&\xd7\xb0 \x0a\x88qv.\
+\xa412\xb5*\x8e\x83\xe0\xbc6\xf5\x03\x13\x89\xbc\x83\
+\xff\x02\xc0\x8f%\x11()\x8d\x9ftS\x1b\xa6\xd9\x82\
+\xd3\x08\x8c\xca\xa9\x9b\xb9c\x89YG\xf0j6s\xc3\
+5e\xab\xb5\x89\xe0\xfbbl\x98\xb1\xf0I\xe5\x98I\
+\xe0\xe63%3\xaa\xcc\x16-\x91\xdc\xdb\xfe\xbe\xd4\xbd\
+$\x5cS\x0fK\xa9\xc8\x7f&*r\x1e\xbf\xc1Aa\
+\x9a\xfdj\xd3:f\xee\xbc\xf4\x85\xe4y*|@\x1b\
+\x82\x04\x83!\x95\x0e\x97\x8c\xf3\x082\xa20\x92\xd5\xa2\
+\xceH\xcc\xc4*\x82YP\xcd\x1d\x1f\xfb\x88\xc7\xc8\x1b\
+\xc4\x02J\x90j\xf1\xca\xd0\xb4\xa1\xdc~~G\xa7\xff\
+\x83wO\xe5\xae\x1e\xc8\x9b\xc2e\x0e\xd3\x02\xe1\xbe\x97\
+}Q\x9d.\xb9\xc4p\x89\xd5A\x0b\xee\xb0\xbfyh\
+\xdb\xa02\x9aI\x8d\xe8\xac\xcb\xc5\xbf46\xbf\x92\xd4\
+\x86\xab\x01\x9ct\x90\x15\x09j\xaf\x87\xcd\x08v\x04J\
+\x87\xc7\xe8<\xaa\xaeD\xc7\xe9\xe5\xf79\x82\x93\x828\
+\xe5\xb7\xeb\xb8\xc4\x85\xc2^\x83?\xafZK\x03\xd1\x1e\
+\x8dz\x07\x85\xfao\xfd\xbdl\xdc\x16#\xb3\x0e\xd0\xa3\
+\x90\x9b=[\x95\xee\xd6%\xa6\x17!\x85\xd7\x11UO\
+\x00L?\xe5Tm\x0f\x06T:z:\x91wT\xe7\
+\xdc\xe8\x1b\x99P\x1e\xc6\x1c\xe7\xa6\x07\xa7\x832lY\
+(\x0e\x8db\xe9\xf4 \xe4T\xac\xcc\x1a~\x84\xd9\xd8\
+V\xfe\x9a\xe2\xebVXu:\x8a\xdc\xa0'\x947\x0b\
+\xcelx\xae\xcbG\xcf\x9b\xfc\x0fN\xe9Gi\xb2o\
+\xe9\xd4\xaac\xa8hv\x8a\x7f~(5\x17\x96\x9f\xc2\
+\x8b\x17l\x9f\xe9\x03\xdeB3\xa8H\xa6\x85\xc2\xbf\xd8\
+\xdf{\xac\xd9\x05O[\xd9\x0d\xc4\xfa\xc2F)\xfa\x82\
+\x91\xedn\xb4\xeb\xa5\xf3e\x999\x8a|S\x06iA\
+9\xbe\xf4\x96\xde\xba\x22\xfc\x00\xcb\x0b\xa3\xde3z\xb7\
+\x97\xed\x0dl/2\xb5'\x8bzN\xfb\xc8\xe3\xfcA\
+\x16\xeejZ\x96\xd4I\x12\xa64\x5c\x85G\xf0\x9al\
+d\xae\x98\xa1\xfa\x08\xce9w\xf9\xf8\xa0\xa3\x06u\x8c\
+_\x5c\xe3\x00\xbd\xcb\x8fx\xdb\xcb\xef\x1d\xcd(\xc1\x07\
+o$\xe8\x857p\xbf\x01'4M\xce1g\x8b=\
+\xac7\xf4\x1eS\x89S{I\x0c\x09Q\xb3}\xd2\x9f\
+M\xe2\xfe`\xdc\x1a\x12\x7f,^\x5c#A\xaf\x0bF\
+\xd9\x02\xa5\xaa\x894\xe5\x98X\xb0\xa6A[\xba\x04k\
+h\x18\xa1V\x8dznP\x86\x12o\x1f6\xce\x95\xcd\
+\x12W\x22\xa1\xf7%)\xc2\xe6d\xd0+f/\xddV\
+\x90\x14k*\xce\xb7\x80\xb9:q\x8e\x88%J\xc6\xa6\
+\xf6\x0e%x\xed\xfa\xbc\xf2\xa5\xd9s\x8d&\x8cjj\
+\x10\xdfcG\x91\x04\xb3\xd5\x86\x8e8\xaeN\x1fE\x95\
+g\x9fs\xd4m)\xd9`\xe7\xa8\xac\xc6\x8b\x1c\xd3\x0b\
+\x89\xd5\xb9@\x7fG\xa5|Ii8;;\x83I}\
+\xe1'\xf0\x13V\x8e\xe5\xe8\x17\xf4q%\x0b\x91MH\
+\xad\xa9'_\x88\xa1H\xd7\x9b\x94|\xafMr\x91\xee\
+\x15\xac\xa5\x86cb\xe31p\xa0A\x99\xd7-\xfc\x9e\
+\x80\xd7\xf4q~\xb5\x09\xfa+\xbaeE\x05U\x84W\
+\x0d\xcc\xb3\xfc\xf2\xe8p\x9e{\xe0\xbeW\xd3S\xaa\xc3\
+\xb1\xaf\xee\xbe\xf1\x99z\xb4k5#\xb7\x03\xfd\x5cP\
+\xbf\x1d\xb1!b\xc5\xe9\x83s\x17o)\x0a?Lo\
+\xad\xea\xbf\x82\xb4k\xffXr\x89%\xcc\xe4\xdb\xf9|\
+\xde^)\xbb\xbe\xf9\xab\xa7\xf6A\xbe\xe2\x9f\x05\x0f\xe4\
+\xb08\x19ha\xbcm\x0e1\xde\xc24\x80\xdd\x16\xc6\
+\xa7\xc9I\xe1\xc8\xa8\x0b\xa8\xce\xba\x5c.'\x83\xbd\x04\
+\xf6c\xc6\xbe\xf2\x17\xae\xb1)\xbb\x8a\x07\xd3\x83\xd2\x9c\
+.M%c\x07\xa3\xc8\x1b\xa2V\x0c[\xa7\x93y\xd0\
+\xad\x98QA\xc6\xee)\xbfe\x9f\xf1\xec'/\x07i\
+\xd4 \x93m\xa5,\x85m\xe6^K\x9e<,\x10\xa7\
+i\xae\x0d\x96\x89\xb6\xfb\xd4,\xa1\xc0\xfd/#\xbe\x9e\
+\xbaf\xdax\xf1:N\x9d*\xb0\xceJ\xbb`\x17\xfc\
+\x0f\x08\xc3c\xa2\
 \x00\x01\x00\x8b\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -4783,6 +4935,10 @@ qt_resource_name = b"\
 \x00\x00x<\
 \x00q\
 \x00m\x00l\
+\x00\x0f\
+\x04\xbe\xa7\xbc\
+\x00D\
+\x00e\x00b\x00u\x00g\x00O\x00u\x00t\x00p\x00u\x00t\x00.\x00q\x00m\x00l\
 \x00\x12\
 \x09\xc1\x84\xfc\
 \x00F\
@@ -4805,6 +4961,10 @@ qt_resource_name = b"\
 \x0b\xf4F\xdc\
 \x00S\
 \x00e\x00a\x00r\x00c\x00h\x00B\x00a\x00r\x00.\x00q\x00m\x00l\
+\x00\x0c\
+\x02(R\x5c\
+\x00M\
+\x00a\x00i\x00n\x00M\x00e\x00n\x00u\x00.\x00q\x00m\x00l\
 \x00\x08\
 \x08\x01Z\x5c\
 \x00m\
@@ -4818,24 +4978,28 @@ qt_resource_name = b"\
 qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x02\x00\x00\x00\x01\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\x10\x00\x02\x00\x00\x00\x06\x00\x00\x00\x04\
+\x00\x00\x00\x10\x00\x02\x00\x00\x00\x08\x00\x00\x00\x04\
 \x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00\xec\x00\x00\x00\x00\x00\x01\x00\x00(U\
+\x00\x00\x01.\x00\x00\x00\x00\x00\x01\x00\x001\x87\
 \x00\x00\x01\x97y\xe6>\xdc\
-\x00\x00\x00\x92\x00\x00\x00\x00\x00\x01\x00\x00\x14a\
-\x00\x00\x01\x97z\x9apJ\
-\x00\x00\x00\xd6\x00\x00\x00\x00\x00\x01\x00\x00\x1d\xe9\
-\x00\x00\x01\x97z\x9d\xe1\xbe\
-\x00\x00\x00v\x00\x00\x00\x00\x00\x01\x00\x00\x11\xab\
-\x00\x00\x01\x97z\x9c\xa6[\
-\x00\x00\x00F\x00\x00\x00\x00\x00\x01\x00\x00\x09<\
-\x00\x00\x01\x97zPPq\
+\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x1b\x12\
+\x00\x00\x01\x97z\xa0\xd3<\
+\x00\x00\x00\xfa\x00\x00\x00\x00\x00\x01\x00\x00&\x02\
+\x00\x00\x01\x97|\x956\xe2\
 \x00\x00\x00\x1c\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
-\x00\x00\x01\x97z\x9d\x1e\xef\
-\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x1c\x0f\
-\x00\x00\x01\x97z0B\x0e\
+\x00\x00\x01\x97|\x8e\xad\xde\
+\x00\x00\x01\x18\x00\x01\x00\x00\x00\x01\x00\x00,\xcd\
+\x00\x00\x01\x97|\x8e\x8e~\
+\x00\x00\x00\x9a\x00\x00\x00\x00\x00\x01\x00\x00\x18\x5c\
+\x00\x00\x01\x97z\xa0\xd3<\
+\x00\x00\x00j\x00\x00\x00\x00\x00\x01\x00\x00\x0ef\
+\x00\x00\x01\x97z\xa0\xd3<\
+\x00\x00\x00@\x00\x00\x00\x00\x00\x01\x00\x00\x05*\
+\x00\x00\x01\x97z\xa0\xd3@\
+\x00\x00\x00\xda\x00\x00\x00\x00\x00\x01\x00\x00\x22\xc0\
+\x00\x00\x01\x97z\xa0\xd3;\
 "
 
 def qInitResources():

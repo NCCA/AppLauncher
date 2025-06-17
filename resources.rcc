@@ -6,6 +6,8 @@
         <file>qml/AppGrid.qml</file>
         <file>qml/AppDelegate.qml</file>
         <file>qml/FavouritesGrid.qml</file>
+        <file>qml/MainMenu.qml</file>
+        <file>qml/DebugOutput.qml</file>
         <file>icons/Nuke.png</file>
     </qresource>
 </RCC>

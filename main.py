@@ -18,6 +18,8 @@ class AppLauncher(QObject):
     """
 
     favourites_changed = Signal()
+    debug_output = Signal(str)
+    status_changed = Signal(str)
 
     def __init__(self, apps_by_tab: List[Dict[str, Any]]) -> None:
         """
@@ -33,17 +35,41 @@ class AppLauncher(QObject):
 
     @Slot(str, str)
     def launch_app(self, path: str, execName: str) -> None:
-        """
-        Launch an application using its path and executable name.
-
-        Args:
-            path: The directory path of the application.
-            execName: The executable name of the application.
-        """
         try:
-            subprocess.Popen([f"{path}/{execName}"])
+            app_name = execName  # Default to execName
+            # Try to find the app name from the apps list
+            for tab in self._apps_by_tab:
+                for app in tab["apps"]:
+                    if app["execName"] == execName and app["path"] == path:
+                        app_name = app["name"]
+                        break
+
+            self.status_changed.emit(f"Launching {app_name}...")
+
+            process = subprocess.Popen(
+                [f"{path}/{execName}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1
+            )
+
+            def read_output():
+                for line in process.stdout:
+                    self.debug_output.emit(line.rstrip())
+                process.stdout.close()
+                process.wait()
+                self.debug_output.emit(f"Process exited with code {process.returncode}")
+                self.status_changed.emit("Done.")
+
+            import threading
+
+            threading.Thread(target=read_output, daemon=True).start()
+
         except Exception as e:
-            print(f"Failed to launch: {e}")
+            self.debug_output.emit(f"Failed to launch: {e}")
+        self.status_changed.emit("Failed to launch.")
+
+    @Slot(str)
+    def emit_debug(self, text: str):
+        """Emit debug output to QML."""
+        self.debug_output.emit(text)
 
     @Slot(str, result="QVariantList")
     def search_apps(self, query: str) -> List[Dict[str, Any]]:
@@ -182,6 +208,25 @@ if __name__ == "__main__":
         engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
 
     app_launcher.favourites_changed.connect(update_tabs_model)
+
+    root_objects = engine.rootObjects()
+    root = root_objects[0]
+    debug_output = root.findChild(QObject, "debugOutput")
+
+    def append_debug_output(text):
+        if debug_output:
+            debug_output.appendText(text)
+
+    app_launcher.debug_output.connect(append_debug_output)
+
+    status_bar = root.findChild(QObject, "statusBar")
+    status_label = status_bar.findChild(QObject, "statusLabel")
+
+    def set_status(text):
+        if status_label:
+            status_label.setProperty("text", text)
+
+    app_launcher.status_changed.connect(set_status)
 
     if not engine.rootObjects():
         sys.exit(-1)
