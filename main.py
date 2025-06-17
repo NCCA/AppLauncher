@@ -1,15 +1,15 @@
 #!/usr/bin/env -S uv run --script
 import json
+import shutil
 import subprocess
 import sys
-from typing import Any, Dict, List
 from pathlib import Path
+from typing import Any, Dict, List, Union
+
 from PySide6.QtCore import Property, QObject, QSettings, QUrl, Signal, Slot
 from PySide6.QtGui import QIcon
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtWidgets import QApplication
-import shutil
-
 
 import resources_rc  # noqa: F401 qt resource
 
@@ -20,6 +20,7 @@ class AppLauncher(QObject):
     and search for apps. It exposes slots for QML integration.
     """
 
+    # signals for QML
     favourites_changed = Signal()
     debug_output = Signal(str)
     status_changed = Signal(str)
@@ -36,7 +37,7 @@ class AppLauncher(QObject):
         self._apps_by_tab: List[Dict[str, Any]] = apps_by_tab
         self._settings: QSettings = QSettings("YourCompany", "AppLauncher")
         self._favourites: List[Dict[str, Any]] = self._load_favourites()
-        self._disk_quotas = []
+        self._disk_quotas: List[Dict[str, Union[float, str]]] = []
         self._create_disk_quotas()
         self._theme = self._settings.value("user/theme", "System")  # Default to System
 
@@ -51,35 +52,46 @@ class AppLauncher(QObject):
             self._settings.setValue("user/theme", theme)
             self.theme_changed.emit(theme)
 
-
-    def _create_disk_quotas(self) :
+    def _create_disk_quotas(self):
         self._disk_quotas = []
         self._disk_quotas.append(self._get_user_quota())
         self._disk_quotas.append(self._get_transfer_usage())
-    def _get_user_quota(self) :
+
+    def _get_user_quota(self):
         user = subprocess.getoutput("whoami")
         try:
-            output = subprocess.check_output(["quota", "-u" ,"-s", user], text=True)
+            output = subprocess.check_output(["quota", "-u", "-s", user], text=True)
             data = output.strip().splitlines()
-            numbers=data[3].split()
+            numbers = data[3].split()
             return {
                 "location": Path.home().as_posix(),
                 "used": int(numbers[0][:-1]),
                 "quota": int(numbers[1][:-1]),
-                "limit": int(numbers[2][:-1]) # strip G
+                "limit": int(numbers[2][:-1]),  # strip G
             }
         except Exception as e:
             print("Error:", e)
         return None
-    def _get_transfer_usage(self) :
-        usage = shutil.disk_usage("/transfer")
-        gb = 1024 ** 3  # 1 GB in bytes
-        return {
-            "location": "/transfer",
-            "limit": round(usage.total / gb, 2),
-            "used": round(usage.used / gb, 2),
-            "quota": round(usage.free / gb, 2)  
-        }
+
+    def _get_transfer_usage(self):
+        gb = 1024**3  # 1 GB in bytes
+
+        try:
+            usage = shutil.disk_usage("/transfer")
+            return {
+                "location": "/transfer",
+                "limit": round(usage.total / gb, 2),
+                "used": round(usage.used / gb, 2),
+                "quota": round(usage.free / gb, 2),
+            }
+        except FileNotFoundError:
+            return {
+                "location": "/dummydata",
+                "limit": round(50 / gb, 2),
+                "used": round(200 / gb, 2),
+                "quota": round(220 / gb, 2),
+            }
+
     @Property("QVariantList", constant=True)
     def diskQuotas(self):
         return self._disk_quotas
