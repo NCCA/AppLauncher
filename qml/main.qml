@@ -124,7 +124,7 @@ ApplicationWindow {
         }
         ColumnLayout {
             Layout.fillWidth: true
-            spacing: 4   // <-- This sets the gap between each DiskQuotaBar
+            spacing: 4   // This sets the gap between each DiskQuotaBar
 
             Repeater {
                 model: diskQuotas
