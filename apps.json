@@ -260,7 +260,7 @@
     "icon": "/icons/UltiMaker.png",
     "tabName": "FOSS DCC"
   },
-  
+
   "Firefox": {
     "path": "/usr/bin",
     "execName": "firefox",
@@ -282,5 +282,13 @@
     "desc": "Web Browser",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/google-chrome.png",
     "tabName": "Web"
+  },
+  "Zed": {
+    "path": "/public/devel/25-26/installers",
+    "execName": "install_zed.sh",
+    "desc": "Insatall the zed editor to your home directory .local",
+    "icon": "/icons/zed.png",
+    "tabName": "Installers"
   }
+
 }
