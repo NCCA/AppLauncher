@@ -32,6 +32,22 @@ ApplicationWindow {
         rootWindow: rootWindow
     }
 
+    DebugDialog {
+        id: debugDialog
+    }
+    Connections {
+        target: appLauncher
+        function onDebug_output(line) {
+            debugDialog.debugText += line + "\n";
+        }
+        function onStatus_changed(status) {
+            if (status === "show_debug_dialog") {
+                debugDialog.debugText = ""; // Clear previous output
+                debugDialog.visible = true;
+            }
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -60,7 +76,6 @@ ApplicationWindow {
                     onSearch: function (query) {
                         searchResultsModel.clear();
                         if (query.trim().length > 0) {
-                            print(query);
                             var results = appLauncher.search_apps(query);
                             for (var i = 0; i < results.length; ++i) {
                                 searchResultsModel.append(results[i]);

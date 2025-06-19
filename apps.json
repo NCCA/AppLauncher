@@ -298,6 +298,7 @@
     "execName": "code",
     "desc": "Visual Studio code",
     "icon": "file:////usr/share/code/resources/app/resources/linux/code.png",
-    "tabName": "Developer Tools"
+    "tabName": "Developer Tools",
+    "popup": "true"
   }
 }
