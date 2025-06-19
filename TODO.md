@@ -1,7 +1,3 @@
-1. Add app output popup
-2. add about menu
-3. fix typehints
-4. Perhaps add different views
-5. write download / installers
-6. Exe deploy app
-7. figure out how to make universal startup
+1. Add popup item to json so prompts can be displayed after run for installers
+2. add optional command line for json
+3. re-factor and tidy up code.
