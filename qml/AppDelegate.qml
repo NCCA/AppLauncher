@@ -39,7 +39,7 @@ Rectangle {
 
         onClicked: function (mouse) {
             if (mouse.button === Qt.LeftButton) {
-                appLauncher.launch_app(app.path, app.execName, app.flags ? app.flags : [], app.popup ? app.popup : false);
+                appLauncher.launch_app(app.path, app.execName, app.flags, !!app.popup);
             }
         }
         onPressed: function (mouse) {

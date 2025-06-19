@@ -4,7 +4,8 @@
     "execName": "goMaya",
     "desc": "Launch Maya 2025",
     "icon": "file:////opt/autodesk/maya/icons/mayaico.png",
-    "tabName": "Core DCC Tools"
+    "tabName": "Core DCC Tools",
+    "popup": "true"
   },
   "Houdini": {
     "path": "/public/bin/25-26",
@@ -288,7 +289,15 @@
     "execName": "install_zed.sh",
     "desc": "Insatall the zed editor to your home directory .local",
     "icon": "/icons/zed.png",
-    "tabName": "Installers"
-  }
+    "tabName": "Installers",
+    "popup": "true"
+  },
 
+  "Code": {
+    "path": "/usr/local/bin",
+    "execName": "code",
+    "desc": "Visual Studio code",
+    "icon": "file:////usr/share/code/resources/app/resources/linux/code.png",
+    "tabName": "Developer Tools"
+  }
 }

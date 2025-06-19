@@ -72,7 +72,7 @@ ScrollView {
                 // Launch button
                 Button {
                     text: "Launch"
-                    onClicked: appLauncher.launch_app(model.path, model.execName, Array.isArray(model.flags) ? model.flags : [], !!model.popup)
+                    onClicked: appLauncher.launch_app(model.path, model.execName, model.flags, !!model.popup)
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 }
 

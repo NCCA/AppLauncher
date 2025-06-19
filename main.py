@@ -40,6 +40,7 @@ class AppLauncher(QObject):
         self._disk_quotas: List[Dict[str, Union[float, str]]] = []
         self._create_disk_quotas()
         self._theme = self._settings.value("user/theme", "System")  # Default to System
+        self._debug_dialogs = []
 
     @Property(str, notify=theme_changed)
     def theme(self):
@@ -96,45 +97,13 @@ class AppLauncher(QObject):
     def diskQuotas(self):
         return self._disk_quotas
 
-    # @Slot(str, str)
-    # def launch_app(self, path: str, execName: str, flags=None, popup=False) -> None:
-    #     if flags is None:
-    #         flags = []
-    #     try:
-    #         app_name = execName  # Default to execName
-    #         # Try to find the app name from the apps list
-    #         for tab in self._apps_by_tab:
-    #             for app in tab["apps"]:
-    #                 if app["execName"] == execName and app["path"] == path:
-    #                     app_name = app["name"]
-    #                     break
-
-    #         self.status_changed.emit(f"Launching {app_name}...")
-
-    #         process = subprocess.Popen(
-    #             [f"{path}/{execName}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1
-    #         )
-
-    #         def read_output():
-    #             for line in process.stdout:
-    #                 self.debug_output.emit(line.rstrip())
-    #             process.stdout.close()
-    #             process.wait()
-    #             self.debug_output.emit(f"Process exited with code {process.returncode}")
-    #             self.status_changed.emit("Done.")
-
-    #         import threading
-
-    #         threading.Thread(target=read_output, daemon=True).start()
-
-    #     except Exception as e:
-    #         self.debug_output.emit(f"Failed to launch: {e}")
-    #     self.status_changed.emit("App Launched")
-
     @Slot(str, str, "QVariantList", bool)
     def launch_app(self, path, execName, flags=None, popup=False):
+        print(f"launch_app called with path={path}, execName={execName}, flags={flags}, popup={popup}")
+
         if flags is None:
             flags = []
+        flags = [str(f) for f in flags]
         try:
             cmd = [f"{path}/{execName}"] + flags
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
@@ -152,7 +121,15 @@ class AppLauncher(QObject):
                         textEdit.append(line.rstrip())
                     proc.stdout.close()
 
+                import threading
+
                 threading.Thread(target=read_output, daemon=True).start()
+
+                # Keep a reference so the dialog isn't garbage collected
+                self._debug_dialogs.append(dlg)
+                # Remove the reference when the dialog is closed
+                dlg.finished.connect(lambda _: self._debug_dialogs.remove(dlg))
+
                 dlg.show()
         except Exception as e:
             print(f"Failed to launch: {e}")
@@ -275,7 +252,7 @@ def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
         app = dict(entry)
         app["name"] = app_name
         app["popup"] = app.get("popup", False)
-        app["flags"] = app.get("flags", [])
+        app["flags"] = list(app.get("flags", [""]))
         tab_name = app["tabName"]
         if tab_name not in tabs:
             tabs[tab_name] = []
