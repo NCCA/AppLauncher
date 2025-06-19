@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Union
 from PySide6.QtCore import Property, QObject, QSettings, QUrl, Signal, Slot
 from PySide6.QtGui import QIcon
 from PySide6.QtQml import QQmlApplicationEngine
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QDialog, QTextEdit, QVBoxLayout
 
 import resources_rc  # noqa: F401 qt resource
 
@@ -96,38 +96,66 @@ class AppLauncher(QObject):
     def diskQuotas(self):
         return self._disk_quotas
 
-    @Slot(str, str)
-    def launch_app(self, path: str, execName: str) -> None:
+    # @Slot(str, str)
+    # def launch_app(self, path: str, execName: str, flags=None, popup=False) -> None:
+    #     if flags is None:
+    #         flags = []
+    #     try:
+    #         app_name = execName  # Default to execName
+    #         # Try to find the app name from the apps list
+    #         for tab in self._apps_by_tab:
+    #             for app in tab["apps"]:
+    #                 if app["execName"] == execName and app["path"] == path:
+    #                     app_name = app["name"]
+    #                     break
+
+    #         self.status_changed.emit(f"Launching {app_name}...")
+
+    #         process = subprocess.Popen(
+    #             [f"{path}/{execName}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1
+    #         )
+
+    #         def read_output():
+    #             for line in process.stdout:
+    #                 self.debug_output.emit(line.rstrip())
+    #             process.stdout.close()
+    #             process.wait()
+    #             self.debug_output.emit(f"Process exited with code {process.returncode}")
+    #             self.status_changed.emit("Done.")
+
+    #         import threading
+
+    #         threading.Thread(target=read_output, daemon=True).start()
+
+    #     except Exception as e:
+    #         self.debug_output.emit(f"Failed to launch: {e}")
+    #     self.status_changed.emit("App Launched")
+
+    @Slot(str, str, "QVariantList", bool)
+    def launch_app(self, path, execName, flags=None, popup=False):
+        if flags is None:
+            flags = []
         try:
-            app_name = execName  # Default to execName
-            # Try to find the app name from the apps list
-            for tab in self._apps_by_tab:
-                for app in tab["apps"]:
-                    if app["execName"] == execName and app["path"] == path:
-                        app_name = app["name"]
-                        break
+            cmd = [f"{path}/{execName}"] + flags
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+            if popup:
+                dlg = QDialog()
+                dlg.setWindowTitle("Debug Output")
+                layout = QVBoxLayout(dlg)
+                textEdit = QTextEdit()
+                textEdit.setReadOnly(False)  # Allow selection and pasting
+                layout.addWidget(textEdit)
+                dlg.setLayout(layout)
 
-            self.status_changed.emit(f"Launching {app_name}...")
+                def read_output():
+                    for line in proc.stdout:
+                        textEdit.append(line.rstrip())
+                    proc.stdout.close()
 
-            process = subprocess.Popen(
-                [f"{path}/{execName}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1
-            )
-
-            def read_output():
-                for line in process.stdout:
-                    self.debug_output.emit(line.rstrip())
-                process.stdout.close()
-                process.wait()
-                self.debug_output.emit(f"Process exited with code {process.returncode}")
-                self.status_changed.emit("Done.")
-
-            import threading
-
-            threading.Thread(target=read_output, daemon=True).start()
-
+                threading.Thread(target=read_output, daemon=True).start()
+                dlg.show()
         except Exception as e:
-            self.debug_output.emit(f"Failed to launch: {e}")
-        self.status_changed.emit("App Launched")
+            print(f"Failed to launch: {e}")
 
     @Slot(str)
     def emit_debug(self, text: str):
@@ -242,11 +270,12 @@ def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
     """
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    tabs: Dict[str, List[Dict[str, Any]]] = {}
+    tabs = {}
     for app_name, entry in data.items():
-        # entry is now a dict with named fields
         app = dict(entry)
-        app["name"] = app_name  # Add the name field for convenience
+        app["name"] = app_name
+        app["popup"] = app.get("popup", False)
+        app["flags"] = app.get("flags", [])
         tab_name = app["tabName"]
         if tab_name not in tabs:
             tabs[tab_name] = []
