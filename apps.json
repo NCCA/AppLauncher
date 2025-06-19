@@ -5,7 +5,8 @@
     "desc": "Launch Maya 2025",
     "icon": "file:////opt/autodesk/maya/icons/mayaico.png",
     "tabName": "Core DCC Tools",
-    "popup": "true"
+    "popup": "true",
+    "flags" : ["--debug"]
   },
   "Houdini": {
     "path": "/public/bin/25-26",
@@ -294,11 +295,10 @@
   },
 
   "Code": {
-    "path": "/usr/local/bin",
+    "path": "/usr/bin",
     "execName": "code",
     "desc": "Visual Studio code",
     "icon": "file:////usr/share/code/resources/app/resources/linux/code.png",
-    "tabName": "Developer Tools",
-    "popup": "true"
+    "tabName": "Developer Tools"
   }
 }
