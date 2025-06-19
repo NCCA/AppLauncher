@@ -65,5 +65,9 @@ Rectangle {
             visible: tabName === "Favourites"
             onTriggered: appLauncher.remove_from_favourites(app.name)
         }
+        MenuItem {
+            text: "Create Desktop Shortcut"
+            onTriggered: appLauncher.create_desktop_entry(app)
+        }
     }
 }

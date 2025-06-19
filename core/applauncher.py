@@ -236,6 +236,31 @@ class AppLauncher(QObject):
                 self.favourites_changed.emit()
                 return
 
+    @Slot("QVariant")
+    def create_desktop_entry(self, app):
+        # Convert QJSValue to Python dict if needed
+        if hasattr(app, "toVariant"):
+            app = app.toVariant()
+        try:
+            desktop_entry = f"""
+[Desktop Entry]
+Type=Application
+Name={app["name"]}
+Exec={app["path"]}/{app["execName"]}
+Icon={app["icon"]}
+Terminal=false
+"""
+            print(f"{app["path"]=}/{app["execName"]=}")
+            desktop_dir = Path.home() / "Desktop"
+            desktop_dir.mkdir(exist_ok=True)
+            filename = f"{app['name'].replace(' ', '_')}.desktop"
+            filepath = desktop_dir / filename
+            filepath.write_text(desktop_entry)
+            filepath.chmod(0o755)
+            self.status_changed.emit(f"Desktop shortcut created: {filepath}")
+        except Exception as e:
+            self.status_changed.emit(f"Failed to create shortcut: {e}")
+
     def get_tabs_model(self) -> List[Dict[str, Any]]:
         """
         Get the model for tabs, including the Favourites tab.
