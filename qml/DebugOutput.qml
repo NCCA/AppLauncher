@@ -28,17 +28,20 @@ Item {
         ColumnLayout {
             anchors.fill: parent
             spacing: 8
-
-            TextArea {
-                id: debugArea
+            ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                readOnly: true
-                wrapMode: TextArea.Wrap
-                color: "#fff"
-                font.family: "Courier New"
-                background: Rectangle {
-                    color: "#333"
+                TextArea {
+                    id: debugArea
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    readOnly: true
+                    wrapMode: TextArea.Wrap
+                    color: "#fff"
+                    font.family: "Courier New"
+                    background: Rectangle {
+                        color: "#333"
+                    }
                 }
             }
 

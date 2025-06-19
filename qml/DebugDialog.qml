@@ -22,15 +22,17 @@ Dialog {
         }
     }
 
-    contentItem: TextArea {
-        id: debugTextArea
-        readOnly: false
-        wrapMode: TextArea.Wrap
-        selectByMouse: true
-        selectByKeyboard: true
-        font.family: "monospace"
-        font.pixelSize: 14
-        text: ""
+    contentItem: ScrollView {
+        TextArea {
+            id: debugTextArea
+            readOnly: false
+            wrapMode: TextArea.Wrap
+            selectByMouse: true
+            selectByKeyboard: true
+            font.family: "monospace"
+            font.pixelSize: 14
+            text: ""
+        }
     }
 
     onAccepted: visible = false
