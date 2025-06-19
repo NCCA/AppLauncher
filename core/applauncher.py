@@ -242,12 +242,18 @@ class AppLauncher(QObject):
         if hasattr(app, "toVariant"):
             app = app.toVariant()
         try:
+            icon = app["icon"]
+            if icon.startswith("file:///"):
+                icon = icon.removeprefix("file:///")
+            elif icon.startswith("qml://"):
+                icon = icon.removeprefix("qml://")
+
             desktop_entry = f"""
 [Desktop Entry]
 Type=Application
 Name={app["name"]}
 Exec={app["path"]}/{app["execName"]}
-Icon={app["icon"]}
+Icon={icon}
 Terminal=false
 """
             print(f"{app["path"]=}/{app["execName"]=}")
