@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 import QtQuick.Layouts 1.15
+import QtWebEngine 1.15
+import QtQuick.Window 2.15
 
 /**
  * MainMenu.qml
@@ -52,7 +54,7 @@ MenuBar {
         MenuItem {
             text: "Documentation"
             onTriggered: {
-                Qt.openUrlExternally("qrc:/help/help.html");
+                onTriggered: helpWindow.open();
             }
         }
     }
@@ -95,6 +97,27 @@ MenuBar {
                 Layout.alignment: Qt.AlignHCenter
                 onLinkActivated: Qt.openUrlExternally(link)
             }
+        }
+    }
+
+    Window {
+        id: helpWindow
+        width: 800
+        height: 600
+        visible: false
+        flags: Qt.Dialog | Qt.WindowTitleHint | Qt.WindowCloseButtonHint
+        title: "Using AppsHere!"
+
+        WebEngineView {
+            anchors.fill: parent
+            url: Qt.resolvedUrl("qrc:/help/help.html")
+        }
+
+        function open() {
+            helpWindow.visible = true;
+        }
+        function close() {
+            helpWindow.visible = false;
         }
     }
 }
