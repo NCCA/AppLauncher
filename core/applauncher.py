@@ -263,6 +263,14 @@ Terminal=false
             filepath = desktop_dir / filename
             filepath.write_text(desktop_entry)
             filepath.chmod(0o755)
+            # Now add to local launch
+            applications_dir = Path("~/.local/share/applications").expanduser()
+
+            # Check if it exists, create it if not
+            if not applications_dir.exists():
+                applications_dir.mkdir(parents=True, exist_ok=True)
+            filepath = applications_dir / filename
+            filepath.write_text(desktop_entry)
             self.status_changed.emit(f"Desktop shortcut created: {filepath}")
         except Exception as e:
             self.status_changed.emit(f"Failed to create shortcut: {e}")

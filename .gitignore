@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 
+# PySide Resources
+resources_rc.py
+
 # Virtual environments
 .venv
 
@@ -14,3 +17,4 @@ build/
 dist/
 AppsEre.spec
 
+.ropeproject/
