@@ -5,3 +5,4 @@ uv run pyinstaller --onefile --windowed --add-data 'resources_rc.py:.' --add-dat
 cp dist/AppsEre /public/devel/25-26/AppsEre
 cp apps.json /public/devel/25-26/AppsEre
 cp appsereicon.png  /public/devel/25-26/AppsEre
+cp AppsEre.desktop /public/devel/25-26/AppsEre

@@ -10,7 +10,8 @@ from PySide6.QtWidgets import QApplication
 
 import resources_rc  # noqa: F401 qt resource
 from core.applauncher import AppLauncher
-
+from pathlib import Path
+import shutil
 
 def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
     """
@@ -37,7 +38,16 @@ def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
     return [{"tabName": tab, "apps": apps} for tab, apps in tabs.items()]
 
 
+def check_for_menu() :
+    menu_item = Path("~/.local/share/applications/AppsEre.desktop").expanduser()
+    if not menu_item.exists():
+        try :
+            shutil.copy("/public/devel/25-26/AppsEre/AppsEre.desktop", menu_item)
+        except Exception as e:
+            pass
+
 if __name__ == "__main__":
+    check_for_menu()
     app = QApplication(sys.argv)
     apps_by_tab = load_apps_json("apps.json")
     app_launcher = AppLauncher(apps_by_tab)
