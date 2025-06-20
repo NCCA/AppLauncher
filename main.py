@@ -1,6 +1,8 @@
 #!/usr/bin/env -S uv run --script
 import json
+import shutil
 import sys
+from pathlib import Path
 from typing import Any, Dict, List
 
 from PySide6.QtCore import QUrl
@@ -10,8 +12,7 @@ from PySide6.QtWidgets import QApplication
 
 import resources_rc  # noqa: F401 qt resource
 from core.applauncher import AppLauncher
-from pathlib import Path
-import shutil
+
 
 def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
     """
@@ -38,27 +39,36 @@ def load_apps_json(json_path: str) -> List[Dict[str, Any]]:
     return [{"tabName": tab, "apps": apps} for tab, apps in tabs.items()]
 
 
-def check_for_menu() :
+def check_for_menu():
+    """
+    see if the app has a menu item for the linux applications if not copy
+    Note this is very specific to out build so not a universal function
+    """
     menu_item = Path("~/.local/share/applications/AppsEre.desktop").expanduser()
     if not menu_item.exists():
-        try :
+        try:
             shutil.copy("/public/devel/25-26/AppsEre/AppsEre.desktop", menu_item)
-        except Exception as e:
+        except Exception:
             pass
+
 
 if __name__ == "__main__":
     check_for_menu()
     app = QApplication(sys.argv)
     apps_by_tab = load_apps_json("apps.json")
+    # create the app launcher backend for our QML tools
     app_launcher = AppLauncher(apps_by_tab)
+    # grab the QML engine.
     engine = QQmlApplicationEngine()
+    # associate the qml data (context Properties) to our app_launcher class.
+    # This basically makes python objects and data available to the QML UI.
     engine.rootContext().setContextProperty("appLauncher", app_launcher)
     engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
     engine.rootContext().setContextProperty("diskQuotas", app_launcher._disk_quotas)
     engine.rootContext().setContextProperty("theme", app_launcher._theme)
     engine.load(QUrl("qrc:/qml/main.qml"))
 
-    # Update QML model when favourites change
+    # closture to update QML model when favourites change
     def update_tabs_model() -> None:
         """
         Update the QML context property for the tabs model when favourites change.
@@ -71,6 +81,7 @@ if __name__ == "__main__":
     root = root_objects[0]
     debug_output = root.findChild(object, "debugOutput")
 
+    # closure do append debut text to the hidden debug panel
     def append_debug_output(text):
         if debug_output:
             debug_output.appendText(text)
@@ -80,14 +91,15 @@ if __name__ == "__main__":
     status_bar = root.findChild(object, "statusBar")
     status_label = status_bar.findChild(object, "statusLabel")
 
+    # closure to set the status text on the status bar when output generated
     def set_status(text):
         if status_label:
             status_label.setProperty("text", text)
 
     app_launcher.status_changed.connect(set_status)
-    # this needs to be loaded locally for menu bars etc.
+    # this needs to be loaded locally for menu bars etc as resources are not read by the system icon setup
     app.setWindowIcon(QIcon("./appsereicon.png"))
-
+    # ensure we have a valid engine.
     if not engine.rootObjects():
         sys.exit(-1)
     sys.exit(app.exec())

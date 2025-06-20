@@ -1,5 +1,6 @@
 import shutil
 import subprocess
+import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -122,7 +123,13 @@ class AppLauncher(QObject):
         return self._disk_quotas
 
     @Slot(str, str, "QVariantList", bool)
-    def launch_app(self, path: str, execName: str, flags: Optional[List[str]] = None, popup: bool = False) -> None:
+    def launch_app(
+        self,
+        path: str,
+        execName: str,
+        flags: Optional[List[str]] = None,
+        popup: bool = False,
+    ) -> None:
         """
         Launch an application with optional flags and debug popup.
 
@@ -137,7 +144,13 @@ class AppLauncher(QObject):
         flags = [str(f) for f in flags]
         try:
             cmd = [f"{path}/{execName}"] + flags
-            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+            proc = subprocess.Popen(
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                bufsize=1,
+            )
             if popup:
                 # Emit a signal to QML to open the debug dialog and clear previous output
                 self.status_changed.emit("show_debug_dialog")
@@ -146,8 +159,6 @@ class AppLauncher(QObject):
                 for line in proc.stdout:
                     self.debug_output.emit(line.rstrip())
                 proc.stdout.close()
-
-            import threading
 
             threading.Thread(target=read_output, daemon=True).start()
         except Exception as e:
