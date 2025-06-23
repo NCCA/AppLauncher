@@ -68,7 +68,9 @@ You can run it from the terminal use goMari.
 ---
 # Blender
 
-The current version of [blender](https://www.blender.org/support/) installed is 4.4.3 we don't use this in any teaching but is here for personal use / experiments. Please ensure you read any project briefs closely as some explicitly say you should use a particular DCC tool such as Maya or Houdini and not Blender.
+The current version of [blender](https://www.blender.org/support/) installed is 4.4.3 we don't use this in any teaching but it is installed here for personal use / experiments.
+
+Please ensure you read any project briefs closely as some explicitly say you should use a particular DCC tool such as Maya or Houdini and not Blender.
 
 You can run blender from the terminal by typing blender.
 
@@ -83,9 +85,17 @@ You can run from the terminal using UnrealEditor
 
 # OpenRV
 
+The current version of [OpenRV](https://aswf-openrv.readthedocs.io/en/latest/) is 3.0.0 it is an image and sequence viewer for VFX and animation artists. Developed by the [Academy Software Foundation](https://github.com/AcademySoftwareFoundation)
 
+You can use it from the terminal by typing rv
 
 ---
+
+# it
+
+The current version of [it](https://rmanwiki-26.pixar.com/space/REN26/19661909/Image+Tool) is 26.3 it is the core renderman image viwer tool and is especially useful for viewing exr files and sequences. You can use it from the terminal by using it [filename]
+
+
 # Rawtherapee
 
 
