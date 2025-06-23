@@ -153,7 +153,7 @@
   },
 
   "Warp": {
-    "path": "/public/devel/25-26",
+    "path": "/public/devel/25-26/bin",
     "execName": "warp-terminal",
     "desc": "Warp Terminal ",
     "icon": "/icons/Warp.png",
