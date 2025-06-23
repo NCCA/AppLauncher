@@ -8,8 +8,8 @@ Window {
     id: aboutWindow
     property string aboutText: ""
     property int theme: Material.theme
-    width: 400
-    height: 300
+    width: 600
+    height: 400
     visible: false
     flags: Qt.Dialog | Qt.WindowTitleHint | Qt.WindowCloseButtonHint
     title: "About"
@@ -22,14 +22,20 @@ Window {
         spacing: 12
 
         ScrollView {
+            id: scroll
             Layout.fillWidth: true
             Layout.fillHeight: true
+            clip: true
+
             Text {
+                id: aboutTextItem
                 text: aboutWindow.aboutText
                 wrapMode: Text.WordWrap
-                textFormat: Text.MarkdownText
+                textFormat: theme === Material.Dark ? Text.RichText : Text.MarkdownText
                 color: theme === Material.Dark ? "#fff" : "#222"
-                anchors.fill: parent
+                width: scroll.availableWidth
+                // anchors.left/right are not needed if width is set
+                onLinkActivated: Qt.openUrlExternally(link)
             }
         }
 

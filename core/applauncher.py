@@ -4,7 +4,7 @@ import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 import resources_rc  # noqa: F401 qt resource
-
+import re
 from PySide6.QtCore import Property, QObject, QSettings, Signal, Slot,QFile
 
 class AppLauncher(QObject):
@@ -248,11 +248,13 @@ class AppLauncher(QObject):
                 return
 
 
-    @Slot(str, result=str)
-    def get_about_text(self, app_name: str) -> str:
+    @Slot(str, str, result=str)
+
+    def get_about_text(self, app_name: str, theme: str) -> str:
         """
         Load AboutText.md and extract the section for the given app name.
-        Includes the first found line containing app_name, and appends lines until '---' is found.
+        - In light mode: returns Markdown.
+        - In dark mode: returns HTML with yellow links and headings.
         """
         try:
             file = QFile(":/help/AboutText.md")
@@ -269,7 +271,26 @@ class AppLauncher(QObject):
                 elif app_name in line:
                     found = True
                     text.append(line)  # Include the first found line
-            return "\n".join(text).strip() if text else "No help available."
+            if not text:
+                return "No help available."
+            markdown = "\n".join(text).strip()
+            if theme == "light":
+                return markdown
+            else:
+                # Convert Markdown headings to HTML
+                def heading_repl(match):
+                    hashes, title = match.group(1), match.group(2)
+                    level = min(len(hashes), 6)
+                    return f'<h{level} style="color:#80cbc4;">{title.strip()}</h{level}>'
+                html = re.sub(r'^(#{1,6})\s+(.*)$', heading_repl, markdown, flags=re.MULTILINE)
+                # Convert Markdown links to yellow HTML links
+                def link_repl(match):
+                    text, url = match.group(1), match.group(2)
+                    return f'<a href="{url}" style="color: #FFD600;">{text}</a>'
+                html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link_repl, html)
+                # Convert line breaks to <br>
+                html = html.replace('\n', '<br>')
+                return html
         except Exception as e:
             return f"Error loading help: {e}"
 

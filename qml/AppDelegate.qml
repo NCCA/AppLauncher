@@ -79,7 +79,8 @@ Rectangle {
         ToolTip.visible: hovered
         ToolTip.text: "About this app"
         onClicked: {
-            var aboutText = appLauncher.get_about_text(app.name)
+            var themeStr = theme === Material.Dark ? "dark" : "light"
+            var aboutText = appLauncher.get_about_text(app.name, themeStr)
             aboutDialogLoader.active = true
             if (aboutDialogLoader.item) {
                 aboutDialogLoader.item.theme = theme

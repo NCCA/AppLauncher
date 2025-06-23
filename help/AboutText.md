@@ -8,6 +8,7 @@ Current installed version of Maya is [Help](https://help.autodesk.com/view/MAYAU
 
 [PyMel](https://github.com/LumaPictures/pymel) is also installed.
 
+It is also possible to start Maya from the terminal by typing goMaya
 
 
 ---
