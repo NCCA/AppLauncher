@@ -134,7 +134,7 @@
     "path": "/public/devel/25-26/bin",
     "execName": "run_houshell.sh",
     "desc": "Houdini Shell for command line tools and usd",
-    "icon": "file://usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
+    "icon": "file:////usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
     "tabName": "Core DCC Tools"
   },
   "CLion": {
@@ -156,7 +156,7 @@
     "path": "/public/devel/25-26",
     "execName": "warp-terminal",
     "desc": "Warp Terminal ",
-    "icon": "file:////usr/share/icons/hicolor/128x128/apps/dev.warp.Warp.png",
+    "icon": "/icons/Warp.png",
     "tabName": "Developer Tools"
   },
   "QtCreator": {
