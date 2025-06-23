@@ -268,14 +268,14 @@
     "execName": "firefox",
     "desc": "Web Browser",
     "icon": "file:////usr/share/icons/hicolor/48x48/apps/firefox.png",
-    "tabName": "Web"
+    "tabName": "Web / Office"
   },
   "Brave": {
     "path": "/usr/bin",
     "execName": "brave-browser",
     "desc": "Web Browser",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/brave-browser.png",
-    "tabName": "Web"
+    "tabName": "Web / Office"
   },
 
   "Chrome": {
@@ -283,17 +283,70 @@
     "execName": "google-chrome",
     "desc": "Web Browser",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/google-chrome.png",
-    "tabName": "Web"
+    "tabName": "Web / Office"
+  },
+  "LibreOffice": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-base.png",
+    "tabName": "Web / Office"
+  },
+  "Writer": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "flags" : ["--writer"],
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-writer.png",
+    "tabName": "Web / Office"
+  },
+  "Calc": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "flags" : ["--calc"],
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-calc.png",
+    "tabName": "Web / Office"
+  },
+  "Draw": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "flags" : ["--draw"],
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-draw.png",
+    "tabName": "Web / Office"
+  },
+  "Impress": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "flags" : ["--impress"],
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-impress.png",
+    "tabName": "Web / Office"
+  },
+  "PDF Viewer": {
+    "path": "/usr/bin",
+    "execName": "evince",
+    "desc": "evince PDF Viewer",
+    "icon": "file:////usr/share/./help/uk/evince/figures/evincelogo.png",
+    "tabName": "Web / Office"
   },
   "Zed": {
     "path": "/public/devel/25-26/installers",
     "execName": "install_zed.sh",
-    "desc": "Insatall the zed editor to your home directory .local",
+    "desc": "Install the zed editor to your home directory .local",
     "icon": "/icons/zed.png",
     "tabName": "Installers",
     "popup": "true"
   },
-
+  "omz": {
+    "path": "/public/devel/25-26/installers",
+    "execName": "install_omz.sh",
+    "desc": "install the omz shell extension for a better experience",
+    "icon": "/icons/zed.png",
+    "tabName": "Installers",
+    "popup": "true"
+  },
   "Code": {
     "path": "/usr/bin",
     "execName": "code",

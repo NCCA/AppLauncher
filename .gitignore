@@ -8,6 +8,8 @@ wheels/
 
 # PySide Resources
 resources_rc.py
+main.dist
+build
 
 # Virtual environments
 .venv
