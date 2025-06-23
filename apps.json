@@ -78,6 +78,13 @@
     "icon": "file:////docker_images/Unreal/Engine/Plugins/VirtualProduction/Switchboard/Source/Switchboard/switchboard/ui/images/unreal_logo.png",
     "tabName": "Core DCC Tools"
   },
+  "OpenRV": {
+    "path": "/public/devel/25-26/bin/",
+    "execName": "rv",
+    "desc": "OpenRV Review tool",
+    "icon": "file:///public/devel/25-26/fossdcc/OpenRV/OpenRV_icon.png",
+    "tabName": "Core DCC Tools"
+  },
   "Rawtherapee": {
     "path": "/public/bin/25-26",
     "execName": "goRawtherapee",
@@ -171,6 +178,14 @@
     "desc": "LLM Tools",
     "icon": "/icons/lmstudio.png",
     "tabName": "Developer Tools"
+  },
+  "Zeal": {
+    "path": "/public/devel/24-25/bin",
+    "execName": "zeal",
+    "desc": "Offline Documentation Browser",
+    "icon": "/icons/Zeal.png",
+    "tabName": "Developer Tools",
+    "popup": "true"
   },
 
   "Allusion": {
@@ -355,6 +370,21 @@
     "icon": "file:////usr/share/./help/uk/evince/figures/evincelogo.png",
     "tabName": "Web / Office"
   },
+  "Obsidian": {
+    "path": "/public/devel/25-26/fossdcc",
+    "execName": "Obsidian",
+    "desc": "Note Taking App",
+    "icon": "/icons/Obsidion.png",
+    "tabName": "Web / Office"
+  },
+  "Joplin": {
+    "path": "/public/devel/25-26/fossdcc",
+    "execName": "Joplin",
+    "desc": "Note Taking App",
+    "icon": "/icons/Joplin.png",
+    "tabName": "Web / Office"
+  },
+
   "Zed": {
     "path": "/public/devel/25-26/installers",
     "execName": "install_zed.sh",
