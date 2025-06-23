@@ -76,7 +76,8 @@
     "execName": "UnrealEditor",
     "desc": "Unreal Engine and Game Development",
     "icon": "file:////docker_images/Unreal/Engine/Plugins/VirtualProduction/Switchboard/Source/Switchboard/switchboard/ui/images/unreal_logo.png",
-    "tabName": "Core DCC Tools"
+    "tabName": "Core DCC Tools",
+    "popup": "true"
   },
   "OpenRV": {
     "path": "/public/devel/25-26/bin/",
