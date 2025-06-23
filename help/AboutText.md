@@ -10,7 +10,7 @@ Current installed version of [Maya](https://help.autodesk.com/view/MAYAUL/2025/E
 
 It is also possible to start Maya from the terminal by typing goMaya
 
-Note tend not to install the very latest version of maya in the labs as not all plugins are supported at the time of release of the new versions.
+Note we tend not to install the very latest version of maya in the labs as not all plugins are supported at the time of release of the new versions.
 
 ---
 # Houdini
@@ -22,7 +22,7 @@ You can run Houdini from the terminal using goHoudini, there is also a Houdini s
 ---
 # Nuke
 
-The current version of [Nuke](https://learn.foundry.com/nuke/content/user_guide.html) is 16.02 you can run it from the terminal using goNuke. Not this will default run NukeX
+The current version of [Nuke](https://learn.foundry.com/nuke/content/user_guide.html) is 16.02 you can run it from the terminal using goNuke. Note this will default run NukeX
 
 ---
 # NukeStudio
