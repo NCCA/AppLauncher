@@ -31,6 +31,7 @@
         <file>icons/UltiMaker.png</file>
         <file>icons/omz.png</file>
         <file>icons/Obsidion.png</file>
+        <file>icons/Joplin.png</file>
         <file>help/help.html</file>
     </qresource>
 </RCC>
