@@ -339,14 +339,6 @@
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-writer.png",
     "tabName": "Web / Office"
   },
-  "Writer": {
-    "path": "/usr/bin",
-    "execName": "libreoffice",
-    "flags": ["--draw"],
-    "desc": "Office Tools",
-    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-draw.png",
-    "tabName": "Web / Office"
-  },
   "Calc": {
     "path": "/usr/bin",
     "execName": "libreoffice",
