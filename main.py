@@ -66,6 +66,8 @@ if __name__ == "__main__":
     engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
     engine.rootContext().setContextProperty("diskQuotas", app_launcher._disk_quotas)
     engine.rootContext().setContextProperty("theme", app_launcher._theme)
+    engine.rootContext().setContextProperty("appLauncher", app_launcher)
+    # ... already done in your code
     engine.load(QUrl("qrc:/qml/main.qml"))
 
     # closture to update QML model when favourites change

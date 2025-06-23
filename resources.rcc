@@ -13,6 +13,7 @@
         <file>qml/DebugOutput.qml</file>
         <file>qml/DiskQuotaBar.qml</file>
         <file>qml/DebugDialog.qml</file>
+        <file>qml/AboutDialog.qml</file>
         <file>icons/appsereicon.png</file>
         <file>icons/Nuke.png</file>
         <file>icons/rawtherapee.svg</file>
@@ -34,5 +35,6 @@
         <file>icons/Joplin.png</file>
         <file>icons/Zeal.png</file>
         <file>help/help.html</file>
+        <file>help/AboutText.md</file>
     </qresource>
 </RCC>

@@ -3,9 +3,9 @@ import subprocess
 import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+import resources_rc  # noqa: F401 qt resource
 
-from PySide6.QtCore import Property, QObject, QSettings, Signal, Slot
-
+from PySide6.QtCore import Property, QObject, QSettings, Signal, Slot,QFile
 
 class AppLauncher(QObject):
     """
@@ -246,6 +246,56 @@ class AppLauncher(QObject):
                 self._save_favourites()
                 self.favourites_changed.emit()
                 return
+
+
+    @Slot(str, result=str)
+    # def get_about_text(self, app_name: str) -> str:
+    #     """
+    #     Load AboutText.md and extract the section for the given app name.
+    #     """
+    #     try:
+    #         file = QFile(":/help/AboutText.md")
+    #         file.open(QFile.ReadOnly | QFile.Text)
+    #         lines = bytes(file.readAll()).decode("utf-8").splitlines()
+    #         print(f"{lines=}")
+    #         found=True
+    #         print(f"finding {app_name}")
+    #         text=[]
+    #         for line in lines:
+    #             if found:
+    #                 if line.strip() == "---":
+    #                     break
+    #                 text.append(line)
+    #             elif line.strip() == app_name:
+    #                 found = True
+    #         return "\n".join(text).strip() if text else "No help available."
+    #     except Exception as e:
+    #         return f"Error loading help: {e}"
+    def get_about_text(self, app_name: str) -> str:
+        """
+        Load AboutText.md and extract the section for the given app name.
+        Includes the first found line containing app_name, and appends lines until '---' is found.
+        """
+        try:
+            file = QFile(":/help/AboutText.md")
+            if not file.open(QFile.ReadOnly | QFile.Text):
+                return "No help available (resource not found)."
+            lines = bytes(file.readAll()).decode("utf-8").splitlines()
+            found = False
+            text = []
+            for line in lines:
+                if found:
+                    if line.strip() == "---":
+                        break
+                    text.append(line)
+                elif app_name in line:
+                    found = True
+                    text.append(line)  # Include the first found line
+            return "\n".join(text).strip() if text else "No help available."
+        except Exception as e:
+            return f"Error loading help: {e}"
+
+
 
     @Slot("QVariant")
     def create_desktop_entry(self, app):
