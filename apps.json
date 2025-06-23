@@ -86,7 +86,7 @@
     "icon": "file:///public/devel/25-26/fossdcc/OpenRV/OpenRV_icon.png",
     "tabName": "Core DCC Tools"
   },
-  "it": {
+  "ImageTool (it)": {
     "path": "/opt/pixar/RenderManProServer-26.3/bin/",
     "execName": "it",
     "desc": "Pixar's Image Tool",

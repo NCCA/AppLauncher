@@ -1,6 +1,6 @@
 # Maya
 
-Current installed version of Maya is [Help](https://help.autodesk.com/view/MAYAUL/2025/ENU/), as well as the default Arnold Renderer it has plugins installed for
+Current installed version of [Maya](https://help.autodesk.com/view/MAYAUL/2025/ENU/) is 2024, as well as the default Arnold Renderer it has plugins installed for
 
 - [V-Ray](https://docs.chaos.com/display/VMAYA/V-Ray+for+Maya+Help)
 - [Renderman](https://rmanwiki-26.pixar.com/space/RFM26/21037058/RenderMan+26+for+Maya)
@@ -10,6 +10,7 @@ Current installed version of Maya is [Help](https://help.autodesk.com/view/MAYAU
 
 It is also possible to start Maya from the terminal by typing goMaya
 
+Note tend not to install the very latest version of maya in the labs as not all plugins are supported at the time of release of the new versions.
 
 ---
 # Houdini
@@ -91,32 +92,51 @@ You can use it from the terminal by typing rv
 
 ---
 
-# it
+# ImageTool (it)
 
 The current version of [it](https://rmanwiki-26.pixar.com/space/REN26/19661909/Image+Tool) is 26.3 it is the core renderman image viwer tool and is especially useful for viewing exr files and sequences. You can use it from the terminal by using it [filename]
 
 
 # Rawtherapee
 
+The current version of [Rawtherapee](https://rawtherapee.com/) is 5.12 it is a powerful raw photo processing system.
+
+You can run it from the terminal using goRawtherapee
 
 ---
 # Gimp3
 
+[Gimp](https://www.gimp.org/) (GNU Image Manipulation Program) is a image editor for linux. This is the latest version 3 of gimp.
+
+It can be run from the terminal using gimp3
 
 ---
 # Gimp2
 
+[Gimp](https://www.gimp.org/) (GNU Image Manipulation Program) is a image editor for linux. This is the latest default RHEL 9.5 2.99 version.
+
+It can be run from the terminal using gimp
+
 
 ---
+
 # Audacity
 
+[Audacity](https://support.audacityteam.org/) is a audio recording and editing tool. It can be run in the terminal using audacity
 
 ---
+
 # MetaShape
 
+[metashape](https://www.agisoft.com/support/tutorials/) is a tool for photogrammetry pipelines. It allows you to process digital images and generate 3D spatial data.
+
+You can run it from the terminal using goMetashape
 
 ---
+
 # HoudiniShell
+
+This will open up a terminal setting up the [houdini shell](https://www.sidefx.com/faq/question/how-do-i-set-up-the-houdini-environment-for-command-line-tools/) allowing access to various [tool](https://www.sidefx.com/docs/houdini/ref/utils/index.html) packaged with houdini. There are instructions [here](https://nccastaff.bournemouth.ac.uk/jmacey/post/desktopIcons/DesktopIcons/) to add your own tabs to the different terminals and to create desktop shortcuts.
 
 
 ---
