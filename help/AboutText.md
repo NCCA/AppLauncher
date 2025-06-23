@@ -142,36 +142,60 @@ This will open up a terminal setting up the [houdini shell](https://www.sidefx.c
 ---
 # CLion
 
+[Clion](https://www.jetbrains.com/clion/) is a C++ ide it can be run from the terminal using clion.
+
 
 ---
+
 # PyCharm
 
+[pycharm](https://www.jetbrains.com/pycharm/) is a python ide it can be run from the terminal using pycharm
 
 ---
+
 # Warp
 
+[warp](https://www.warp.dev/) is a modern terminal that can be used instead of the default gnome terminal. If you sign up you can add the basic AI tools with limited prompts / requests per month https://www.warp.dev/pricing by default this is disabled and the University does not license this software.
 
 ---
 # QtCreator
 
+[Qt Creator](https://www.qt.io/product/development-tools) is an ide for Qt Projects in C++ or Python. Both Qt 5.15.2 and Qt 6.8.3 are installed in /public/devel/25-25/Qt
+
+You can run the ide in the terminal by using qtcreator
 
 ---
+
 # DesignStudio
 
+[Qt Design Studio](https://www.qt.io/product/ui-design-tools) is a tool / ide to aid the development of modern QML based applications in C++ or PySide. Note for pyside development you will need to install pyside. See Jon's lecture notes / labs for more details.
 
 ---
+
 # Podman
 
+[Podman](https://podman.io/) is a container tool for managing containers on the local machine. Note that images are stored on a partion on the local disk so do not transfer from machine to machine.
 
 ---
 # LMStudio
 
+[LMStudio](https://lmstudio.ai/) allows you to run local LLM  models on your computer. Note that these can get quite large and will be stored in your home directory.
+
+Command line ollama tools are also installed on the build, you can start ollama using the command line
+
+ollama serve &>/dev/null &
+
+Then run models on the local machine, the gollama tool is also installed which allows you to conver ollama models to run on LMStudio.
 
 ---
+
 # Zeal
 
+[zeal](https://zealdocs.org/) is an offline documentation browser (as sometimes it's quicker to RTFM than it is to process the AI slop that google serves you up). I have installed quite a few of the docsets we use. More can be requested from Jon.
+
 
 ---
+
 # Allusion
 
 
