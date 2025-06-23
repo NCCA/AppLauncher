@@ -30,6 +30,7 @@
         <file>icons/zed.png</file>
         <file>icons/UltiMaker.png</file>
         <file>icons/omz.png</file>
+        <file>icons/Obsidion.png</file>
         <file>help/help.html</file>
     </qresource>
 </RCC>
