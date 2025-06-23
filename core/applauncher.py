@@ -249,28 +249,6 @@ class AppLauncher(QObject):
 
 
     @Slot(str, result=str)
-    # def get_about_text(self, app_name: str) -> str:
-    #     """
-    #     Load AboutText.md and extract the section for the given app name.
-    #     """
-    #     try:
-    #         file = QFile(":/help/AboutText.md")
-    #         file.open(QFile.ReadOnly | QFile.Text)
-    #         lines = bytes(file.readAll()).decode("utf-8").splitlines()
-    #         print(f"{lines=}")
-    #         found=True
-    #         print(f"finding {app_name}")
-    #         text=[]
-    #         for line in lines:
-    #             if found:
-    #                 if line.strip() == "---":
-    #                     break
-    #                 text.append(line)
-    #             elif line.strip() == app_name:
-    #                 found = True
-    #         return "\n".join(text).strip() if text else "No help available."
-    #     except Exception as e:
-    #         return f"Error loading help: {e}"
     def get_about_text(self, app_name: str) -> str:
         """
         Load AboutText.md and extract the section for the given app name.
@@ -294,8 +272,6 @@ class AppLauncher(QObject):
             return "\n".join(text).strip() if text else "No help available."
         except Exception as e:
             return f"Error loading help: {e}"
-
-
 
     @Slot("QVariant")
     def create_desktop_entry(self, app):
