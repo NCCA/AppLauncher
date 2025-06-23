@@ -6,7 +6,7 @@
     "icon": "file:////opt/autodesk/maya/icons/mayaico.png",
     "tabName": "Core DCC Tools",
     "popup": "true",
-    "flags" : ["--debug"]
+    "flags": ["--debug"]
   },
   "Houdini": {
     "path": "/public/bin/25-26",
@@ -85,6 +85,29 @@
     "icon": "/icons/rawtherapee.svg",
     "tabName": "Core DCC Tools"
   },
+  "Gimp3": {
+    "path": "/public/devel/25-26/fossdcc",
+    "execName": "Gimp3",
+    "desc": "Gnu Image Manipulation Program",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/gimp.png",
+    "tabName": "Core DCC Tools"
+  },
+  "Gimp2": {
+    "path": "/usr/bin",
+    "execName": "gimp",
+    "desc": "Gnu Image Manipulation Program",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/gimp.png",
+    "tabName": "Core DCC Tools"
+  },
+
+  "Audacity": {
+    "path": "/usr/bin",
+    "execName": "audacity",
+    "desc": "Audio Editor",
+    "icon": "file:////usr/share/icons/hicolor/48x48/audacity.png",
+    "tabName": "Core DCC Tools"
+  },
+
   "MetaShape": {
     "path": "/public/bin/25-26",
     "execName": "goMetashape",
@@ -96,13 +119,6 @@
     "path": "/public/devel/25-26/bin",
     "execName": "run_houshell.sh",
     "desc": "Houdini Shell for command line tools and usd",
-    "icon": "file://usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
-    "tabName": "Core DCC Tools"
-  },
-  "MayaShell": {
-    "path": "/public/devel/25-26/bin",
-    "execName": "run_mayashell.sh",
-    "desc": "Maya Shell for command line tools and usd",
     "icon": "file://usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
     "tabName": "Core DCC Tools"
   },
@@ -295,15 +311,23 @@
   "Writer": {
     "path": "/usr/bin",
     "execName": "libreoffice",
-    "flags" : ["--writer"],
+    "flags": ["--writer"],
     "desc": "Office Tools",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-writer.png",
+    "tabName": "Web / Office"
+  },
+  "Writer": {
+    "path": "/usr/bin",
+    "execName": "libreoffice",
+    "flags": ["--draw"],
+    "desc": "Office Tools",
+    "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-draw.png",
     "tabName": "Web / Office"
   },
   "Calc": {
     "path": "/usr/bin",
     "execName": "libreoffice",
-    "flags" : ["--calc"],
+    "flags": ["--calc"],
     "desc": "Office Tools",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-calc.png",
     "tabName": "Web / Office"
@@ -311,7 +335,7 @@
   "Draw": {
     "path": "/usr/bin",
     "execName": "libreoffice",
-    "flags" : ["--draw"],
+    "flags": ["--draw"],
     "desc": "Office Tools",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-draw.png",
     "tabName": "Web / Office"
@@ -319,7 +343,7 @@
   "Impress": {
     "path": "/usr/bin",
     "execName": "libreoffice",
-    "flags" : ["--impress"],
+    "flags": ["--impress"],
     "desc": "Office Tools",
     "icon": "file:////usr/share/icons/hicolor/64x64/apps/libreoffice-impress.png",
     "tabName": "Web / Office"
@@ -343,7 +367,7 @@
     "path": "/public/devel/25-26/installers",
     "execName": "install_omz.sh",
     "desc": "install the omz shell extension for a better experience",
-    "icon": "/icons/zed.png",
+    "icon": "/icons/omz.png",
     "tabName": "Installers",
     "popup": "true"
   },
