@@ -401,6 +401,14 @@
     "tabName": "Installers",
     "popup": "true"
   },
+  "rustup": {
+    "path": "/public/devel/25-26/installers",
+    "execName": "install_rustup.sh",
+    "desc": "install rust / cargo for rust development",
+    "icon": "/icons/rust.png",
+    "tabName": "Installers",
+    "popup": "true"
+  },
   "Code": {
     "path": "/usr/bin",
     "execName": "code",

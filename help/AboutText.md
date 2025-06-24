@@ -367,6 +367,11 @@ Chrome is installed as part of the core RHEL build, teams and Brightspace both w
 [oh-my-zsh](https://ohmyz.sh/) is a set of extension to make the zsh even better. This is an installer script that only needs to be run once.
 
 ---
+# rustup
+
+[rustup](https://www.rust-lang.org/tools/install) is a simple tool to install rust into your local environment so you can start developing in rust. You may need to add .cargo/bin to your path and re-start the terminal.
+
+---
 # Code
 
 [Visual Studio Code](https://code.visualstudio.com/) is a very useful editor there are full instructions on setting up things [here](https://code.visualstudio.com/docs) you can use the code command in the terminal to open the editor. Note this is a RHEL installed version and will not get updated regularly. If you need the very latest versions, you should install it locally.
