@@ -195,6 +195,14 @@
     "tabName": "Developer Tools",
     "popup": "true"
   },
+  "VenvCleaner": {
+    "path": "/public/devel/24-25/bin",
+    "execName": "venv_cleaner",
+    "flage": "--gui",
+    "desc": "clean out old venvs",
+    "icon": "/icons/cleaner.png",
+    "tabName": "Developer Tools"
+  },
 
   "Allusion": {
     "path": "/public/devel/25-26/bin",

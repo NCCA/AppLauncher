@@ -372,6 +372,15 @@ Chrome is installed as part of the core RHEL build, teams and Brightspace both w
 [rustup](https://www.rust-lang.org/tools/install) is a simple tool to install rust into your local environment so you can start developing in rust. You may need to add .cargo/bin to your path and re-start the terminal.
 
 ---
+
+# VenvCleaner
+
+This tool allows you to scan and find .venv files on your disk to help clean them. This was written as an exercise in "vibe" coding by Jon. you can read more [here](https://github.com/NCCA/VenvCleaner).
+
+You can run this app in the terminal using venv_cleaner which will work as a simple cli tool. If you use the flag venv_cleaner --tui you will get the terminal user interface mode.
+
+---
+
 # Code
 
 [Visual Studio Code](https://code.visualstudio.com/) is a very useful editor there are full instructions on setting up things [here](https://code.visualstudio.com/docs) you can use the code command in the terminal to open the editor. Note this is a RHEL installed version and will not get updated regularly. If you need the very latest versions, you should install it locally.
