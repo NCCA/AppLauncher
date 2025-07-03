@@ -75,7 +75,7 @@
     "path": "/public/devel/25-26/bin/",
     "execName": "UnrealEditor",
     "desc": "Unreal Engine and Game Development",
-    "icon": "file:////docker_images/Unreal/Engine/Plugins/VirtualProduction/Switchboard/Source/Switchboard/switchboard/ui/images/unreal_logo.png",
+    "icon": "file:////opt/Unreal/Engine/Plugins/VirtualProduction/Switchboard/Source/Switchboard/switchboard/ui/images/unreal_logo.png",
     "tabName": "Core DCC Tools",
     "popup": "true"
   },
@@ -198,7 +198,7 @@
   "VenvCleaner": {
     "path": "/public/devel/25-26/bin",
     "execName": "venv_cleaner",
-    "flags": ["--gui" ,"~."],
+    "flags": ["--gui", "~."],
     "desc": "clean out old venvs",
     "icon": "/icons/cleaner.png",
     "tabName": "Developer Tools"
