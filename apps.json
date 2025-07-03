@@ -198,7 +198,7 @@
   "VenvCleaner": {
     "path": "/public/devel/25-26/bin",
     "execName": "venv_cleaner",
-    "flags": ["--gui" ,"~."],
+    "flags": ["--gui", "~/"],
     "desc": "clean out old venvs",
     "icon": "/icons/cleaner.png",
     "tabName": "Developer Tools"

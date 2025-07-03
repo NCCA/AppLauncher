@@ -1,6 +1,6 @@
 # Maya
 
-Current installed version of [Maya](https://help.autodesk.com/view/MAYAUL/2025/ENU/) is 2024, as well as the default Arnold Renderer it has plugins installed for
+Current installed version of [Maya](https://help.autodesk.com/view/MAYAUL/2025/ENU/) is 2025, as well as the default Arnold Renderer it has plugins installed for
 
 - [V-Ray](https://docs.chaos.com/display/VMAYA/V-Ray+for+Maya+Help)
 - [Renderman](https://rmanwiki-26.pixar.com/space/RFM26/21037058/RenderMan+26+for+Maya)

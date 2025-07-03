@@ -75,7 +75,9 @@ if __name__ == "__main__":
         """
         Update the QML context property for the tabs model when favourites change.
         """
-        engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
+        engine.rootContext().setContextProperty(
+            "tabsModel", app_launcher.get_tabs_model()
+        )
 
     app_launcher.favourites_changed.connect(update_tabs_model)
 
