@@ -54,6 +54,7 @@ def check_for_menu():
 
 if __name__ == "__main__":
     check_for_menu()
+
     app = QApplication(sys.argv)
     apps_by_tab = load_apps_json("apps.json")
     # create the app launcher backend for our QML tools
@@ -75,9 +76,7 @@ if __name__ == "__main__":
         """
         Update the QML context property for the tabs model when favourites change.
         """
-        engine.rootContext().setContextProperty(
-            "tabsModel", app_launcher.get_tabs_model()
-        )
+        engine.rootContext().setContextProperty("tabsModel", app_launcher.get_tabs_model())
 
     app_launcher.favourites_changed.connect(update_tabs_model)
 

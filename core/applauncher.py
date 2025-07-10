@@ -34,9 +34,7 @@ class AppLauncher(QObject):
         self._favourites: List[Dict[str, Any]] = self._load_favourites()
         self._disk_quotas: List[Dict[str, Union[float, str]]] = []
         self._create_disk_quotas()
-        self._theme: str = str(
-            self._settings.value("user/theme", "System")
-        )  # Default to System
+        self._theme: str = str(self._settings.value("user/theme", "System"))  # Default to System
         self._debug_dialogs: List[Any] = []
 
     @Property(str, notify=theme_changed)
@@ -209,9 +207,7 @@ class AppLauncher(QObject):
             from_index: The current index of the favourite.
             to_index: The new index to move to.
         """
-        if 0 <= from_index < len(self._favourites) and 0 <= to_index < len(
-            self._favourites
-        ):
+        if 0 <= from_index < len(self._favourites) and 0 <= to_index < len(self._favourites):
             fav = self._favourites.pop(from_index)
             self._favourites.insert(to_index, fav)
             self._save_favourites()
@@ -286,13 +282,9 @@ class AppLauncher(QObject):
                 def heading_repl(match):
                     hashes, title = match.group(1), match.group(2)
                     level = min(len(hashes), 6)
-                    return (
-                        f'<h{level} style="color:#80cbc4;">{title.strip()}</h{level}>'
-                    )
+                    return f'<h{level} style="color:#80cbc4;">{title.strip()}</h{level}>'
 
-                html = re.sub(
-                    r"^(#{1,6})\s+(.*)$", heading_repl, markdown, flags=re.MULTILINE
-                )
+                html = re.sub(r"^(#{1,6})\s+(.*)$", heading_repl, markdown, flags=re.MULTILINE)
 
                 # Convert Markdown links to yellow HTML links
                 def link_repl(match):
@@ -364,11 +356,7 @@ Terminal=false
         """
         favs = self._settings.value("user/favourites", [])
         # QSettings may return a QVariantList of QVariantMaps, ensure Python dicts and flags
-        return (
-            [dict(fav, flags=list(fav.get("flags", []))) for fav in favs]
-            if favs
-            else []
-        )
+        return [dict(fav, flags=list(fav.get("flags", []))) for fav in favs] if favs else []
 
     def _save_favourites(self) -> None:
         """
