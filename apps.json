@@ -214,7 +214,7 @@
     "path": "/public/devel/25-26/bin",
     "execName": "PyProject",
     "desc": "Template Python Projects",
-    "icon": "/public/devel/25-26/PyProject/pyproject.png",
+    "icon": "file:///public/devel/25-26/PyProject/pyproject.png",
     "tabName": "Developer Tools"
   },
 
