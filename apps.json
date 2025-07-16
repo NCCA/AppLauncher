@@ -151,6 +151,13 @@
     "icon": "file:////public/devel/25-26/pycharm-2025.1.2/bin/pycharm.png",
     "tabName": "Developer Tools"
   },
+  "Rider": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "rider",
+    "desc": "Rider IDE",
+    "icon": "file:////public/devel/25-26/Rider-2025.1.4/bin/rider.png",
+    "tabName": "Developer Tools"
+  },
 
   "Warp": {
     "path": "/public/devel/25-26/bin",
@@ -201,6 +208,13 @@
     "flags": ["--gui", "~."],
     "desc": "clean out old venvs",
     "icon": "/icons/cleaner.png",
+    "tabName": "Developer Tools"
+  },
+  "PyProject": {
+    "path": "/public/devel/25-26/bin",
+    "execName": "PyProject",
+    "desc": "Template Python Projects",
+    "icon": "/public/devel/25-26/PyProject/pyproject.png",
     "tabName": "Developer Tools"
   },
 

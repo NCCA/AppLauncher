@@ -151,6 +151,12 @@ This will open up a terminal setting up the [houdini shell](https://www.sidefx.c
 
 [pycharm](https://www.jetbrains.com/pycharm/) is a python ide it can be run from the terminal using pycharm
 
+# Rider
+
+[Rider](https://www.jetbrains.com/rider/) is an IDE for C# and C++ development and is ideal for developing Unreal Games applications. see [here](https://www.jetbrains.com/help/rider/Unreal_Engine__Before_You_Start.html#rvhq9l_11) for initial setup.
+
+
+
 ---
 
 # Warp
@@ -380,6 +386,12 @@ This tool allows you to scan and find .venv files on your disk to help clean the
 You can run this app in the terminal using venv_cleaner which will work as a simple cli tool. If you use the flag venv_cleaner --tui you will get the terminal user interface mode.
 
 ---
+
+# PyProject
+
+This tool will use uv to setup template python projects. It has templates for all types of project we use at the NCCA including Machine Learning with PyTorch, Games with Pygame. PySide and Marimo. See the lecture [here](https://nccastaff.bournemouth.ac.uk/jmacey/Lectures/PythonTooling/#/)
+---
+
 
 # Code
 
