@@ -137,6 +137,14 @@
     "icon": "file:////usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg",
     "tabName": "Core DCC Tools"
   },
+  "Zed Editor": {
+    "path": "/public/devel/25-26/installers",
+    "execName": "run_zed.sh",
+    "desc": "The Zed editor",
+    "icon": "/icons/zed.png",
+    "tabName": "Developer Tools"
+  },
+
   "CLion": {
     "path": "/public/bin/25-26",
     "execName": "clion",
@@ -407,11 +415,11 @@
     "tabName": "Web / Office"
   },
 
-  "Zed": {
+  "Zed installer": {
     "path": "/public/devel/25-26/installers",
     "execName": "install_zed.sh",
     "desc": "Install the zed editor to your home directory .local",
-    "icon": "/icons/zed.png",
+    "icon": "/icons/zed_installer.png",
     "tabName": "Installers",
     "popup": "true"
   },

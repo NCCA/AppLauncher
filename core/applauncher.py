@@ -69,6 +69,24 @@ class AppLauncher(QObject):
         if transfer_quota:
             self._disk_quotas.append(transfer_quota)
 
+    def _parse_size_to_gigabytes(self, value: str) -> float:
+        """Convert quota human-readable sizes to bytes."""
+        value = value.strip()
+        match = re.match(r"([\d.]+)([KMGTP]?)", value)
+        if not match:
+            return 0
+        num, unit = match.groups()
+        num = int(num)
+        unit_multipliers = {
+            "": 1,
+            "K": 1024,
+            "M": 1024**2,
+            "G": 1024**3,
+            "T": 1024**4,
+            "P": 1024**5,
+        }
+        return num * unit_multipliers.get(unit, 1) // (1024**3)
+
     def _get_user_quota(self) -> Optional[Dict[str, Union[str, int]]]:
         """
         Get the user's disk quota.
@@ -83,9 +101,9 @@ class AppLauncher(QObject):
             numbers = data[3].split()
             return {
                 "location": str(Path.home()),
-                "used": int(numbers[0][:-1]),
-                "quota": int(numbers[1][:-1]),
-                "limit": int(numbers[2][:-1]),
+                "used": self._parse_size_to_gigabytes(numbers[0]),
+                "quota": self._parse_size_to_gigabytes(numbers[1]),
+                "limit": self._parse_size_to_gigabytes(numbers[2]),
             }
         except Exception as e:
             print("Error:", e)
